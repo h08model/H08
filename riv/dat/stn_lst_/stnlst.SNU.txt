@@ -1,0 +1,11 @@
+ID	Name		RIV		LON(OBS)	LAT(OBS)	AREA(OBS)	LON(H08)	LAT(H08)	AREA(H08)
+1	Gongju		Geum_River	127.14 		36.46	 	7.15E+03	127.13		36.46		7.18E+03
+2	Goryeong	Nakdong_River	128.39 		35.75 		1.40E+04	128.38		35.79		1.46E+04
+3	Gyuam		Geum_River	126.89 		36.28 		8.25E+03	126.88		36.29		7.94E+03
+4	Jeokpo		Nakdong_River	128.36 		35.53 		1.64E+04	128.38		35.54		1.67E+04
+5	Moonmak		Seom_River	127.81 		37.31 		1.34E+03	127.88		37.38		1.57E+03
+6	Naju		Yeongsan_River	126.73 		35.04 		2.06E+03	126.79		35.13		2.10E+03
+7	Samrangjin	Nakdong_River	128.83 		35.38 		2.29E+04	128.79		35.29		2.21E+04
+8	Songjeong	Seomjin_River	127.54 		35.19 		4.27E+03	127.54		35.2		2.24E+03
+9	Waegwan		Nakdong_River	128.39 		36.00 		1.11E+04	128.38		35.96		1.13E+04
+10	Yeoju		Han_River	127.65 		37.31 		1.11E+04	127.71		37.2		8.67E+03

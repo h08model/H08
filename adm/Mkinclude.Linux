@@ -1,0 +1,61 @@
+#cto   be included by Makefiles
+#by   2010/03/31, hanasaki, NIES: H08ver1.0
+############################################################
+# netcdf path.
+# H08 requires an include file netcdf.inc, and library libnetcdf.a
+# If you don't understand this, leave as is: this settings affect
+# compilation of two optional programs in bin, 
+# namely htcreatenc and htputncts. These programs are used
+# when one convert Hformatted file into NetCDF.
+############################################################
+#
+# If you install netcdf from Fink, enable below
+#
+#INC     = -I/sw/lib/netcdf-gfortran/include
+#LIB     = -L/sw/lib/netcdf-gfortran/lib -lnetcdff -L/sw/lib -lnetcdf
+#
+# If you install netcdf from Mac Port, enable below
+#
+#INC     = -I/opt/local/include
+#LIB     = -L/opt/local/lib -lnetcdf
+#
+# If you install netcdf from source, enable below (1)
+#
+INC     = -I/usr/local/include           # Source install via GMT
+LIB     = -L/usr/local/lib -lnetcdff      # Source install via GMT
+#
+# If you install netcdf from source, enable below (2)
+#
+#INC     = -I/Users/Naota/netcdf-3.6.2/include    # Source install via GMT
+#LIB     = -L/Users/Naota/netcdf-3.6.2/lib -lnetcdf -L/opt/intel/composer_xe_2011_sp1/lib -lirc                                  # Source install via GMT
+############################################################
+# rm path. Leave as is.
+############################################################
+RM      = /bin/rm
+############################################################
+# Fortran compiler
+############################################################
+#
+# If you use intel fortran compiler on mac  (top: debug; bottom: optimized)
+#
+#FC  = ifort -assume byterecl -zero -DD -CB -traceback -fpe0 -g -heap-arrays
+#FC  = ifort -assume byterecl -zero -O3 -Wl,-stack_size,0x10000000 -heap-arrays
+#
+# If you use intel fortran compiler on linux (top: debug; bottom: optimized)
+#
+#FC  = ifort -assume byterecl -zero -DD -CB -traceback -fpe0 -g -heap-arrays -mcmodel=medium -shared-intel
+FC  = ifort -assume byterecl -zero -O3 -heap-arrays -mcmodel=medium -shared-intel
+#
+# If you use g95, enable below (top: debug; bottom: optimized)
+#
+#FC  = g95 -fno-pic -fzero -fd-comment -fbounds-check -ftrace=full -g
+#FC  = g95 -fno-pic -fzero -O3
+#
+# If you use gfortran, enable below (top: debug; bottom: optimized)
+#
+#FC  = gfortran -finit-local-zero -fd-lines-as-code -fbounds-check -fbacktrace -ffpe-trap=invalid,zero,overflow -g
+#FC  = gfortran -finit-local-zero -O3 -fd-lines-as-comments 
+############################################################
+# Fortran linker flags. Leave as is.
+############################################################
+FFLAGS  = 
