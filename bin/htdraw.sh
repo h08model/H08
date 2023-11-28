@@ -101,7 +101,7 @@ LATTITLE2=`echo $LATMAX $LATMIN | awk '{print $1*1.1-$2*0.1}'`
 ######################################################################
 HFLAG="$NL $NX $NY $L2X $L2Y $LONMIN $LONMAX $LATMIN $LATMAX binary ascii3"
 RFLAG="-R${LONMIN}/${LONMAX}/${LATMIN}/${LATMAX}"
-JFLAG="-Jx${WMAP}d/${HMAP}d"
+JFLAG="-JX${WMAP}d/${HMAP}d"
 BFLAG="-Ba${LONANO}f${LONFRM}::/a${LATANO}f${LATFRM}::neWS"
 GRD=temp.grd
 XYZ=temp.xyz

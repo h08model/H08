@@ -24,7 +24,7 @@ c parameter (array)
       integer           n0l              
       integer           n0t              
 c     parameter        (n0l=64800)
-     parameter        (n0l=259200)
+      parameter        (n0l=259200)
 c     parameter        (n0l=11088)
 c      parameter        (n0l=32400)
       parameter        (n0t=3) 
