@@ -52,9 +52,9 @@ OPTNNB=new
 #YEAREND=2063; MONEND=12; DAYEND=00  # year, month, day of final   state
 #DAYS=365; TIME=31536000
 #
-YEAR=1986;    MON=00;    DAY=00     # year, month, day to report
-YEARINI=1985; MONINI=12; DAYINI=00  # year, month, day of initial state
-YEAREND=1986; MONEND=12; DAYEND=00  # year, month, day of final   state
+YEAR=1979;    MON=00;    DAY=00     # year, month, day to report
+YEARINI=1978; MONINI=12; DAYINI=00  # year, month, day of initial state
+YEAREND=1979; MONEND=12; DAYEND=00  # year, month, day of final   state
 DAYS=365; TIME=31536000
 #
 #YEAR=2079;    MON=00;    DAY=00     # year, month, day to report

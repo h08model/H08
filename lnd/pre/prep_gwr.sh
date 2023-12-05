@@ -46,10 +46,10 @@ OPTAGR=yes              # aggregation
 DIRSLP=../../map/dat/slp_cls_
 SOITYP=../../map/dat/soi_typ_/GSWP3___00000000${SUF}
 GEOLOG=../../map/dat/geo_cls_/OneGeo__00000000.3cls${SUF}
-#  TAIR=../../met/dat/Tair____/wfde____00000000${SUF}
-#  PRCP=../../met/dat/Prcp____/wfde____00000000${SUF}
-   TAIR=../../met/dat/Tair____/AMeDAS1_00000000${SUF}
-   PRCP=../../met/dat/Prcp____/AMeDAS1_00000000${SUF}
+  TAIR=../../met/dat/Tair____/wfde____00000000${SUF}
+  PRCP=../../met/dat/Prcp____/wfde____00000000${SUF}
+#  TAIR=../../met/dat/Tair____/AMeDAS1_00000000${SUF} #for kyusyu
+#  PRCP=../../met/dat/Prcp____/AMeDAS1_00000000${SUF} #for kyusyu
    PRM=../../map/dat/prm_msk_/prmmsk.merkator${SUF}
 ############################################################
 # out

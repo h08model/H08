@@ -78,7 +78,7 @@ VALLNDARA=`htpoint $ARG lonlat $LNDARA $LON $LAT`
 ############################################################
 # Draw variables
 ############################################################
-psbasemap $RFLAG0 $BFLAG0 $JFLAG0 -K > $EPS
+gmt psbasemap $RFLAG0 $BFLAG0 $JFLAG0 -K > $EPS
 
 COUNT=1
 for VAR in $VARS; do
@@ -198,7 +198,7 @@ for VAR in $VARS; do
     psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
   fi
 
-  pstext -O         $RFLAG $BFLAG $JFLAG     -N -K << EOF >> $EPS
+  gmt pstext -O         $RFLAG $BFLAG $JFLAG     -N -K << EOF >> $EPS
   $XTITLE $YTITLE 12 0 0 7 $VAR [$UNIT]
 EOF
   COUNT=`expr $COUNT + 1`
@@ -280,8 +280,8 @@ echo --- water balance error ---
 awk '{printf("%2d %12.4f\n",NR,$4*'"$SCALE"'+'"$OFFSET"')}' temp.$VAR.txt
 echo ---------------------------
 awk '{print NR,$4*'"$SCALE"'+'"$OFFSET"'}' temp.$VAR.txt |\
-psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
-pstext -O         $RFLAG $BFLAG $JFLAG     -N -K << EOF >> $EPS
+    psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
+gmt pstext -O         $RFLAG $BFLAG $JFLAG     -N -K << EOF >> $EPS
 $XTITLE $YTITLE 16 0 0 6 $VAR
 EOF
 
@@ -289,7 +289,7 @@ EOF
 # Put title
 ############################################################
 YOFF=`echo $HOFF $NOFVAR | awk '{print $1*($2-1+1)*-1}'`
-pstext -O -Y${YOFF} $RFLAG0 $BFLAG0 $JFLAG0 -N << EOF >> $EPS
+gmt pstext -O -Y${YOFF} $RFLAG0 $BFLAG0 $JFLAG0 -N << EOF >> $EPS
 0.5 1.02 20 0 0 6 $TITLE
 EOF
 htconv $EPS $PNG rot
