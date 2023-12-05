@@ -23,4 +23,5 @@ Latest GitHub branch (main) is v23.0.0
      4. File:lnd/pre/prog_gwr_fa.f
           - Line 48(corrected): data i0dbg/1/
      5. File:lnd/pre/prog_gwr_fp.f
-          - Line 57(corrected): data i0dbg/1/ 
+          - Line 57(corrected): data i0dbg/1/
+- 20231128 small bugfix (lnd/bin/main.f, bin/htdraw.sh)
