@@ -119,13 +119,13 @@ $PSSCALE  -O -C$CPT -D${XSCA}/${YSCA}/${WSCA}/${HSCA}h -L    -K >> $EPS
 ######################################################################
 if [ "$TITLE1" != "" -a "$TITLE1" != "." ]; then
 #  echo main title ${TITLE1}
-$PSTEXT -O $RFLAG $JFLAG -N                   -K  << EOF >> $EPS    
+$PSTEXT $JFLAG $RFLAG -K -N -O                  << EOF >> $EPS 
 $LONTITLE1 $LATTITLE1 20 0.0 1 6 ${TITLE1}
 EOF
 fi
 if [ "$TITLE2" != "" -a "$TITLE2" != "." ]; then
-#  echo sub title ${TITLE2}
-$PSTEXT -O $RFLAG $JFLAG -N                   -K  << EOF >> $EPS    
+#  echo sub title ${TITLE2}        
+$PSTEXT $JFLAG $RFLAG -K -N -O                  << EOF >> $EPS 
 $LONTITLE2 $LATTITLE2 20 0.0 1 6 ${TITLE2}		
 EOF
 fi
