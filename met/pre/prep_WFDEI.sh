@@ -34,13 +34,8 @@ YEARMAX=1979
 DIRPWD=`pwd`
 L=259200
 MONS="01 02 03 04 05 06 07 08 09 10 11 12"
-<<<<<<< Updated upstream
-#VARS="LWdown PSurf Qair Rainf SWdown Snowf Tair Wind": outdated 
-VARS="rlds huss prrn prsn tas ps pr rsds sfcWind"
-=======
 #VARS="LWdown PSurf Qair Rainf SWdown Snowf Tair Wind"
 VARS="rlds ps huss prrn rsds prsn tas sfcWind"
->>>>>>> Stashed changes
 TRESO=DY
 ############################################################
 # Job (Convert netcdf file into binary file)
