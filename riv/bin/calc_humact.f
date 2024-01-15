@@ -45,6 +45,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cto   calculate river flows taking into account human activities
 cby   2010/09/30, hanasaki, NIES, modified on 2014/05/09
+cto   include urban effects      
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       implicit none
 c parameter (array)
