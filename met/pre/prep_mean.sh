@@ -33,12 +33,12 @@ YEARMIN=1979; YEARMAX=1979; YEAROUT=0000
 ######################################################
 # Macro (Do not edit below unless you are an expert)
 ######################################################
-#DIR=../../met/dat
-#SUBDIRS="Tair____ Qair____ PSurf___ Wind____ SWdown__ LWdown__ Rainf___ Snowf___"
+DIR=../../met/dat
+SUBDIRS="Tair____ Qair____ PSurf___ Wind____ SWdown__ LWdown__ Rainf___ Snowf___"
 
 # regional setting (.ks1)
-DIR=../../met/dat
-SUBDIRS="Tair____ Qair____ PSurf___ Wind____ SWdown__ LWdown__ Rainf___ Snowf___ Prcp____"
+#DIR=../../met/dat
+#SUBDIRS="Tair____ Qair____ PSurf___ Wind____ SWdown__ LWdown__ Rainf___ Snowf___ Prcp____"
 
 ######################################################
 # Job
