@@ -49,75 +49,38 @@ for VAR in $VARS; do
       elif [ $TRESO = DY ]; then
         SECINT=86400
       fi
-<<<<<<< Updated upstream
-#      if   [ $VAR = "LWdown" ]; then(outdated)
       if   [ $VAR = "rlds" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/LWdown__
+        DIROUT=../../met/dat/LWdown_
 	VAR2=LWdown
-#      elif [ $VAR = "PSurf" ]; then(outdated)
-       elif [ $VAR = "ps" ]; then
-        ADD=WFDEI
-        DIROUT=../../met/dat/PSurf___
-	VAR2=PSurf
-#      elif [ $VAR = "Qair" ]; then(outdated)
-       elif [ $VAR = "huss" ]; then
-	ADD=WFDEI
-        DIROUT=../../met/dat/Qair____
-	VAR2=Qair
-#      elif [ $VAR = "Rainf" ]; then(outdated)
-       elif [ $VAR = "prrn" ] ; then
-#	ADD=WFDEI_CRU(outdated)
-	ADD=WFDEI  
-        DIROUT=../../met/dat/Rainf___
-	VAR2=Rainf
-#      elif [ $VAR = "SWdown" ]; then(outdated)
-       elif [ $VAR = "rsds" ]; then
-	ADD=WFDEI
-        DIROUT=../../met/dat/SWdown__
-	VAR2=SWdown
-#      elif [ $VAR = "Snowf" ]; then(outdated)
-       elif [ $VAR = "prsn" ]; then
-#	ADD=WFDEI_CRU(outdated)
-        ADD=WFDEI
-	DIROUT=../../met/dat/Snowf___
-	VAR2=Snowf
-#      elif [ $VAR = "Tair" ]; then(outdated)
-       elif [ $VAR = "tas" ]; then
-	ADD=WFDEI
-        DIROUT=../../met/dat/Tair____
-	VAR2=Tair
-#      elif [ $VAR = "Wind" ]; then(outdated)
-       elif [ $VAR = "sfcWind" ]; then
-	ADD=WFDEI
-        DIROUT=../../met/dat/Wind____
-	VAR2=Wind
-=======
-      if   [ $VAR = "rlds" ]; then
-        ADD=WFDEI
-        DIROUT=../../met/dat/tLWdown_
       elif [ $VAR = "ps" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/tPSurf__
+        DIROUT=../../met/dat/PSurf__
+	VAR2=PSurf__
       elif [ $VAR = "huss" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/tQair___
+        DIROUT=../../met/dat/Qair___
+	VAR2=Qair___
       elif [ $VAR = "prrn" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/tRainf__
+        DIROUT=../../met/dat/Rainf__
+	VAR2=Rainf__
       elif [ $VAR = "rsds" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/tSWdown_
+        DIROUT=../../met/dat/SWdown_
+	VAR2=SWdown_
       elif [ $VAR = "prsn" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/tSnowf__
+        DIROUT=../../met/dat/Snowf__
+	VAR2=Snowf__
       elif [ $VAR = "tas" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/tTair___
+        DIROUT=../../met/dat/Tair___
+	VAR2=Tair___
       elif [ $VAR = "sfcWind" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/tWind___
->>>>>>> Stashed changes
+        DIROUT=../../met/dat/Wind___
+	VAR2=Wind___
       fi
       if [ ! -d $DIROUT ]; then
         mkdir -p $DIROUT
@@ -128,12 +91,8 @@ for VAR in $VARS; do
 #  NC=../../met/org/WFDEI/3hourly/${VAR}_${ADD}_${YEAR}${MON}.nc(outdated)
    NC=../../met/org/WFDEI/3hourly/${VAR2}_${ADD}_${YEAR}${MON}.nc
       elif [ $TRESO = DY ]; then
-<<<<<<< Updated upstream
 #  NC=../../met/org/WFDEI/daily/${VAR}_daily_${ADD}_${YEAR}${MON}.nc(outdated)
-   NC=../../met/org/WFDEI/daily/${VAR2}_daily_${ADD}_${YEAR}${MON}.nc
-=======
-        NC=../../met/org/WFDEI/daily/${VAR}_wfde_____${YEAR}${MON}_DY.nc
->>>>>>> Stashed changes
+   NC=../../met/org/WFDEI/daily/${VAR2}_wfde_____${YEAR}${MON}_DY.nc
       fi
       echo $NC
 #
