@@ -191,8 +191,8 @@ FDEMDOM=../../map/dat/dem_dom_/AQUASTAT20000000${SUF}
 FWITIND=../../map/dat/wit_ind_/AQUASTAT20000000${MAP}${SUF}
 FWITDOM=../../map/dat/wit_dom_/AQUASTAT20000000${MAP}${SUF}
 FWITAGR=../../map/dat/wit_agr_/AQUASTAT20000000${SUF}
-FWITIND=../../map/dat/wit_ind_/AQUASTAT20000000${SUF} global
-FWITDOM=../../map/dat/wit_dom_/AQUASTAT20000000${SUF} global
+#FWITIND=../../map/dat/wit_ind_/AQUASTAT20000000${SUF} global
+#FWITDOM=../../map/dat/wit_dom_/AQUASTAT20000000${SUF} global
 #FWITIND=../../map/dat/wit_ind_/METIms__20150000${SUF}
 #FWITDOM=../../map/dat/wit_dom_/JWRC____20160000${SUF}
 #
