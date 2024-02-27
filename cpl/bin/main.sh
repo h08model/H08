@@ -274,8 +274,8 @@ OPTDAMWBC=no     # no for not execute water balance calculation
 #OPTNNBS=no        # non-local & non-renewable water source (surface water)
 #OPTNNBG=no        # non-local & non-renewable water source (groundwater)
 #
-OPTNNBS=YES      # non-local & non-renewable water source (surface water)
-OPTNNBG=YES      # non-local & non-renewable water source (groundwater)
+OPTNNBS=yes      # non-local & non-renewable water source (surface water)
+OPTNNBG=yes      # non-local & non-renewable water source (groundwater)
 ############################################################
 # Input for climate change (Edit here if you wish)
 ############################################################
