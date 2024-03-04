@@ -3,7 +3,7 @@
 ## Versions (2023.11.21)
 Latest GitHub branch (main) is v23.0.0
 
-## Latest updates on v23.0.0 (2024.03.04)
+## Latest updates in v23.0.0 (2024.03.04)
 - Replaced geographical data for global domain on website.
      1. File: map/org/GRanD/GRanD_M.txt
 - All of the bugs below have been fixed.
