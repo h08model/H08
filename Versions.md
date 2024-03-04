@@ -3,6 +3,16 @@
 ## Versions (2023.11.21)
 Latest GitHub branch (main) is v23.0.0
 
+## Latest updates on v23.0.0 (2024.03.04)
+- Replaced geographical data for global domain on website.
+     1. File: map/org/GRanD/GRanD_M.txt
+- All of the bugs below have been fixed.
+     1. File: cpl/bin/main.sh
+          - Line 277-278(corrected): OPTNNBS=yes, OPTNNBG=yes
+     2. File: crp/bin/main.sh
+          - Line 84-86(corrected): CRPTYP2ND=../../map/out/crp_typ2/M08_____20000000${SUF}
+                                   #CRPTYP2ND=../../map/org/KYUSYU/crp_typ_second${SUF}
+            
 ## Update in v23.0.0
 - Source code management using GitHub has started.
 - Source code for the global, regional, and Japanese versions have been integrated.
