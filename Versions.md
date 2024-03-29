@@ -6,7 +6,7 @@ Latest GitHub branch (main) is v23.1.0
 ## Updates in v23.1.0 (2024.04.01)
 - Source code for river submodel with FTCS scheme has been added.
 - The relevant codes are as follows;
-     1. riv/bin/main_ftcs.sh, main_ftcs.f, calc_humact_ftcs.f, calc_outflow_ftcs.f
+     1. riv/bin/main_ftcs.sh, main_ftcs.f, calc_humact_ftcs.f, calc_outflw_ftcs.f
      2. cpl/bin/main_ftcs.sh, main_ftcs.f
 - Please check the footnotes in the manual for details on usage.
 - **Notes: The conventional code also remains under the names main.sh and main.f.**
