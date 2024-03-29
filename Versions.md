@@ -8,7 +8,7 @@ Latest GitHub branch (main) is v23.1.0
 - The relevant codes are as follows;
      1. riv/bin/main_ftcs.sh, main_ftcs.f, calc_humact_ftcs.f, calc_outflw_ftcs.f
      2. cpl/bin/main_ftcs.sh, main_ftcs.f
-- Please check the footnotes in the manual for details on usage.
+- Please check the footnotes(20,29) in the manual for details on usage.
 - **Notes: The conventional code also remains under the names main.sh and main.f.**
 
 ## Updates in v23.0.0 (2024.03.04)
