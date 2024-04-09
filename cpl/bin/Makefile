@@ -10,7 +10,7 @@ DIRRIV  = ../../riv/bin/
 DIRDAM  = ../../dam/bin/
 DIRCRP  = ../../crp/bin/
 DIRCPL  = ../../cpl/bin/
-OBJS    = main calc_irgapp_hyper.o main_hyper
+OBJS    = main calc_irgapp_hyper.o main_hyper main_ftcs
 ############################################################
 #	Macro (Settings)
 ############################################################
@@ -21,8 +21,8 @@ OBJS    = main calc_irgapp_hyper.o main_hyper
 ############################################################
 #	Dependency
 ############################################################
-TARGET4    = main
-COMPONENT4 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
+TARGET1    = main
+COMPONENT1 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
              ${DIRLIB}read_result.o \
              ${DIRLIB}wrte_bints2.o ${DIRLIB}wrte_bints3.o \
@@ -33,7 +33,7 @@ COMPONENT4 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope.o \
              ${DIRLIB}cgetfnl.o     ${DIRCRP}calc_crpyld.o \
              ${DIRCPL}calc_watsrc.o
-TARGETS    = main_new
+TARGET5    = main_new
 COMPONENT5 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
              ${DIRLIB}read_result.o \
@@ -45,8 +45,8 @@ COMPONENT5 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope_M12.o \
              ${DIRLIB}cgetfnl.o     ${DIRCRP}calc_crpyld.o \
              ${DIRCPL}calc_watsrc.o
-TARGET3    = main.F18
-COMPONENT3 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
+TARGET6    = main.F18
+COMPONENT6 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
              ${DIRLIB}read_result.o \
              ${DIRLIB}wrte_bints2.o ${DIRLIB}wrte_bints3.o \
@@ -70,6 +70,18 @@ COMPONENT3 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope_F18.o \
              ${DIRLIB}cgetfnl.o     ${DIRCRP}calc_crpyld.o \
              ${DIRCPL}calc_watsrc.o
+TARGET4    = main_ftcs
+COMPONENT4 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
+             ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
+             ${DIRLIB}read_result.o \
+             ${DIRLIB}wrte_bints2.o ${DIRLIB}wrte_bints3.o \
+             ${DIRLIB}igetday.o     ${DIRRIV}calc_spinup.o \
+             ${DIRLIB}conv_rhtoqa.o ${DIRLIB}conv_rstors.o \
+             ${DIRCPL}calc_flgcrp.o ${DIRCPL}calc_irgapp.o \
+             ${DIRLIB}igetdoy.o     ${DIRRIV}calc_humact_ftcs.o \
+             ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope.o \
+             ${DIRLIB}cgetfnl.o     ${DIRCRP}calc_crpyld.o \
+             ${DIRCPL}calc_watsrc.o
 ############################################################
 #	Compilation
 ############################################################
@@ -83,6 +95,8 @@ $(TARGET4) : $(TARGET4).o $(COMPONENT4)
 	$(FC) -o $@ $@.o $(COMPONENT4)
 $(TARGET5) : $(TARGET5).o $(COMPONENT5)
 	$(FC) -o $@ $@.o $(COMPONENT5)
+$(TARGET6) : $(TARGET6).o $(COMPONENT6)
+	$(FC) -o $@ $@.o $(COMPONENT6)
 all : $(OBJS)
 clean : 
 	rm -f *.o *~ temp*
