@@ -272,8 +272,8 @@ OPTDAMWBC=no     # no for not execute water balance calculation
 # Parameter for NNBW (Edit here if you wish)
 ############################################################
 #
-#OPTNNBS=no        # non-local & non-renewable water source (surface water)
-#OPTNNBG=no        # non-local & non-renewable water source (groundwater)
+#OPTNNBS=NO        # non-local & non-renewable water source (surface water)
+#OPTNNBG=NO        # non-local & non-renewable water source (groundwater)
 #
 OPTNNBS=yes      # non-local & non-renewable water source (surface water)
 OPTNNBG=yes      # non-local & non-renewable water source (groundwater)
