@@ -14,7 +14,7 @@ YEARMIN=1979
 YEARMAX=1979
 #YEARMIN=2014
 #YEARMAX=2014
-SECINT=86400
+SECINT=10800
 LDBG=27641
 #LDBG=5734  # must be smaller than L. (regional)
 ############################################################
