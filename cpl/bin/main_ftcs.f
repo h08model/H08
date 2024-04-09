@@ -1010,10 +1010,10 @@ c
 c
       do i0l=1,n0l
         if (r1rivnxd(i0l).gt.0.0) then
-          if(r1flwvel(i0l)*i0secint.gt.
+          if(r1flwvel(i0l)*i0secint2.gt.
      $     r1rivnxd(i0l)*r1medrat(i0l))then
-            write(*,*) 'CFL condition failed; i0secint too large.'
-            write(*,*) (r1flwvel(i0l)*i0secint)
+            write(*,*) 'CFL condition failed; i0secint2 too large.'
+            write(*,*) (r1flwvel(i0l)*i0secint2)
      $       /(r1rivnxd(i0l)*r1medrat(i0l))
             stop  !!check CFL condition
           end if
