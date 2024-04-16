@@ -4,7 +4,7 @@
 Latest GitHub branch (main) is v24.0.0
 
 ## Updates in v24.0.0 (2024.04.16)
-- The explicit method (FTCS) can now be selected for the river model. The traditional semi-implicit (semi-implicit) method is also available.
+- The explicit method (FTCS) can now be selected for the river model. The traditional semi-implicit method is also available.
   The explicit code was developed and provided by Naho Yoden. We appriciate her kindness.
   <br> For more details, please see the following paper.
   
