@@ -3,6 +3,11 @@
 #to   run river model (FTCS)
 #by   2010/09/30, hanasaki, NIES: H08ver1.0
 ############################################################
+# The explicit code was developed and provided by Naho Yoden.
+# We thank her for her kindness.
+# For more details, please see the following paper.
+# Yoden, N., Yamazaki, D., and Hanasaki, N.: Improving river routing algorithms to efficiently implement canal water diversion schemes in global hydrological models, Hydrological Research Letters, 18, 7-13, 10.3178/hrl.18.7, 2024.
+############################################################
 # Basic Settings (Edit here if you wish)
 ############################################################
 PRJ=WFDE

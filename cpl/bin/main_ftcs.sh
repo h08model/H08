@@ -5,6 +5,11 @@
 #
 #if job scheduling and management system is installed in your environment (e.g. OpenPBS, TORQUE, etc.), please change "cat<<EOF>>$SET???" into "cat>>$SET???<<EOF".
 ############################################################
+# The explicit code was developed and provided by Naho Yoden.
+# We thank her for her kindness.
+# For more details, please see the following paper.
+# Yoden, N., Yamazaki, D., and Hanasaki, N.: Improving river routing algorithms to efficiently implement canal water diversion schemes in globalhydrological models, Hydrological Research Letters, 18, 7-13, 10.3178/hrl.18.7, 2024.
+############################################################
 # Basic settings (Edit here if you like)
 ############################################################
 PRJ=WFDE		# Project name

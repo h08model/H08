@@ -14,6 +14,11 @@ c either express or implied.
 c See the License for the specific language governing permissions and
 c limitations under the License.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+c The explicit code was developed and provided by Naho Yoden.
+c We thank her for her kindness.
+c For more details, please see the following paper.
+c Yoden, N., Yamazaki, D., and Hanasaki, N.: Improving river routing algorithms to efficiently implement canal water diversion schemes in global hydrological models, Hydrological Research Letters, 18, 7-13, 10.3178/hrl.18.7, 2024.
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       subroutine calc_humact_ftcs(
      $     n0l,         i0ldbg,
      $     i0secint,    
