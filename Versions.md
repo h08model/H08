@@ -1,15 +1,19 @@
-# Update Note: H08 v23
+# Update Note: H08 v24
 
-## Versions (2023.04.01)
-Latest GitHub branch (main) is v23.1.0
+## Versions (2024.04.16)
+Latest GitHub branch (main) is v24.0.0
 
-## Updates in v23.1.0 (2024.04.01)
-- Source code for river submodel with FTCS scheme has been added.
+## Updates in v24.0.0 (2024.04.16)
+- The explicit method (FTCS) can now be selected for the river model. The traditional semi-implicit (semi-implicit) method is also available.
+  The explicit code was developed and provided by Naho Yoden. We appriciate her kindness.
+  <br> For more details, please see the following paper.
+  
+  Yoden, N., Yamazaki, D., and Hanasaki, N.: Improving river routing algorithms to efficiently implement canal water diversion schemes in global hydrological models, Hydrological   Research Letters, 18, 7-13, 10.3178/hrl.18.7, 2024. 
 - The relevant codes are as follows;
      1. riv/bin/main_ftcs.sh, main_ftcs.f, calc_humact_ftcs.f, calc_outflw_ftcs.f
      2. cpl/bin/main_ftcs.sh, main_ftcs.f
 - Please check the footnotes(20,29) in the manual for details on usage.
-- **Notes: The conventional code also remains under the names main.sh and main.f.**
+- **Notes: The conventional code remains under the names main.sh and main.f.**
 
 ## Updates in v23.0.0 (2024.03.04)
 - Replaced geographical data for global domain on website.
