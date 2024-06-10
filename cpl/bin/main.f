@@ -1166,7 +1166,9 @@ c
       if(c0despot.ne.'NO')then
         call read_binary(n0l,c0despot,r1tmp)
         do i0l=1,n0l
-          i1despot(i0l)=int(r1tmp(i0l))
+          if(r1tmp(i0l).ne.p0mis)then
+            i1despot(i0l)=int(r1tmp(i0l))
+          end if
         end do
       else
         i1despot=0
