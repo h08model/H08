@@ -304,7 +304,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c simplification
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
       do i0l=1,n0l
-        if(r2tair(i0l,0).eq.p0mis.or.r2tair(i0l,0).eq.0)then
+        if(r2tair(i0l,0).eq.p0mis)then
           r1koppen(i0l)=0.0
         end if
       end do
