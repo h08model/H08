@@ -1,6 +1,6 @@
 #!/bin/sh
 ############################################################
-#
+#to prepare meteorological data
 #
 ############################################################
 #
@@ -37,6 +37,10 @@ for VAR in $VARS; do
   YEAR=$YEARMIN
   while [ $YEAR -le $YEARMAX ]; do 
       for MON in $MONS; do
+	  DIRORG=../../met/org/WFDEI/daily
+	  NCORG=${DIRORG}/${VAR}_wfde_____${YEAR}01-${YEAR}12_DY.nc.tar.gz
+	  tar xf $NCORG -C $DIRORG
+#	  
           if   [ $TRESO = 3H ]; then
 	      SECINT=10800
 	  elif [ $TRESO = DY ]; then
@@ -73,7 +77,7 @@ for VAR in $VARS; do
 	  fi
 	  OUT=${DIROUT}/wfde____${SUF}
 #
-          if   [ $TRESO = 3H ]; then
+	  if   [ $TRESO = 3H ]; then
 	      NC=../../met/org/WFDEI/3hourly/${VAR}_${ADD}_${YEAR}${MON}.nc
           elif [ $TRESO = DY ]; then
 	      NC=../../met/org/WFDEI/daily/${VAR}_wfde_____${YEAR}${MON}_DY.nc

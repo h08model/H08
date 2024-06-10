@@ -81,9 +81,9 @@ TAIROUT=NO
 # Map (Edit here if you change settings)
 ############################################################
 LNDMSK=../../map/dat/lnd_msk_/lndmsk${MAP}${SUF}
-#CRPTYP2ND=../../map/out/crp_typ2/M08_____20000000${SUF} # only for JOB=2nd
+CRPTYP2ND=../../map/out/crp_typ2/M08_____20000000${SUF} # only for JOB=2nd
 #CRPTYP1ST=../../map/org/KYUSYU/crp_typ_first${SUF}
-CRPTYP2ND=../../map/org/KYUSYU/crp_typ_second${SUF} # only for KYUSYU JOB=2nd   
+#CRPTYP2ND=../../map/org/KYUSYU/crp_typ_second${SUF} # only for KYUSYU JOB=2nd   
 ############################################################
 # Initial value (Do not edit here basically)
 ############################################################

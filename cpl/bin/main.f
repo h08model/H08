@@ -350,6 +350,7 @@ c local (riv)
 
 c namelist
       character*128     c0setriv        !! setting file for river model
+      character*128     c0lndara
       namelist         /setriv/ c0qtot,   c0rivstoini,
      $                          c0rivsto, c0dis,
      $                          c0rivseq, c0rivnxl,
@@ -563,7 +564,6 @@ c in (map, irrigation)
       character*128     c1pltdoy(n0c)
       character*128     c1hvsdoy(n0c)
       character*128     c1crptyp(n0c)
-      character*128     c0lndara
       character*128     c1arafrc(n0m)
 c in (map, withdrawal)
       real              r1msrcap(n0l)
@@ -997,7 +997,7 @@ c - read distance to downward grid cell
 c - read land area
 c - read flow velocity
 c - read meandering ratio
-c - set r0rivseqmax by finding the maximum value of r1rivseq
+c - set r0rivseqmax by finding the maximum value of r1rivs
 c - set r1paramc by calculation
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       call read_binary(n0l,c0rivseq,r1rivseq)

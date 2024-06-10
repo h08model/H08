@@ -113,7 +113,7 @@ $PSBASEMAP   $RFLAG $JFLAG $BFLAG                            -K  > $EPS
 awk '{if($3!=1.0E20) print $1,$2,$3; else print $1,$2,"NaN"}' $XYZ | \
 $XYZ2GRD     $RFLAG -G$GRD -I${GRIDSIZE}/${GRIDSIZE} -r
 $GRDIMAGE -O $RFLAG $JFLAG $GRD -C$CPT                       -K >> $EPS 
-$PSSCALE  -O -C$CPT -D${XSCA}/${YSCA}/${WSCA}/${HSCA}h -L    -K >> $EPS
+$PSSCALE  -O -C$CPT -Dx${XSCA}/${YSCA}/${WSCA}/${HSCA}h -L    -K >> $EPS
 ######################################################################
 # Put title
 ######################################################################
