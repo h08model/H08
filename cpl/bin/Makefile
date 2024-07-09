@@ -33,8 +33,8 @@ COMPONENT1 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope.o \
              ${DIRLIB}cgetfnl.o     ${DIRCRP}calc_crpyld.o \
              ${DIRCPL}calc_watsrc.o
-TARGET5    = main_new
-COMPONENT5 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
+TARGET2    = main_new
+COMPONENT2 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
              ${DIRLIB}read_result.o \
              ${DIRLIB}wrte_bints2.o ${DIRLIB}wrte_bints3.o \
@@ -45,8 +45,8 @@ COMPONENT5 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope_M12.o \
              ${DIRLIB}cgetfnl.o     ${DIRCRP}calc_crpyld.o \
              ${DIRCPL}calc_watsrc.o
-TARGET6    = main.F18
-COMPONENT6 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
+TARGET3    = main.F18
+COMPONENT3 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
              ${DIRLIB}read_result.o \
              ${DIRLIB}wrte_bints2.o ${DIRLIB}wrte_bints3.o \
@@ -57,9 +57,9 @@ COMPONENT6 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope_F18.o \
              ${DIRLIB}cgetfnl.o     ${DIRCRP}calc_crpyld.o \
              ${DIRCPL}calc_watsrc.o
-TARGET2    = calc_irgapp_hyper
-TARGET3    = main_hyper
-COMPONENT3 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
+TARGET4    = calc_irgapp_hyper
+TARGET5    = main_hyper
+COMPONENT5 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
              ${DIRLIB}read_result.o \
              ${DIRLIB}wrte_bints2.o ${DIRLIB}wrte_bints3.o \
@@ -67,11 +67,11 @@ COMPONENT3 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}conv_rhtoqa.o ${DIRLIB}conv_rstors.o \
              ${DIRCPL}calc_flgcrp.o ${DIRCPL}calc_irgapp_hyper.o \
              ${DIRLIB}igetdoy.o     ${DIRRIV}calc_humact_hyper.o \
-             ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope_F18.o \
+             ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope_hyper.o \
              ${DIRLIB}cgetfnl.o     ${DIRCRP}calc_crpyld.o \
              ${DIRCPL}calc_watsrc.o
-TARGET4    = main_ftcs
-COMPONENT4 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
+TARGET6    = main_ftcs
+COMPONENT6 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
              ${DIRLIB}read_result.o \
              ${DIRLIB}wrte_bints2.o ${DIRLIB}wrte_bints3.o \
@@ -97,6 +97,7 @@ $(TARGET5) : $(TARGET5).o $(COMPONENT5)
 	$(FC) -o $@ $@.o $(COMPONENT5)
 $(TARGET6) : $(TARGET6).o $(COMPONENT6)
 	$(FC) -o $@ $@.o $(COMPONENT6)
+
 all : $(OBJS)
 clean : 
 	rm -f *.o *~ temp*

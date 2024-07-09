@@ -68,7 +68,7 @@ prog_map_cstlin $L2X $L2Y $LNDMSK $NATMSK $NATWAT2 $BINCSTLIN $DISTANCE $ELVMIN 
 ############################################################
 # job (draw)
 ############################################################
-makecpt -T-0.5/1.5/1 > temp.cpt
+gmt makecpt -T-0.5/1.5/1 > temp.cpt
 #htlinear $ARGHLF $ARG $BINCSTLIN $BINCSTLIN2 
 htdraw $ARG $BINCSTLIN temp.cpt $EPS
 htconv $EPS $FIGCSTLIN rot
