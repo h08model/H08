@@ -11,8 +11,8 @@ Latest GitHub branch (main) is v24.0.1
          - Line 71(corrected): gmt makecpt -T-0.5/1.5/1 > temp.cpt
     3. File: met/pre/prep_wfdei_DataServer.sh
          - Line 40(added):  DIRORG=../../met/org/WFDEI/daily
-	                          NCORG=${DIRORG}/${VAR}_wfde_____${YEAR}01-${YEAR}12_DY.nc.tar.gz
-	                          tar xf $NCORG -C $DIRORG
+			    NCORG=${DIRORG}/${VAR}_wfde_____${YEAR}01-${YEAR}12_DY.nc.tar.gz
+			    tar xf $NCORG -C $DIRORG
     4. File: met/pre/prep_mean.sh
          - Enable line 37 and disable line 41
          - Line 37: SUBDIRS="Tair____ Qair____ PSurf___ Wind____ SWdown__ LWdown__ Rainf___ Snowf___"
