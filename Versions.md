@@ -32,7 +32,8 @@ Latest GitHub branch (main) is v24.0.1
     10. File: cpl/bin/main.f
          - Move the declaration of 'c0lndara' to before the namelist 'setriv'.
          - Line 1169(corrected): if (r1tmp(i01).ne.p0mis)then
-                                      r1despot(i0l)=int(r1tmp(i0l))
+                                      i1despot(i0l)=int(r1tmp(i0l))
+           
                                  end if
 
 ## Updates in v24.0.0 (2024.04.16)
