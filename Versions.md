@@ -31,10 +31,10 @@ Latest GitHub branch (main) is v24.0.1
          - Line 70(corrected): ${DIRDAM)calc_resope_hyper.o
     10. File: cpl/bin/main.f
          - Move the declaration of 'c0lndara' to before the namelist 'setriv'.
-         - Line 1169(corrected): if (r1tmp(i01).ne.p0mis)then
-                                      i1despot(i0l)=int(r1tmp(i0l))
-           
-                                 end if
+         - Line 1169(corrected):
+           <br>if (r1tmp(i01).ne.p0mis)then
+           <br>   i1despot(i0l)=int(r1tmp(i0l))
+           <br>end if
 
 ## Updates in v24.0.0 (2024.04.16)
 - The explicit method (FTCS) can now be selected for the river model. The traditional semi-implicit method is also available.
