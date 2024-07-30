@@ -1,9 +1,9 @@
 # Update Note: H08 v24
 
-## Versions (2024.07.09)
+## Versions (2024.07.30)
 Latest GitHub branch (main) is v24.0.1
 
-## Updates in v24.0.1 (2024.07.09)
+## Updates in v24.0.1 (2024.07.30)
 - All of the small bugs below have been fixed.
     1. File: map/pre/prep_map_cstlin.sh
          - Line 60(corrected): gmt makecpt -T-0.5/1.5/1 > temp.cpt
