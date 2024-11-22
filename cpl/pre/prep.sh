@@ -11,6 +11,7 @@ L2X=../../map/dat/l2x_l2y_/l2x.hlf.txt
 L2Y=../../map/dat/l2x_l2y_/l2y.hlf.txt
 LONLAT="-180 180 -90 90"
 SUF=.hlf
+CANSUF=.binhlf
 MAP=.WFDEI
 
 #L=11088
@@ -19,6 +20,7 @@ MAP=.WFDEI
 #L2X=../../map/dat/l2x_l2y_/l2x.ko5.txt
 #L2Y=../../map/dat/l2x_l2y_/l2y.ko5.txt
 #SUF=.ko5
+#CANSUF=.binko5
 #MAP=.SNU
 
 #
@@ -42,7 +44,7 @@ DUMMY2=${DIRDAMDAT}/uniform.0.1${SUF}
 DUMMY3=${DIRDAMDAT}/uniform.0.15${SUF}
 DUMMY4=${DIRDAMDAT}/uniform.0.5${SUF}
 DUMMY5=${DIRDAMDAT}/uniform.1.0${SUF}
-CANDAT=${DIRDAMDAT}/uniform.0.0.bin
+CANDAT=${DIRDAMDAT}/uniform.0.0${CANSUF}
 ############################################################
 # Job (prepare directory)
 ############################################################

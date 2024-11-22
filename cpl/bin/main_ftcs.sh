@@ -173,7 +173,7 @@ OPTRGW=yes
 #
 # disable aqueduct
 #
-LCAN=../../dam/dat/uniform.0.0.bin # must be 10 times larger than the binary.
+LCAN=../../dam/dat/uniform.0.0${SUF}10 # must be 10 times larger than the binary.
 #
 # aqueduct settings shown in Hanasaki et al. 2018 
 #
@@ -285,9 +285,9 @@ OPTNNBG=yes      # non-local & non-renewable water source (groundwater)
 ############################################################
 # Input for climate change (Edit here if you wish)
 ############################################################
-    TCOR=../../met/dat/Tair__DF/m32ma213.binMM
-    PCOR=../../met/dat/Prcp__RT/m32ma213.binMM
-    LCOR=../../met/dat/LWdownDF/m32ma213.binMM
+    TCOR=../../met/dat/Tair__DF/m32ma213${SUF}MM
+    PCOR=../../met/dat/Prcp__RT/m32ma213${SUF}MM
+    LCOR=../../met/dat/LWdownDF/m32ma213${SUF}MM
 #
     TCOR=NO
     PCOR=NO

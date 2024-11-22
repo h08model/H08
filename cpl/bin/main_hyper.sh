@@ -39,6 +39,7 @@ PROG=./main_F18             # program
 # edit main.f and re-compile it.)
 ############################################################
 SUF=.ks1                # Suffix
+CANSUF=.binks1
 MAP=.kyusyu             # Map
 ############################################################
 # Mosaic settings (Do not edit here unless you are an expert)
@@ -243,7 +244,7 @@ OPTRGW=yes
 #
 # disable aqueduct
 #
-LCAN=../../dam/dat/uniform.0.0.bin # must be 10 times larger than the binary.
+LCAN=../../dam/dat/uniform.0.0${CANSUF} # must be 10 times larger than the binary.
 #
 # aqueduct settings shown in Hanasaki et al. 2018 
 #
@@ -252,7 +253,7 @@ LCAN=../../dam/dat/uniform.0.0.bin # must be 10 times larger than the binary.
 #LCAN=../../map/out/can_des_/candes.l.within.5${MAP}.bin  #5w
 #
 #LCAN=../../map/out/can_des_/candes.l.within.1${MAP}.bin  #NECD
-LCAN=../../map/out/can_des_/candes.l.merged.5${MAP}.bin  #N_C_
+LCAN=../../map/out/can_des_/candes.l.merged.5${MAP}${CANSUF}  #N_C_
 ############################################################
 # Input for water efficiency 1 (Edit here if you wish)
 ############################################################
@@ -381,9 +382,9 @@ OPTNNB=yes       # non-local & non-renwable water source (J. Hydrol., 2010)
 ############################################################
 # Input for climate change (Edit here if you wish)
 ############################################################
-    TCOR=../../met/dat/Tair__DF/m32ma213.binMM
-    PCOR=../../met/dat/Prcp__RT/m32ma213.binMM
-    LCOR=../../met/dat/LWdownDF/m32ma213.binMM
+    TCOR=../../met/dat/Tair__DF/m32ma213${SUF}MM
+    PCOR=../../met/dat/Prcp__RT/m32ma213${SUF}MM
+    LCOR=../../met/dat/LWdownDF/m32ma213${SUF}MM
 #
     TCOR=NO
     PCOR=NO

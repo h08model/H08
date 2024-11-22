@@ -231,6 +231,8 @@ COMPONENT41 = ${DIRLIB}/read_binary.o ${DIRLIB}/wrte_binary.o \
 TARGET42    = htpercentile2
 COMPONENT42 = ${DIRLIB}/read_binary.o ${DIRLIB}/wrte_binary.o \
               ${DIRLIB}/read_result.o ${DIRLIB}/igetday.o
+TARGET43    = ht2dto1d
+COMPONENT43 = ${DIRLIB}/read_binary.o ${DIRLIB}/wrte_binary.o
 TARGET101   = htcreatenc
 COMPONENT101= ${DIRLIB}/read_binary.o ${DIRLIB}/wrte_binary.o \
               ${DIRLIB}/rgetlon.o     ${DIRLIB}/rgetlat.o     \

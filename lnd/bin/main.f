@@ -18,15 +18,14 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cto   run land surface model
 cby   2010/03/31, hanasaki, NIES: H08ver1.0
-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+ccccccc
       implicit none
 c parameter (array)
       integer           n0l              
       integer           n0t              
-c     parameter        (n0l=64800)
       parameter        (n0l=259200)
-c     parameter        (n0l=11088)
-c      parameter        (n0l=32400)
+c      parameter        (n0l=67209) !! for parallel computing
       parameter        (n0t=3) 
 c parameter (physical)      
       integer           n0secday         !! seconds in a day [s]
@@ -93,6 +92,7 @@ cnew start
       real              r1gwrcf(n0l)     !! groundwater recharge fraction [-]
       real              r1gwrcmax(n0l)   !! groundwater maxim. recharge [-]
 cnew end
+      character*128     c0optpara
       character*128     c0lndmsk
       character*128     c0soildepth
       character*128     c0w_fieldcap
@@ -186,8 +186,8 @@ c out (1:general energy balance components)
       real              r1qg(n0l)         !! Ground heat flux [W m-2] down
       real              r2qg(n0l,0:n0t)   
       real              r1qf(n0l)         !! Energy of fusion [W m-2] s<l
-      real              r2qf(n0l,0:n0t)     
-      real              r1qv(n0l)         !! Energy of sublimation [W m-2] s<v
+      real              r2qf(n0l,0:n0t)
+      real              r1qv(n0l) !! Energy of sublimation [W m-2] s<v
       real              r2qv(n0l,0:n0t)     
       character*128     c0swnet
       character*128     c0lwnet
@@ -256,7 +256,8 @@ c namelist
       namelist         /setlnd/
      $     i0yearmin,     i0yearmax,     i0secint,      i0ldbg,
      $     i0cntc,        i0spnflg,      r0spnerr,      r0spnrat,
-     $     r0engbalc,     r0watbalc,     
+     $     r0engbalc,     r0watbalc,
+     $     c0optpara, 
      $     c0lndmsk,      c0soildepth,   c0w_fieldcap,  c0w_wilt,
      $     c0gwdepth,     c0w_gwyield,
      $     c0cg,          c0cd,
@@ -339,18 +340,15 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       call read_binary(n0l,c0avgsurftini,r1avgsurft_pr)
       call read_binary(n0l,c0sweini,r1swe)
       call read_binary(n0l,c0sweini,r1swe_pr)
-cnew start
       call read_binary(n0l,c0gwini,r1gw)
       call read_binary(n0l,c0gwini,r1gw_pr)
-cnew end
+
 d     write(*,*) 'main: --- Initialize state variables --------------'
 d     write(*,*) 'main: r1soilmoist:',r1soilmoist(i0ldbg)
 d     write(*,*) 'main: r1soiltemp: ',r1soiltemp(i0ldbg)
 d     write(*,*) 'main: r1avgsurft: ',r1avgsurft(i0ldbg)
 d     write(*,*) 'main: r1swe:      ',r1swe(i0ldbg)
-cnew start
 d     write(*,*) 'main: r1gw:       ',r1gw(i0ldbg)
-cnew end
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Loop (year,mon,it)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -527,9 +525,10 @@ d             write(*,*) 'main: r1psurf:  ',r1psurf(i0ldbg)
 d             write(*,*) 'main: r1wind:   ',r1wind(i0ldbg)
 d             write(*,*) 'main: r1balbedo:',r1balbedo(i0ldbg)
       call calc_leakyb(
-     $     n0l,
+     $     n0l, 
      $     i0secint,     i0ldbg,     i0cntc,        r0engbalc,
      $     r0watbalc,
+     $     c0optpara, 
      $     i1lndmsk,     r1soildepth,r1w_fieldcap,  r1w_wilt,
      $     r1gwdepth,    r1w_gwyield,
      $     r1cg,         r1cd,
@@ -567,19 +566,16 @@ c statevariable
               call wrte_bints2(n0l,n0t,
      $             r1swe,         r2swe,       c0swe,
      $             i0year,i0mon,i0day,i0sec,i0secint,c0opt)
-cnew start
               c0opt='sta'
               call wrte_bints2(n0l,n0t,
      $             r1gw,          r2gw,        c0gw,
      $             i0year,i0mon,i0day,i0sec,i0secint,c0opt)
-cnew end
 d             write(*,*) 'main: r1soilmoist:  ',r1soilmoist(i0ldbg)
 d             write(*,*) 'main: r1soiltemp:   ',r1soiltemp(i0ldbg)
 d             write(*,*) 'main: r1avgsurft:   ',r1avgsurft(i0ldbg)
 d             write(*,*) 'main: r1swe:        ',r1swe(i0ldbg)
-cnew start
 d             write(*,*) 'main: r1gw:         ',r1gw(i0ldbg)
-cnew end
+              
 c out1
               c0opt='ave'
               call wrte_bints2(n0l,n0t,
@@ -690,7 +686,6 @@ c out 7
      $             r1salbedo,     r2salbedo,   c0salbedo,
      $             i0year,i0mon,i0day,i0sec,i0secint,c0opt)
 d             write(*,*) 'main: r1salbedo:  ',r1salbedo(i0ldbg)
-cnew start
 c out 8
               c0opt='ave'
               call wrte_bints2(n0l,n0t,
@@ -702,16 +697,13 @@ c out 8
      $             i0year,i0mon,i0day,i0sec,i0secint,c0opt)
 d             write(*,*) 'main: r1qrc:  ',r1qrc(i0ldbg)
 d             write(*,*) 'main: r1qbf:  ',r1qbf(i0ldbg)
-cnew end
 c
               do i0l=1,n0l
                 r1avgsurft_pr(i0l)=r1avgsurft(i0l)
                 r1swe_pr(i0l)=r1swe(i0l)
                 r1soiltemp_pr(i0l)=r1soiltemp(i0l)
                 r1soilmoist_pr(i0l)=r1soilmoist(i0l)
-cnew start
                 r1gw_pr(i0l)=r1gw(i0l)
-cnew end
               end do
 c
             end do   !! sec
@@ -748,13 +740,12 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      $         r1tmp,       r2swe,        c0swe,
      $         i0yearmin-1,12,31,n0secday,i0secint,
      $         c0opt)
-cnew start
           call wrte_bints2(n0l,n0t,
      $         r1tmp,       r2gw,         c0gw,
      $         i0yearmin-1,12,31,n0secday,i0secint,
      $         c0opt)
         end if
-cnew end
+
         go to 10
       end if
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 

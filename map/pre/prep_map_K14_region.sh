@@ -2,10 +2,6 @@
 ############################################################
 #to   prepare global canal data by Kitamura et al. (2014)
 #by   2016/01/31, hanasaki
-#
-#
-#
-#
 ############################################################
 #settings
 ############################################################
@@ -17,6 +13,7 @@ LONLAT="124 131 33 44"
 ARG="$L $XY $L2X $L2Y $LONLAT"
 MAP=.SNU
 SUF=.ko5
+CANSUF=.binko5
 MAX=1
 OPT=within
 ############################################################
@@ -40,13 +37,13 @@ DIRCANORG=../../map/out/can_org_   # origin of canal water
 DIRCANDES=../../map/out/can_des_   # destination of canal water
 #LCANEXPORG=$DIRCANORG/canorg.l.canal.K14.hlf
 LCANEXPORG=$DIRCANORG/canorg.l.canal.K14${SUF}
-LCANEXPDES=$DIRCANDES/candes.l.canal.K14.bin
+LCANEXPDES=$DIRCANDES/candes.l.canal.K14${CANSUF}
 #LCANIMPORG=$DIRCANORG/canorg.l.${OPT}.${MAX}${MAP}.hlf
 LCANIMPORG=$DIRCANORG/canorg.l.${OPT}.${MAX}${MAP}${SUF}
-LCANIMPDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}.bin
+LCANIMPDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}${CANSUF}
 #LCANMRGORG=$DIRCANORG/canorg.l.merged.${MAX}${MAP}.hlf
 LCANMRGORG=$DIRCANORG/canorg.l.merged.${MAX}${MAP}${SUF}
-LCANMRGDES=$DIRCANDES/candes.l.merged.${MAX}${MAP}.bin
+LCANMRGDES=$DIRCANDES/candes.l.merged.${MAX}${MAP}${CANSUF}
 #
 LOG=temp.log
 ############################################################

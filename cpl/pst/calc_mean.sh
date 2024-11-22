@@ -12,6 +12,13 @@ L2Y=../../map/dat/l2x_l2y_/l2y.hlf.txt
 LONLAT="-180 180 -90 90"
 SUF=.hlf
 
+#L=67209                    # for parallel computing
+#XY="720 360"
+#L2X=../../map/dat/l2x_l2y_/l2x.hlo.txt
+#L2Y=../../map/dat/l2x_l2y_/l2y.hlo.txt
+#LONLAT="-180 180 -90 90"
+#SUF=.hlo
+
 #L=11088                   # for Korean peninsula 2018
 #XY="84 132"
 #LONLAT="124 131 33 44"

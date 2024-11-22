@@ -19,6 +19,8 @@ ARG="$L $XY $L2X $L2Y $LONLAT"
 #
 OPT=within          # within or nolimit
 MAX=1               # maximum distance of implicit canal
+#
+CANSUF=.binhlf # SUF for canal data (world .hlf rec20)
 ############################################################
 # in (edit here )
 ############################################################
@@ -41,7 +43,7 @@ DIRCANCNT=../../map/out/can_cnt_   # counter
 XCANORG=$DIRCANORG/canorg.x.${OPT}.${MAX}${MAP}${SUF}
 YCANORG=$DIRCANORG/canorg.y.${OPT}.${MAX}${MAP}${SUF}
 LCANORG=$DIRCANORG/canorg.l.${OPT}.${MAX}${MAP}${SUF}
-LCANDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}.bin
+LCANDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}${CANSUF}
 CANSCO=$DIRCANSCO/cansco.${OPT}.${MAX}${MAP}${SUF}
 CANCNT=$DIRCANCNT/cancnt.${OPT}.${MAX}${MAP}${SUF}
 #

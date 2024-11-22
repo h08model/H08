@@ -1,4 +1,4 @@
-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c Copyright (c) 2023 Dr. Naota HANASAKI, NIES
 c
 c Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +14,7 @@ c either express or implied.
 c See the License for the specific language governing permissions and
 c limitations under the License.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$use omp_lib
       program main_human
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cto   run coupled model
@@ -29,9 +30,9 @@ c parameter (array)
       integer           n0ram              !! Crop type (Leff et al., 2004)
       integer           n0rec
       parameter        (n0l=259200)
-c      parameter        (n0l=11088)
+c      parameter        (n0l=67209)   !! for parallel computing
+c     parameter        (n0l=11088)
 c      parameter        (n0l=64800)
-c      parameter        (n0l=5040)
       parameter        (n0t=3) 
       parameter        (n0m=4) 
       parameter        (n0c=2) 
@@ -42,8 +43,8 @@ c parameter (physical)
       integer           n0secday         !! seconds in a day [s]
       real              p0sigma          !! Stefan Boltzman const [W m-2 K-4]
       real              p0omega          !! anglular speed of Earth rot [s-1] 
-      real              p0icepnt         !! ice point [K]
-      real              p0l              !! latent heat water -> vapor [J kg-1]
+      real              p0icepnt !! ice point [K]
+      real              p0l     !! latent heat water -> vapor [J kg-1]
       real              p0lf             !! latent heat ice -> water [J kg-1]
       real              p0cp             !! heat capacity of air [J kg-1]
       parameter        (n0secday=86400)
@@ -75,6 +76,7 @@ c index (time)
       integer           i0sec            !! second
       integer           i0doy
 c temporary
+      integer           i0tmp
       real              r0tmp
       real              r1tmp(n0l)
       real              r1tmp10(n0l*n0rec)
@@ -85,7 +87,7 @@ c temporary
       character*128     s0sum            !! string "sum" (summation)
       data              s0ave/'ave'/ 
       data              s0sta/'sta'/ 
-      data              s0spn/'spn'/ 
+      data              s0spn/'spn'/
       data              s0sum/'sum'/ 
 c function
       integer           iargc
@@ -110,7 +112,7 @@ c in (file: map of lnd)
       integer           i1lndmsk(n0l)    !! land mask [-]
       real              r1soildepth(n0l) !! soil depth [m]
       real              r1w_fieldcap(n0l)!! field capacity [m3 m-3]
-      real              r1w_wilt(n0l)    !! wilting point [m3 m-3]
+      real              r1w_wilt(n0l) !! wilting point [m3 m-3]
       real              r1cg(n0l)        !! volumetric dry soil heat capacity
       real              r1cd(n0l)        !! bulk transfer coefficient
       real              r1gamma(n0l)     !! gamma of subsurface runoff [-]
@@ -122,6 +124,7 @@ c in (file: map of lnd)
       real              r1rgwtau(n0l)     !! tau for groundwater [dy]
       real              r1rgwrcf(n0l)     !! groundwater recharge fraction [-]
       real              r1rgwrcmax(n0l)!! maximum recharge
+      character*128     c0optpara      !! parallel computing  
       character*128     c0lndmsk
       character*128     c0soildepth
       character*128     c0w_fieldcap
@@ -293,6 +296,7 @@ c namelist (lnd)
      $     i0yearmin,     i0yearmax,     i0secint,      i0ldbg,
      $     i0cntc,        i0spnflg,      r0spnerr,      r0spnrat,
      $     r0engbalc,     r0watbalc,
+     $     c0optpara,
      $     c0lndmsk,      c0soildepth,   c0w_fieldcap,  c0w_wilt,
      $     c0rgwdepth,     c0w_rgwyield,
      $     c0cg,          c0cd,
@@ -1702,7 +1706,7 @@ c
                   do i0l=1,n0l
                     r1frcsoilmoistnnb(i0l)=r3frcsoilmoistnnb(i0l,0,i0m)
                   end do
-c
+
                   call calc_watsrc(
      $                 n0l,real(n0secday),r1lndara,r1tmp,
      $                 r1soilmoist_pr,r1zero,r1zero, r1supagr_df,
@@ -1887,7 +1891,9 @@ c
      $               n0l,
      $               i0secint,     i0ldbg,     i0cntc,     r0engbalc,
      $               r0watbalc,
-     $               i1lndmsk,     r1soildepth2,r1w_fieldcap,r1w_wilt,
+     $               c0optpara,           
+     $               i1lndmsk,
+     $               r1soildepth2,r1w_fieldcap,r1w_wilt,
      $               r1rgwdepth,    r1w_rgwyield,
      $               r1cg,         r1cd2,
      $               r1gamma2,      r1tau2,      r1balbedo,
@@ -2398,33 +2404,68 @@ c
                     end if
                   end do 
                 else
-                  do i0m=n0m,1,-1
+                   do i0m=n0m,1,-1
                     if(r3rgw(i0l,0,i0m).ne.p0mis)then
                       if(r2arafrc(i0l,i0m).ne.p0mis.and.
      $                   r2arafrc(i0l,n0m).le.0.99)then
             if(i0m.eq.1)then
                continue
-            else if(i0m-1.ge.1.and.r2arafrc(i0l,i0m-1).gt.0.0)then
+            else 
+c               (c0optpara.eq.'yes')then
+               if (i0m-1.ge.1)then
+                  if (r2arafrc(i0l,i0m-1).gt.0.0)then
                       r3rgw(i0l,0,i0m-1)=r3rgw(i0l,0,i0m-1)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-1)
-            else if(i0m-2.ge.1.and.r2arafrc(i0l,i0m-2).gt.0.0)then
+                  end if
+               else if(i0m-2.ge.1)then
+                  if(r2arafrc(i0l,i0m-2).gt.0.0)then
                       r3rgw(i0l,0,i0m-2)=r3rgw(i0l,0,i0m-2)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-2)
-            else if(i0m-3.ge.1.and.r2arafrc(i0l,i0m-3).gt.0.0)then
+                  end if    
+               else if(i0m-3.ge.1)then
+                  if(r2arafrc(i0l,i0m-3).gt.0.0)then
                       r3rgw(i0l,0,i0m-3)=r3rgw(i0l,0,i0m-3)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-3)
-            else if(i0m-4.ge.1.and.r2arafrc(i0l,i0m-4).gt.0.0)then
+                  end if    
+               else if(i0m-4.ge.1)then
+                  if(r2arafrc(i0l,i0m-4).gt.0.0)then
                       r3rgw(i0l,0,i0m-4)=r3rgw(i0l,0,i0m-4)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-4)
-            else if(i0m-5.ge.1.and.r2arafrc(i0l,i0m-5).gt.0.0)then
+                  end if
+               else if(i0m-5.ge.1)then
+                  if(r2arafrc(i0l,i0m-5).gt.0.0)then
                       r3rgw(i0l,0,i0m-5)=r3rgw(i0l,0,i0m-5)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-5)
-            end if
+                  end if
+               end if                         
+c            else if(c0optpara.eq.'NO')then
+C               if (i0m-1.ge.1.and.r2arafrc(i0l,i0m-1).gt.0.0)then
+C                      r3rgw(i0l,0,i0m-1)=r3rgw(i0l,0,i0m-1)
+C     $               +min(0.0,r3rgw(i0l,0,i0m))
+C     $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-1)
+C                else if(i0m-2.ge.1.and.r2arafrc(i0l,i0m-2).gt.0.0)then
+C                      r3rgw(i0l,0,i0m-2)=r3rgw(i0l,0,i0m-2)
+C     $               +min(0.0,r3rgw(i0l,0,i0m))
+C     $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-2)
+C                else if(i0m-3.ge.1.and.r2arafrc(i0l,i0m-3).gt.0.0)then
+C                      r3rgw(i0l,0,i0m-3)=r3rgw(i0l,0,i0m-3)
+C     $               +min(0.0,r3rgw(i0l,0,i0m))
+C     $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-3)
+C                else if(i0m-4.ge.1.and.r2arafrc(i0l,i0m-4).gt.0.0)then
+C                      r3rgw(i0l,0,i0m-4)=r3rgw(i0l,0,i0m-4)
+C     $               +min(0.0,r3rgw(i0l,0,i0m))
+C     $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-4)
+C                else if(i0m-5.ge.1.and.r2arafrc(i0l,i0m-5).gt.0.0)then
+C                      r3rgw(i0l,0,i0m-5)=r3rgw(i0l,0,i0m-5)
+C     $               +min(0.0,r3rgw(i0l,0,i0m))
+C     $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-5)
+C                end if
+            end if   
                       end if
                       r3rgw(i0l,0,i0m)=max(0.0,r3rgw(i0l,0,i0m))
                     end if

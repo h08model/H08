@@ -9,6 +9,7 @@ PRJ=WFDE		# Project name
 RUN=LR__               # Run name
 YEARMIN=1979		# start year
 YEARMAX=1979           # end year
+
 #PRJ=AK10              # for Kyusyu (.ks1) 
 #RUN=LR__
 #YEARMIN=2014
@@ -16,10 +17,10 @@ YEARMAX=1979           # end year
 
 SECINT=86400            # interval
 LDBG=43420             # debugging point
-#LDBG=5734
 PRJMET=wfde
 RUNMET=____
-#PRJMET=AMeD
+
+#PRJMET=AMeD           # for Kyusyu (.ks1)
 #RUNMET=AS1_
 ############################################################
 # Expert Settings (Do not edit here unless you are an expert)
@@ -39,11 +40,19 @@ PROG=./main
 SUF=.hlf                # Suffix
 MAP=.WFDEI              # Map
 
+#SUF=.hlo                # for parallel computing  
+#MAP=.WFDEI
+
 #SUF=.ko5                # for Korean peninsula (.ko5)
 #MAP=.SNU
 
 #SUF=.ks1                # for Kyusyu (.ks1)
 #MAP=.kyusyu
+############################################################
+# option for parallel computing
+############################################################
+#OPTPARA=yes
+OPTPARA=NO
 ############################################################
 # Meteorological input (Edit here if you wish)
 ############################################################
@@ -255,6 +264,7 @@ r0spnrat=$SPNRAT
 r0engbalc=$ENGBALC
 r0watbalc=$WATBALC
 
+c0optpara='$OPTPARA'
 c0lndmsk='$LNDMSK'
 c0soildepth='$SOILDEPTH'
 c0w_fieldcap='$FIELDCAP'

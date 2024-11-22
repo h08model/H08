@@ -18,6 +18,7 @@ L2Y=../../map/dat/l2x_l2y_/l2y.ks1.txt
 LONLAT="129 132 31 34"
 ARG="$L $XY $L2X $L2Y $LONLAT"
 SUF=.ks1
+CANSUF=.binks1
 MAP=.kyusyu
 #
 OPT=conditionally   # within or nolimit or conditionally
@@ -57,7 +58,7 @@ DIRCANCNT=../../map/out/can_cnt_   # counter
 XCANORG=$DIRCANORG/canorg.x.${OPT}.${MAX}${MAP}${SUF}
 YCANORG=$DIRCANORG/canorg.y.${OPT}.${MAX}${MAP}${SUF}
 LCANORG=$DIRCANORG/canorg.l.${OPT}.${MAX}${MAP}${SUF}
-LCANDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}.bin
+LCANDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}${CANSUF}
 CANSCO=$DIRCANSCO/cansco.${OPT}.${MAX}${MAP}${SUF}
 CANCNT=$DIRCANCNT/cancnt.${OPT}.${MAX}${MAP}${SUF}
 #

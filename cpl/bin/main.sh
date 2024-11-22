@@ -34,17 +34,29 @@ SPNRAT=0.95             # spinup threshold
 ENGBALC=1.0             # energy inbalance tolerance
 WATBALC=0.1             # water inbalance tolerance
 CNTC=1000               # maximum iteration
-PROG=./main             # program
+PROG=./main         # program
 ############################################################
 # Geographical settings (edit here if you change spatial domain/resolution.
 # Note that L (n0l) is prescribed in main.f. You also need to
 # edit main.f and re-compile it.)
 ############################################################
 SUF=.hlf                # Suffix
+CANSUF=.binhlf          # Suffix for canal (.bin+suffix)
 MAP=.WFDEI              # Map
 
-#SUF=.ko5
+#SUF=.hlo                # for parallel computing
+#CANSUF=.binhlo
+#MAP=.WFDEI
+
+#SUF=.ko5                # for Korean peninsula (.ko5)
+#CANSUF=.binko5
 #MAP=.SNU
+
+############################################################
+# Setting for parallel computing
+############################################################
+OPTPARA=NO       
+#OPTPARA=yes
 ############################################################
 # Mosaic settings (Do not edit here unless you are an expert)
 ############################################################
@@ -167,11 +179,11 @@ OPTRGW=yes
 #
 # disable aqueduct
 #
-LCAN=../../dam/dat/uniform.0.0.bin # must be 10 times larger than the binary.
+LCAN=../../dam/dat/uniform.0.0${CANSUF} # must be 10 times larger than the binary.
 #
 # aqueduct settings shown in Hanasaki et al. 2018 
 #
-LCAN=../../map/out/can_des_/candes.l.merged.1${MAP}.bin
+LCAN=../../map/out/can_des_/candes.l.merged.1${MAP}${CANSUF}
 ############################################################
 # Input for water efficiency 1 (Edit here if you wish)
 ############################################################
@@ -271,17 +283,17 @@ OPTDAMWBC=no     # no for not execute water balance calculation
 # Parameter for NNBW (Edit here if you wish)
 ############################################################
 #
-#OPTNNBS=no        # non-local & non-renewable water source (surface water)
-#OPTNNBG=no        # non-local & non-renewable water source (groundwater)
+#OPTNNBS=NO        # non-local & non-renewable water source (surface water)
+#OPTNNBG=NO        # non-local & non-renewable water source (groundwater)
 #
 OPTNNBS=yes      # non-local & non-renewable water source (surface water)
 OPTNNBG=yes      # non-local & non-renewable water source (groundwater)
 ############################################################
 # Input for climate change (Edit here if you wish)
 ############################################################
-    TCOR=../../met/dat/Tair__DF/m32ma213.binMM
-    PCOR=../../met/dat/Prcp__RT/m32ma213.binMM
-    LCOR=../../met/dat/LWdownDF/m32ma213.binMM
+    TCOR=../../met/dat/Tair__DF/m32ma213${SUF}MM
+    PCOR=../../met/dat/Prcp__RT/m32ma213${SUF}MM
+    LCOR=../../met/dat/LWdownDF/m32ma213${SUF}MM
 #
     TCOR=NO
     PCOR=NO
@@ -1452,6 +1464,7 @@ r0spnerr=$SPNERR
 r0spnrat=$SPNRAT
 r0engbalc=$ENGBALC
 r0watbalc=$WATBALC
+c0optpara='$OPTPARA'
 c0lndmsk='$LNDMSK'
 c0soildepth='$SOILDEPTH'
 c0w_fieldcap='$FIELDCAP'
@@ -1878,6 +1891,7 @@ SETCRP=${DIRSET}/${PRJ}${RUN}${DATE}.set
 if [ -f $SETCRP ]; then
   rm $SETCRP
 fi
+
 cat << EOF >> $SETCRP
 &setcrp
 i0crpdaymax=$INTCRPDAYMAX

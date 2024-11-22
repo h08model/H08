@@ -11,6 +11,7 @@ L2X=../../map/dat/l2x_l2y_/l2x.ks1.txt
 L2Y=../../map/dat/l2x_l2y_/l2y.ks1.txt
 LONLAT="129 132 31 34"
 SUF=.ks1
+CANSUF=.binks1
 MAP=.kyusyu
 #
 L10=324000                             # 10 times of L
@@ -38,7 +39,7 @@ DUMMY6=${DIRDAMDAT}/uniform.0.45${SUF}
 DUMMY7=${DIRCRPOUT}/uniform.0.0${SUF}
 DUMMY8=${DIRCRPOUT}/uniform.8.0${SUF}
 DUMMY9=${DIRCRPOUT}/uniform.12.0${SUF}
-CANDAT=${DIRDAMDAT}/uniform.0.0.bin
+CANDAT=${DIRDAMDAT}/uniform.0.0${CANSUF}
 RICDAT=../../crp/out/plt_ric_/AK10__C_00000000.30${SUF}
 ############################################################
 # Job (prepare directory)

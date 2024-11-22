@@ -14,10 +14,12 @@ c either express or implied.
 c See the License for the specific language governing permissions and
 c limitations under the License.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$use omp_lib
       subroutine calc_leakyb(
      $     n0l,
      $     i0secint,     i0ldbg,     i0cntc,        r0engbalc,
      $     r0watbalc,
+     $     c0optpara, 
      $     i1lndmsk,     r1soildepth,r1w_fieldcap,  r1w_wilt,
      $     r1gwdepth,    r1w_gwyield,
      $     r1cg,         r1cd,
@@ -46,6 +48,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     parameter (array)
       integer           n0l
 c     parameter (physical)
+      integer           n0numomp !! number of threads (parallel computing)
       integer           n0secday !! second of a day
       real              p0icepnt !! ice point [K]
       real              p0cp    !! heat capacity of air [J kg-1]
@@ -53,6 +56,7 @@ c     parameter (physical)
       real              p0lf    !! latent heat of ice to water [J kg-1]
       real              p0sigma !! Stefan Boltzman const [W m-2 K-4]
       real              p0omega !! angular speed of the Earth rot [s-1]
+      parameter        (n0numomp=1) !! number of threads (for parallel computing)
       parameter        (n0secday=86400)
       parameter        (p0icepnt=273.15)
       parameter        (p0cp=1005.0) 
@@ -71,7 +75,9 @@ c     in (set)
       integer           i0cntc  !! counter
       real              r0engbalc !! energy balance threshold
       real              r0watbalc !! water balance threshold
-c     in (map)
+c     parallel computing
+      character*128     c0optpara
+c     in (map) 
       integer           i1lndmsk(n0l) !! land mask [-]
       real              r1soildepth(n0l)
       real              r1w_fieldcap(n0l)
@@ -167,11 +173,11 @@ c     local (parameter)
       real              r0swemin !! swe min
       data              r0avgsurftc1/263.15/
       data              r0avgsurftc2/273.15/
-      data              r0salbedoc1/0.60/ 
-      data              r0salbedoc2/0.45/ 
+      data              r0salbedoc1/0.60/
+      data              r0salbedoc2/0.45/
       data              r0swec/20.0/
       data              r0soilwetc/0.75/
-      data              r0windmin/2.0/ 
+      data              r0windmin/2.0/
       data              r0swemin/1.0E-10/
 c     local (flags)
       integer           i0flgfix !! calc. mode: fix Ts
@@ -182,6 +188,7 @@ c     local (flags)
       integer           i0cnttot !! counter
       integer           i0last  !! counter
       real              r0tmp
+      real              r1tmp(n0l)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     initialize
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -226,102 +233,116 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate snow albedo
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008a, Eq.B1
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
- 10   do i0l=1,n0l
+ 10    write(*,*) 'calculation start'
+!$omp parallel num_threads(n0numomp)
+!$omp do private(i0l)
+      do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          if(r1swe_pr(i0l).gt.0.0)then
-            if(r1avgsurft(i0l).le.r0avgsurftc1)then
-              r1salbedo(i0l)=r0salbedoc1
-            else if(r1avgsurft(i0l).ge.r0avgsurftc2)then
-              r1salbedo(i0l)=r0salbedoc2
-            else
-              r1salbedo(i0l)
+        if(r1swe_pr(i0l).gt.0.0)then
+          if(r1avgsurft(i0l).le.r0avgsurftc1)then
+            r1salbedo(i0l)=r0salbedoc1
+          else if(r1avgsurft(i0l).ge.r0avgsurftc2)then
+            r1salbedo(i0l)=r0salbedoc2
+          else
+            r1salbedo(i0l)
      $             =( r0salbedoc1*(r0avgsurftc2-r1avgsurft(i0l))
      $             +r0salbedoc2*(r1avgsurft(i0l)-r0avgsurftc1))
      $             /
      $             (r0avgsurftc2-r0avgsurftc1)
-            end if
-          else
-            r1salbedo(i0l)=p0mis
           end if
+        else
+          r1salbedo(i0l)=p0mis
+        end if
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1salbedo: ',r1salbedo(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate albedo
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008a, Eq.B2
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          if(r1swe_pr(i0l).le.r0swec)then
-            r1albedo(i0l)
+        if(r1swe_pr(i0l).le.r0swec)then
+          r1albedo(i0l)
      $           =r1balbedo(i0l)
      $           +(r1swe_pr(i0l)/r0swec)**0.5
      $           *(r1salbedo(i0l)-r1balbedo(i0l))
-          else
-            r1albedo(i0l)=r1salbedo(i0l)
-          end if
+        else
+          r1albedo(i0l)=r1salbedo(i0l)
+        end if
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1albedo: ',r1albedo(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate aerodynamic conductance
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008a, Eq.B3
 c     - Caution!! Minimum wind speed (r0windmin)is assumed!!
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1acond(i0l)=r1cd(i0l)*max(r1wind(i0l),r0windmin)
+        r1acond(i0l)=r1cd(i0l)*max(r1wind(i0l),r0windmin)
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1acond: ',r1acond(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate density of air (rho)
 c     - See Kondo, Asakura Publ., 1994, pp130, Eq6.1
 c     - Also, Kondo, Asakura Publ., 1994, pp28, Eq2.19
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1rho(i0l)
+        r1rho(i0l)
      $         =1.293*p0icepnt/r1tair(i0l)*r1psurf(i0l)/101325
      $         *(1-0.378/0.622*r1qair(i0l))
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1rho: ',r1rho(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate saturated humidity (esat)
 c     - See Kondo, Asakura Publ., 1994, pp26, Eq2.14
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
 c     debug          if(r1avgsurft(i0l)-p0icepnt.lt.-50)then
 c     debug            write(*,*) i0l,r1avgsurft(i0l)
 c     debug          end if
-          if(r1avgsurft(i0l).ge.p0icepnt)then
-            r1esat(i0l)=6.1078*100
+        if(r1avgsurft(i0l).ge.p0icepnt)then
+          r1esat(i0l)=6.1078*100
      $           *10**((7.5*(r1avgsurft(i0l)-p0icepnt))
      $           /
      $           (237.3+r1avgsurft(i0l)-p0icepnt))
-          else
-            r1esat(i0l)=6.1078*100
+        else
+          r1esat(i0l)=6.1078*100
      $           *10**((9.5*(r1avgsurft(i0l)-p0icepnt))
      $           /
      $           (265.3+r1avgsurft(i0l)-p0icepnt))
-          end if
+        end if
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1esat: ',r1esat(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate saturated humidity (qsat)
 c     - See Kondo, Asakura Publ., 1994, pp28, Eq2.19
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1qsat(i0l)
+        r1qsat(i0l)
      $         =(0.622*r1esat(i0l))
      $         /
      $         (r1psurf(i0l)-0.378*r1esat(i0l))
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1qsat: ',r1qsat(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate delta (desat/dT)
@@ -329,9 +350,10 @@ c     - See Kondo, Asakura Publ., 1994, pp130, Eq6.8
 c     - Caution!! snow/snowfree separation omitted.
 c     - Caution!! now esat is calculated for Ts.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1delta(i0l)
+        r1delta(i0l)
      $         =(6.1078*(2500-2.4*(r1tair(i0l)-p0icepnt)))
      $         /
      $         (0.4615*r1tair(i0l)**2)
@@ -343,146 +365,166 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      $         (r1psurf(i0l)/100-0.378*r1esat(i0l)/100)**2
         end if
       end do
+!$omp end do
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate delta and zeta of Milly (1992)
 c     - See Milly, J of Clim, 5, 209-226, 1992, Eq18
 c     - Caution!! now esat is calculated for Ts.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
           r1zeta(i0l)=(p0l*r1rho(i0l)*r1acond(i0l)*r1delta(i0l))
      $         /(4*p0sigma*r1tair(i0l)**3+r1rho(i0l)*p0cp*r1acond(i0l))
         end if
       end do
+!$omp end do
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate soil wetness 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1soilwet_pr(i0l)
+        r1soilwet_pr(i0l)
      $         =r1soilmoist_pr(i0l)
      $         /(r1soildepth(i0l)*1000.0
      $         *(r1w_fieldcap(i0l)-r1w_wilt(i0l)))
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1soilwet_pr: ',r1soilwet_pr(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate beta
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008, Eq.B5
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          if(r1swe_pr(i0l).gt.0.0)then
+        if(r1swe_pr(i0l).gt.0.0)then
+          r1beta(i0l)=1.0
+        else
+          if(r1soilwet_pr(i0l).ge.r0soilwetc)then
             r1beta(i0l)=1.0
           else
-            if(r1soilwet_pr(i0l).ge.r0soilwetc)then
-              r1beta(i0l)=1.0
-            else
-              r1beta(i0l)=r1soilwet_pr(i0l)/r0soilwetc
-            end if
+            r1beta(i0l)=r1soilwet_pr(i0l)/r0soilwetc
           end if
         end if
+        end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1beta: ',r1beta(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate potential evapotranspiration
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008, Eq.B3
 c     - See Milly, J of Clim, 5, 209-226, 1992, Eq.22
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          if(r1swe_pr(i0l).gt.0.0)then
-            r1potevap(i0l)
+        if(r1swe_pr(i0l).gt.0.0)then
+          r1potevap(i0l)
      $           =r1rho(i0l)*r1acond(i0l)*(r1qsat(i0l)-r1qair(i0l))
-          else
-            r1potevap(i0l)
+        else
+          r1potevap(i0l)
      $           =r1rho(i0l)*r1acond(i0l)*(r1qsat(i0l)-r1qair(i0l))
      $           *(1.0+r1zeta(i0l)*r1beta(i0l))
      $           /
      $           (1.0+r1zeta(i0l))
-          end if
+        end if
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1potevap: ',r1potevap(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate evaporation
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008, Eq.B4
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          if(r1swe_pr(i0l).gt.0.0)then
-            r1subsnow(i0l)=r1potevap(i0l)
-            if(r1swe_pr(i0l).lt.r1potevap(i0l)*real(i0secint))then
-              r1subsnow(i0l)=r1swe_pr(i0l)/real(i0secint)
-            end if
-            r1et(i0l)=0.0
-          else
-            r1et(i0l)=r1beta(i0l)*r1potevap(i0l)
-            if(r1soilmoist_pr(i0l).lt.r1et(i0l)*real(i0secint))then
-              r1et(i0l)=r1soilmoist_pr(i0l)/real(i0secint)
-            end if
-            r1subsnow(i0l)=0.0
+        if(r1swe_pr(i0l).gt.0.0)then
+          r1subsnow(i0l)=r1potevap(i0l)
+          if(r1swe_pr(i0l).lt.r1potevap(i0l)*real(i0secint))then
+            r1subsnow(i0l)=r1swe_pr(i0l)/real(i0secint)
           end if
-          r1evap(i0l)=r1et(i0l)+r1subsnow(i0l)
+          r1et(i0l)=0.0
+        else
+          r1et(i0l)=r1beta(i0l)*r1potevap(i0l)
+          if(r1soilmoist_pr(i0l).lt.r1et(i0l)*real(i0secint))then
+            r1et(i0l)=r1soilmoist_pr(i0l)/real(i0secint)
+          end if
+          r1subsnow(i0l)=0.0
+        end if
+        r1evap(i0l)=r1et(i0l)+r1subsnow(i0l)
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1et:      ',r1et(i0ldbg)
 d     write(*,*) 'calc_leakyb: r1subsnow: ',r1subsnow(i0ldbg)
 d     write(*,*) 'calc_leakyb: r1evap:    ',r1evap(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate latent heat flux
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          if(r1swe_pr(i0l).gt.0.0)then
-            r1qle(i0l)=0.0
-            r1qv(i0l)=(p0l+p0lf)*r1subsnow(i0l)
-          else
+        if(r1swe_pr(i0l).gt.0.0)then
+          r1qle(i0l)=0.0
+          r1qv(i0l)=(p0l+p0lf)*r1subsnow(i0l)
+        else
 c     bug            r1qle(i0l)=p0l*r1evap(i0l)
-            r1qle(i0l)=p0l*r1et(i0l)
-            r1qv(i0l)=0.0
-          end if
+          r1qle(i0l)=p0l*r1et(i0l)
+          r1qv(i0l)=0.0
+        end if
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1qle: ',r1qle(i0ldbg)
 d     write(*,*) 'calc_leakyb: r1qv:  ',r1qv(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate sensible heat flux
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008, Eq.B6
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1qh(i0l)
+        r1qh(i0l)
      $         =p0cp*r1rho(i0l)*r1acond(i0l)
      $         *(r1avgsurft(i0l)-r1tair(i0l))
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1qh:  ',r1qh(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate shortwave net radiation
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1swnet(i0l)=r1swdown(i0l)*(1-r1albedo(i0l))
+        r1swnet(i0l)=r1swdown(i0l)*(1-r1albedo(i0l))
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1swnet:  ',r1swnet(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate longwave net radiation
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1lwnet(i0l)=r1lwdown(i0l)-p0sigma*r1avgsurft(i0l)**4
+        r1lwnet(i0l)=r1lwdown(i0l)-p0sigma*r1avgsurft(i0l)**4
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1lwnet:  ',r1lwnet(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate soil temperature
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008, Eq.B8 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1soiltemp(i0l)
+        r1soiltemp(i0l)
      $         =((r1avgsurft(i0l)-r1avgsurft_pr(i0l))
      $         + (r1soiltemp_pr(i0l)*sqrt(365.0))
      $         + (r1avgsurft(i0l)*p0omega*real(i0secint))
@@ -491,31 +533,37 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      $         (sqrt(365.0)+p0omega*real(i0secint))
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1soiltemp:  ',r1soiltemp(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate ground heat flux
 c     - Caution!! Checking incomplete!! (review FR carefully!)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1qg(i0l)
+        r1qg(i0l)
      $         =r1cg(i0l)*(r1avgsurft(i0l)-r1avgsurft_pr(i0l))
      $         /real(i0secint)
      $         +r1cg(i0l)*p0omega*(r1avgsurft(i0l)-r1soiltemp(i0l))
         end if
       end do
+!$omp end do
 d     write(*,*) 'calc_leakyb: r1qg:  ',r1qg(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate energy balance
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008, Eq.B7
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1engbal(i0l)
+        r1engbal(i0l)
      $         =r1swnet(i0l)+r1lwnet(i0l)-r1qle(i0l)-r1qh(i0l)
      $         -r1qg(i0l)-r1qf(i0l)-r1qv(i0l)
         end if
       end do
+!$omp end do
+!$omp end parallel
 d     write(*,*) 'calc_leakyb: r1engbal:  ',r1engbal(i0ldbg)
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     If i0flgfix = 0 
@@ -555,7 +603,7 @@ c
 c     
         do i0l=1,n0l
           if(i1flgcal(i0l).eq.1)then
-            r1avgsurft(i0l)
+          r1avgsurft(i0l)
      $           =r1tair(i0l)+
      $           ((1.0-r1albedo(i0l))*r1swdown(i0l)
      $           +r1lwdown(i0l)
@@ -578,7 +626,7 @@ c
 c     
         do i0l=1,n0l
           if(i1flgcal(i0l).eq.1)then
-            r1avgsurft(i0l)
+          r1avgsurft(i0l)
      $           =min(max(r1avgsurft(i0l),p0icepnt-50.0),p0icepnt+50.0)
           end if
         end do
@@ -642,12 +690,12 @@ c
 c     
           do i0l=1,n0l
             if(i1flgcal(i0l).eq.1)then
-              if(abs(r1engbal(i0l)).gt.r0engbalc)then
-                i1flgcal(i0l)=1
-                i0flgfin=0
-              else
-                i1flgcal(i0l)=0
-              end if
+            if(abs(r1engbal(i0l)).gt.r0engbalc)then
+              i1flgcal(i0l)=1
+              i0flgfin=0
+            else
+              i1flgcal(i0l)=0
+            end if
             end if
           end do
 c     
@@ -716,68 +764,77 @@ d     write(*,*) 'calc_leakyb: --------------------------------------'
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate snow balance
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp parallel num_threads(n0numomp)
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1swe(i0l)=r1swe_pr(i0l)
+        r1swe(i0l)=r1swe_pr(i0l)
      $         +(r1snowf(i0l)-r1qsm(i0l)-r1subsnow(i0l))*real(i0secint)
-          if(r1swe(i0l).lt.r0swemin)then
-            r1qsm(i0l)=(r1swe_pr(i0l)+(r1snowf(i0l)-r1subsnow(i0l))
+        if(r1swe(i0l).lt.r0swemin)then
+          r1qsm(i0l)=(r1swe_pr(i0l)+(r1snowf(i0l)-r1subsnow(i0l))
      $           *real(i0secint))/real(i0secint)
-            r1swe(i0l)=0.0
-c     suspended
-            if(r1qsm(i0l).lt.0)then
-              r1qsm(i0l)=0
-            end if
-c     suspended
+          r1swe(i0l)=0.0
+          if(r1qsm(i0l).lt.0)then
+            r1qsm(i0l)=0
           end if
         end if
+        end if
       end do
+!$omp end do
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate Water Balance
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1soilmoist(i0l)
+        r1soilmoist(i0l)
      $         =r1soilmoist_pr(i0l)
      $         +(r1rainf(i0l)-r1et(i0l)+r1qsm(i0l))*real(i0secint)
         end if
       end do
-c     
+!$omp end do
+c
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1soilwet(i0l)
+        r1soilwet(i0l)
      $         =r1soilmoist(i0l)
      $         /(r1soildepth(i0l)*1000.0
      $         *(r1w_fieldcap(i0l)-r1w_wilt(i0l)))
         end if
       end do
+!$omp end do
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate surface runoff
 c     - 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          if(r1soilwet(i0l).ge.1)then
-            r1qs(i0l)
+        if(r1soilwet(i0l).ge.1)then
+          r1qs(i0l)
      $           =(r1soilmoist(i0l)
      $           -r1soildepth(i0l)*1000.0
      $           *(r1w_fieldcap(i0l)-r1w_wilt(i0l)))
      $           /real(i0secint)
-            r1soilmoist(i0l)=r1soildepth(i0l)*1000
+          r1soilmoist(i0l)=r1soildepth(i0l)*1000
      $           *(r1w_fieldcap(i0l)-r1w_wilt(i0l))
-            r1soilwet(i0l)=1.0
-          else
-            r1qs(i0l)=0.0
-          end if
+          r1soilwet(i0l)=1.0
+        else
+          r1qs(i0l)=0.0
+        end if
         end if
       end do
+!$omp end do
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate subsurface runoff
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008, Eq.B12
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1qsb(i0l)
+c        write(*,*) 'l773',r1tau(i0l)
+        r1qsb(i0l)
      $         =(r1soilmoist(i0l)
      $         /
      $         (r1soildepth(i0l)*1000.0
@@ -788,21 +845,27 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      $         /(r1tau(i0l)*real(n0secday))
         end if
       end do
-c
+!$omp end do
+c     
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1soilmoist(i0l)=r1soilmoist(i0l)-r1qsb(i0l)*real(i0secint)
+        r1soilmoist(i0l)=r1soilmoist(i0l)-r1qsb(i0l)*real(i0secint)
         end if
       end do
-c
+!$omp end do
+c     
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1soilwet(i0l)
+        r1soilwet(i0l)
      $         =r1soilmoist(i0l)
      $         /(r1soildepth(i0l)*1000.0
      $         *(r1w_fieldcap(i0l)-r1w_wilt(i0l)))
         end if
       end do
+!$omp end do
+!$omp end parallel
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate groundwater recharge and storage, and base flow
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -810,38 +873,62 @@ d      write(*,*) 'calc_leakyb:r1gwrcmax  ',r1gwrcmax(i0ldbg)
 d      write(*,*) 'calc_leakyb:r1gwrcf    ',r1gwrcf(i0ldbg)
 d      write(*,*) 'calc_leakyb:r1qsb      ',r1qsb(i0ldbg)
 d      write(*,*) 'calc_leakyb:r1qs       ',r1qs(i0ldbg)
+c!$omp do private(i0l)
       do i0l=1,n0l
-        if(i1flgcal(i0l).eq.1)then
-          r0tmp=r1qs(i0l)+r1qsb(i0l)
-          r1qrc(i0l)=min(r1gwrcmax(i0l),
-     $                   r1gwrcf(i0l)*r0tmp)
-          if(r0tmp.gt.0.0)then
-            r1qsb(i0l)
-     $           =max(0.0,r1qsb(i0l)-r1qrc(i0l)*r1qsb(i0l)/r0tmp)
-            r1qs(i0l)
-     $           =max(0.0,r1qs(i0l) -r1qrc(i0l)*r1qs(i0l)/r0tmp)
+        if(i1flgcal(i0l).eq.1)then  
+          if(c0optpara.eq.'NO')then
+            r0tmp=r1qs(i0l)+r1qsb(i0l)
+            r1qrc(i0l)=min(r1gwrcmax(i0l),
+     $                     r1gwrcf(i0l)*r0tmp)
+            if(r0tmp.gt.0.0)then
+              r1qsb(i0l)                  
+     $             =max(0.0,r1qsb(i0l)-r1qrc(i0l)*r1qsb(i0l)/r0tmp)
+              r1qs(i0l)
+     $             =max(0.0,r1qs(i0l)-r1qrc(i0l)*r1qs(i0l)/r0tmp)
+            else
+              r1qsb(i0l)=0.0
+              r1qs(i0l)=0.0 
+            end if
           else
-            r1qsb(i0l)=0.0
-            r1qs(i0l)=0.0
+            r0tmp=r1qs(i0l)+r1qsb(i0l)
+            r1tmp(i0l)=r1qs(i0l)+r1qsb(i0l)
+            r1qrc(i0l)=min(r1gwrcmax(i0l),
+     $                     r1gwrcf(i0l)*r1tmp(i0l))
+            if(r1tmp(i0l).gt.0.0)then
+              r1qsb(i0l)                  
+     $             =max(0.0,r1qsb(i0l)-r1qrc(i0l)*r1qsb(i0l)/r1tmp(i0l))
+              r1qs(i0l)
+     $             =max(0.0,r1qs(i0l)-r1qrc(i0l)*r1qs(i0l)/r1tmp(i0l))
+            else
+              r1qsb(i0l)=0.0
+              r1qs(i0l)=0.0 
+            end if
           end if
-        end if
+        end if 
       end do
-c
+c!$omp end do
+c     
 
 d      write(*,*) 'calc_leakyb:r1qrc  ',r1qrc(i0ldbg)
 d      write(*,*) 'calc_leakyb:r1qsb  ',r1qsb(i0ldbg)
 d      write(*,*) 'calc_leakyb:r1qs   ',r1qs(i0ldbg)
+!$omp parallel num_threads(n0numomp)
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1gw(i0l)=r1gw_pr(i0l)
+        r1gw(i0l)=r1gw_pr(i0l)
         end if
-      end do      
+      end do
+!$omp end do
 d      write(*,*) 'calc_leakyb:r1gw',r1gw(i0ldbg)
 c     
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          if(r1gw(i0l).gt.0.0)then
-            r1qbf(i0l)
+        if(r1gw(i0l).gt.0.0)then
+c          write(*,*) 'gwdepth',r1gwdepth(i0l)
+c          write(*,*) 'gwyield',r1w_gwyield(i0l)
+          r1qbf(i0l)
      $           =(r1gw(i0l)
      $           /
      $           (r1gwdepth(i0l)*1000.0
@@ -850,32 +937,39 @@ c
      $           *r1gwdepth(i0l)*1000.0
      $           *r1w_gwyield(i0l)
      $           /(r1gwtau(i0l)*real(n0secday))
-          else
-            r1qbf(i0l)=0.0
-          end if
+        else
+          r1qbf(i0l)=0.0
+        end if
         end if
       end do
+!$omp end do
+c     
 d      write(*,*) 'calc_leakyb:r1qbf',r1qbf(i0ldbg)
 c
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1gw(i0l)=r1gw(i0l)+(r1qrc(i0l)-r1qbf(i0l))*real(i0secint)
-          if(r1gw(i0l).lt.0.0)then
-            r1qbf(i0l)=r1qbf(i0l)+r1gw(i0l)/real(i0secint)
-            r1gw(i0l)=0.0
-          end if
+        r1gw(i0l)=r1gw(i0l)+(r1qrc(i0l)-r1qbf(i0l))*real(i0secint)
+        if(r1gw(i0l).lt.0.0)then
+          r1qbf(i0l)=r1qbf(i0l)+r1gw(i0l)/real(i0secint)
+          r1gw(i0l)=0.0
         end if
-      end do      
-c continue
-c
-      do i0l=1,n0l
-        if(i1flgcal(i0l).eq.1)then
-          r1qtot(i0l)=r1qs(i0l)+r1qsb(i0l)+r1qbf(i0l)
         end if
       end do
-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
+!$omp end do
+c continue
+c
+!$omp do private(i0l)
+      do i0l=1,n0l
+        if(i1flgcal(i0l).eq.1)then
+        r1qtot(i0l)=r1qs(i0l)+r1qsb(i0l)+r1qbf(i0l)
+        end if
+      end do
+!$omp end do
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c Check energy balance
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
+!$omp do private(i0l)
       do i0l=1,n0l
         r1engbal(i0l)=r1swnet(i0l)+r1lwnet(i0l)-r1qle(i0l)
      $       -r1qh(i0l)-r1qg(i0l)-r1qf(i0l)-r1qv(i0l)
@@ -897,62 +991,68 @@ d         write(*,*) 'cacl_leakyb: ENB: r1qv:    -',r1qv(i0l)
 d         write(*,*) 'cacl_leakyb: ENB: r1engbal =',r1engbal(i0l)
         end if
       end do
+!$omp end do
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
 c Check Qtot balance
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
-          r1qtotbal(i0l)=r1qtot(i0l)-r1qs(i0l)-r1qsb(i0l)-r1qbf(i0l)
-          if(abs(r1qtotbal(i0l)*real(n0secday)).gt.r0watbalc)then
-            i1qtotnotbal(i0l)=i1qtotnotbal(i0l)+1
-            write(*,*) 'calc_leakyb: QTB: Qtot Not Balanced.'
-            write(*,*) 'calc_leakyb: WNB: i0l:         ',i0l
-            write(*,*) 'cacl_leakyb: WNB: r1qtotbal:   ',r1qtotbal(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1qtot:     +',r1qtot(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1qs:       -',r1qs(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1qsb:      -',r1qsb(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1qbf:      -',r1qbf(i0l)
-          end if
+        r1qtotbal(i0l)=r1qtot(i0l)-r1qs(i0l)-r1qsb(i0l)-r1qbf(i0l)
+        if(abs(r1qtotbal(i0l)*real(n0secday)).gt.r0watbalc)then
+          i1qtotnotbal(i0l)=i1qtotnotbal(i0l)+1
+          write(*,*) 'calc_leakyb: QTB: Qtot Not Balanced.'
+          write(*,*) 'calc_leakyb: WNB: i0l:         ',i0l
+          write(*,*) 'cacl_leakyb: WNB: r1qtotbal:   ',r1qtotbal(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1qtot:     +',r1qtot(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1qs:       -',r1qs(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1qsb:      -',r1qsb(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1qbf:      -',r1qbf(i0l)
+        end if
         end if
       end do
-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
+!$omp end do
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c Check water balance
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
+!$omp do private(i0l)
       do i0l=1,n0l
         if(i1flgcal(i0l).eq.1)then
 c nogw          r1watbal(i0l)=r1snowf(i0l)+r1rainf(i0l)-r1evap(i0l)-r1qs(i0l)
 c nogw     $         -r1qsb(i0l)
 c nogw     $         -(r1soilmoist(i0l)-r1soilmoist_pr(i0l))/real(i0secint)
 c nogw     $         -(r1swe(i0l)-r1swe_pr(i0l))/real(i0secint)
-          r1watbal(i0l)=r1snowf(i0l)+r1rainf(i0l)-r1evap(i0l)-r1qs(i0l)
+        r1watbal(i0l)=r1snowf(i0l)+r1rainf(i0l)-r1evap(i0l)-r1qs(i0l)
      $         -r1qsb(i0l)-r1qbf(i0l)
      $         -(r1soilmoist(i0l)-r1soilmoist_pr(i0l))/real(i0secint)
      $         -(r1swe(i0l)-r1swe_pr(i0l))/real(i0secint)
      $         -(r1gw(i0l)-r1gw_pr(i0l))/real(i0secint)
-c     
-          if(abs(r1watbal(i0l)*real(n0secday)).gt.r0watbalc)then
-            i1watnotbal(i0l)=i1watnotbal(i0l)+1
-            write(*,*) 'calc_leakyb: WNB: Water Not Balanced.'
-            write(*,*) 'calc_leakyb: WNB: i0l:         ',i0l
-            write(*,*) 'cacl_leakyb: WNB: r1watbal:    ',r1watbal(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1snowf:    +',r1snowf(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1rainf:    +',r1rainf(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1evap:     -',r1evap(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1qs:       -',r1qs(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1qsb:      -',r1qsb(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1qbf:      -',r1qbf(i0l)
-            write(*,*) 'calc_leakyb: WNB: r1soilmoist: ',
-     $           (r1soilmoist(i0l)-r1soilmoist_pr(i0l))/real(i0secint)
-            write(*,*) 'calc_leakyb: WNB: r1swe:       ',
-     $           (r1swe(i0l)-r1swe_pr(i0l))/real(i0secint)
-            write(*,*) 'calc_leakyb: WNB: r1gw:        ',
-     $           (r1gw(i0l)-r1gw_pr(i0l))/real(i0secint)
-          end if
 c
-          r1evap(i0l)=r1evap(i0l)+r1watbal(i0l)
+        if(abs(r1watbal(i0l)*real(n0secday)).gt.r0watbalc)then
+          i1watnotbal(i0l)=i1watnotbal(i0l)+1
+          write(*,*) 'calc_leakyb: WNB: Water Not Balanced.'
+          write(*,*) 'calc_leakyb: WNB: i0l:         ',i0l
+          write(*,*) 'cacl_leakyb: WNB: r1watbal:    ',r1watbal(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1snowf:    +',r1snowf(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1rainf:    +',r1rainf(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1evap:     -',r1evap(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1qs:       -',r1qs(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1qsb:      -',r1qsb(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1qbf:      -',r1qbf(i0l)
+          write(*,*) 'calc_leakyb: WNB: r1soilmoist: ',
+     $           (r1soilmoist(i0l)-r1soilmoist_pr(i0l))/real(i0secint)
+          write(*,*) 'calc_leakyb: WNB: r1swe:       ',
+     $           (r1swe(i0l)-r1swe_pr(i0l))/real(i0secint)
+          write(*,*) 'calc_leakyb: WNB: r1gw:        ',
+     $           (r1gw(i0l)-r1gw_pr(i0l))/real(i0secint)
+        end if
+c
+        r1evap(i0l)=r1evap(i0l)+r1watbal(i0l)
         end if
       end do
-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
+!$omp end do
+!$omp end parallel
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
       write(*,*) 'calc_leakyb: i0cnt,i0last:',i0cnt,i0last
