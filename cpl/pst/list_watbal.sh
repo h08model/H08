@@ -5,7 +5,6 @@
 ############################################################
 # Settings (Edit here if you change settings)
 ############################################################
-
 PRJ="WFDE"                         # project
 #PRJ="AK10"
 RUN="LR__"                          # run
@@ -16,8 +15,8 @@ RUNMET=____                        # run     for meteorology
 #PRJMET=AMeD
 #RUNMET=AS1_
 PRJDEM=WFDE                         # project for water demand
-#RUNDEM=N_C_                        # run     for water demand
-RUNDEM=LECD
+RUNDEM=N_C_                        # run     for water demand
+#RUNDEM=LECD
 PRJENV=WFDE                         # project for environmental flow
 RUNENV=LR__                         # run     for environmental flow
 #PRJENV=AK10                        # setting for Kyusyu
@@ -77,6 +76,14 @@ LONLAT="-180 180 -90 90"            # geographical range
 SUF=.hlf                            # suffix
 MAP=.WFDEI                          # map
 #
+# for parallel computing
+#L="67209"                          # total num of land cells
+#XY="720 360"                        # X and Y
+#L2X=../../map/dat/l2x_l2y_/l2x.hlo.txt 
+#L2Y=../../map/dat/l2x_l2y_/l2y.hlo.txt
+#LONLAT="-180 180 -90 90"            # geographical range
+#SUF=.hlo                            # suffix
+#MAP=.WFDEI                          # map
 #
 # Regional setting (.ko5)
 #L=11088
@@ -181,8 +188,8 @@ FLNDARA=../../map/dat/lnd_ara_/lndara${MAP}${SUF}  # land area
 FFLWDIR=../../map/dat/flw_dir_/flwdir${MAP}${SUF}  # flwo direction
 #
 FIRGARA=../../map/dat/irg_ara_/S05_____20000000${SUF}
-#FPOPTOT=../../map/dat/pop_tot_/C05_a___20000000${SUF}
-FPOPTOT=../../map/dat/pop_tot_/popuration${SUF}
+FPOPTOT=../../map/dat/pop_tot_/C05_a___20000000${SUF}
+#FPOPTOT=../../map/dat/pop_tot_/popuration${SUF}
 #
 FDEMIND=../../map/dat/dem_ind_/AQUASTAT20000000${SUF}
 FDEMDOM=../../map/dat/dem_dom_/AQUASTAT20000000${SUF}
@@ -196,7 +203,7 @@ FWITAGR=../../map/dat/wit_agr_/AQUASTAT20000000${SUF}
 #FWITIND=../../map/dat/wit_ind_/METIms__20150000${SUF}
 #FWITDOM=../../map/dat/wit_dom_/JWRC____20160000${SUF}
 #
-FNONARA=../../map/dat/non_ara_/S05_____20000000${SUF}
+FNONARA=../../map/out/non_ara_/S05_____20000000${SUF}
 FIRGEFF=../../map/dat/irg_eff_/DS02____00000000${SUF}
 FDAMCAP=../../map/dat/dam_cap_/H06_____20000000${SUF}
 #FDAMCAP=../../map/dat/dam_cap_/KYSY____20000000${SUF}

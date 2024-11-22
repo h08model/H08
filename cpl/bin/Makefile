@@ -18,6 +18,10 @@ OBJS    = main calc_irgapp_hyper.o main_hyper main_ftcs
 	$(FC) -c ${FCFLAGS} $<
 .F.o:
 	${FC} -c ${FCFLAGS} -I${INC} $<
+
+# for parallel computing
+#calc_leakyb.o: calc_leakyb.f
+#	$(FC) -c ${FCFLAGS} -fopenmp ${INC} $<
 ############################################################
 #	Dependency
 ############################################################
@@ -87,6 +91,7 @@ COMPONENT6 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
 ############################################################
 $(TARGET1) : $(TARGET1).o $(COMPONENT1)
 	$(FC) -o $@ $@.o $(COMPONENT1)
+#	$(FC) -fopenmp -o $@ $@.o $(COMPONENT1) # for parallel computing
 $(TARGET2) : $(TARGET2).o $(COMPONENT2)
 	$(FC) -o $@ $@.o $(COMPONENT2)
 $(TARGET3) : $(TARGET3).o $(COMPONENT3)
@@ -97,6 +102,7 @@ $(TARGET5) : $(TARGET5).o $(COMPONENT5)
 	$(FC) -o $@ $@.o $(COMPONENT5)
 $(TARGET6) : $(TARGET6).o $(COMPONENT6)
 	$(FC) -o $@ $@.o $(COMPONENT6)
+
 
 all : $(OBJS)
 clean : 

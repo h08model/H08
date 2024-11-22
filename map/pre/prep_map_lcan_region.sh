@@ -15,6 +15,7 @@ L2Y=../../map/dat/l2x_l2y_/l2y.ko5.txt
 LONLAT="124 131 33 44"
 ARG="$L $XY $L2X $L2Y $LONLAT"
 SUF=.ko5
+CANSUF=.binko5
 MAP=.SNU
 #
 OPT=within          # within or nolimit
@@ -42,7 +43,7 @@ DIRCANCNT=../../map/out/can_cnt_   # counter
 XCANORG=$DIRCANORG/canorg.x.${OPT}.${MAX}${MAP}${SUF}
 YCANORG=$DIRCANORG/canorg.y.${OPT}.${MAX}${MAP}${SUF}
 LCANORG=$DIRCANORG/canorg.l.${OPT}.${MAX}${MAP}${SUF}
-LCANDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}.bin
+LCANDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}${CANSUF}
 CANSCO=$DIRCANSCO/cansco.${OPT}.${MAX}${MAP}${SUF}
 CANCNT=$DIRCANCNT/cancnt.${OPT}.${MAX}${MAP}${SUF}
 #

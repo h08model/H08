@@ -2,10 +2,6 @@
 ############################################################
 #to   prepare global canal data by Kitamura et al. (2014)
 #by   2016/01/31, hanasaki
-#
-#
-#
-#
 ############################################################
 #settings
 ############################################################
@@ -20,6 +16,7 @@ ARG="$L $XY $L2X $L2Y $LONLAT"
 
 MAX=1
 OPT=within
+CANSUF=.binhlf
 ############################################################
 # in
 ############################################################
@@ -27,6 +24,11 @@ OPT=within
 ORGOUT=../../map/org/K14/out_3___20000000.hlf.txt
 #
 RIVSEQ=../../map/out/riv_seq_/rivseq${MAP}.hlf
+#
+DIRCANORG=../../map/out/can_org_   # origin of canal water
+DIRCANDES=../../map/out/can_des_   # destination of canal water
+LCANIMPORG=$DIRCANORG/canorg.l.${OPT}.${MAX}${MAP}${SUF}
+LCANIMPDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}${CANSUF}
 ############################################################
 # out 
 ############################################################
@@ -35,14 +37,10 @@ BINOUT=../../map/org/K14/out_3___20000000.hlf
  ASCIN=../../map/org/K14/in__3___20000000.txt
 ASCOUT=../../map/org/K14/out_3___20000000.txt
 #
-DIRCANORG=../../map/out/can_org_   # origin of canal water
-DIRCANDES=../../map/out/can_des_   # destination of canal water
-LCANEXPORG=$DIRCANORG/canorg.l.canal.K14.hlf
-LCANEXPDES=$DIRCANDES/candes.l.canal.K14.bin
-LCANIMPORG=$DIRCANORG/canorg.l.${OPT}.${MAX}${MAP}.hlf
-LCANIMPDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}.bin
-LCANMRGORG=$DIRCANORG/canorg.l.merged.${MAX}${MAP}.hlf
-LCANMRGDES=$DIRCANDES/candes.l.merged.${MAX}${MAP}.bin
+LCANEXPORG=$DIRCANORG/canorg.l.canal.K14${SUF}
+LCANEXPDES=$DIRCANDES/candes.l.canal.K14${CANSUF}
+LCANMRGORG=$DIRCANORG/canorg.l.merged.${MAX}${MAP}${SUF}
+LCANMRGDES=$DIRCANDES/candes.l.merged.${MAX}${MAP}${CANSUF}
 #
 LOG=temp.log
 ############################################################

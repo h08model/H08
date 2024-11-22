@@ -13,6 +13,7 @@ LONLAT="129 132 31 34"
 ARG="$L $XY $L2X $L2Y $LONLAT"
 MAP=.kyusyu
 SUF=.ks1
+CANSUF=.binks1
 #
 MAX=5
 OPT=conditionally
@@ -25,7 +26,7 @@ BINOUT=../org/KYUSYU/out_3___00000000${SUF}   # prep_explicit.sh
 DIRCANORG=../../map/out/can_org_   # origin of canal water
 DIRCANDES=../../map/out/can_des_   # destination of canal water
 LCANIMPORG=$DIRCANORG/canorg.l.${OPT}.${MAX}${MAP}${SUF}
-LCANIMPDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}.bin
+LCANIMPDES=$DIRCANDES/candes.l.${OPT}.${MAX}${MAP}${CANSUF}
 #
 RIVSEQ=../../map/out/riv_seq_/rivseq${MAP}${SUF}
 ############################################################
@@ -35,9 +36,9 @@ RIVSEQ=../../map/out/riv_seq_/rivseq${MAP}${SUF}
 ASCOUT=../org/KYUSYU/out_3___00000000.txt      # not used
 #
 LCANEXPORG=$DIRCANORG/canorg.l.explicit${MAP}${SUF} # not used
-LCANEXPDES=$DIRCANDES/candes.l.explicit${MAP}.bin   # not used
+LCANEXPDES=$DIRCANDES/candes.l.explicit${MAP}${CANSUF}   # not used
 LCANMRGORG=$DIRCANORG/canorg.l.merged.${MAX}${MAP}${SUF}
-LCANMRGDES=$DIRCANDES/candes.l.merged.${MAX}${MAP}.bin
+LCANMRGDES=$DIRCANDES/candes.l.merged.${MAX}${MAP}${CANSUF}
 #
 LOG=temp.log
 ############################################################
