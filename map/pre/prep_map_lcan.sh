@@ -20,7 +20,7 @@ ARG="$L $XY $L2X $L2Y $LONLAT"
 OPT=within          # within or nolimit
 MAX=1               # maximum distance of implicit canal
 #
-CANSUF=.binhlf # SUF for canal data (world .hlf rec20)
+CANSUF=.binhlf # suffix for canal (.bin+SUF)
 ############################################################
 # in (edit here )
 ############################################################

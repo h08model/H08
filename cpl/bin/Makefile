@@ -1,8 +1,8 @@
 #to     compile source code in cpl/bin
 #on     2010/03/31, hanasaki, NIES: H08ver1.0
-############################################################
+###############################################################
 #	Macro (Basics)
-############################################################
+###############################################################
 include   ../../adm/Mkinclude
 DIRLIB  = ../../lib/
 DIRLND  = ../../lnd/bin/
@@ -11,9 +11,9 @@ DIRDAM  = ../../dam/bin/
 DIRCRP  = ../../crp/bin/
 DIRCPL  = ../../cpl/bin/
 OBJS    = main calc_irgapp_hyper.o main_hyper main_ftcs
-############################################################
+###############################################################
 #	Macro (Settings)
-############################################################
+###############################################################
 .f.o:
 	$(FC) -c ${FCFLAGS} $<
 .F.o:
@@ -22,9 +22,9 @@ OBJS    = main calc_irgapp_hyper.o main_hyper main_ftcs
 # for parallel computing
 #calc_leakyb.o: calc_leakyb.f
 #	$(FC) -c ${FCFLAGS} -fopenmp ${INC} $<
-############################################################
+###############################################################
 #	Dependency
-############################################################
+###############################################################
 TARGET1    = main
 COMPONENT1 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
@@ -86,9 +86,9 @@ COMPONENT6 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRDAM}calc_damdem.o ${DIRDAM}calc_resope.o \
              ${DIRLIB}cgetfnl.o     ${DIRCRP}calc_crpyld.o \
              ${DIRCPL}calc_watsrc.o
-############################################################
+###############################################################
 #	Compilation
-############################################################
+###############################################################
 $(TARGET1) : $(TARGET1).o $(COMPONENT1)
 	$(FC) -o $@ $@.o $(COMPONENT1)
 #	$(FC) -fopenmp -o $@ $@.o $(COMPONENT1) # for parallel computing

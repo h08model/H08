@@ -25,7 +25,7 @@ c parameter (array)
       integer           n0l              
       integer           n0t              
       parameter        (n0l=259200)
-c      parameter        (n0l=67209) !! for parallel computing
+c      parameter        (n0l=67209) !! for parallel computing (land only)
       parameter        (n0t=3) 
 c parameter (physical)      
       integer           n0secday         !! seconds in a day [s]

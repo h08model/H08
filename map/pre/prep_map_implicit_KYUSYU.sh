@@ -18,7 +18,7 @@ L2Y=../../map/dat/l2x_l2y_/l2y.ks1.txt
 LONLAT="129 132 31 34"
 ARG="$L $XY $L2X $L2Y $LONLAT"
 SUF=.ks1
-CANSUF=.binks1
+CANSUF=.binks1      # suffix for canal (.bin+SUF)
 MAP=.kyusyu
 #
 OPT=conditionally   # within or nolimit or conditionally

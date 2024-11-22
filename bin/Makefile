@@ -15,7 +15,7 @@ OBJS = htarray   htbin2list htcal     htcat      htcatchment \
        htpointts htrank     htranktxt htstat     htstattxt   \
        htwind    htrs       htuscale  \
        httime    httimetxt  htuvwind htextract htstatlst \
-       htcreatenc htputncts htcreatencfx htputncfx
+       htcreatenc htputncts htcreatencfx htputncfx ht2dto1d
 ############################################################
 # Note
 ############################################################

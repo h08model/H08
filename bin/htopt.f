@@ -1,4 +1,4 @@
-ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c Copyright (c) 2023 Dr. Naota HANASAKI, NIES
 c
 c Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +13,7 @@ c WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
 c either express or implied.
 c See the License for the specific language governing permissions and
 c limitations under the License.
-ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       program htopt 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cto fix the characters of options

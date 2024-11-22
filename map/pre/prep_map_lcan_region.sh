@@ -15,7 +15,7 @@ L2Y=../../map/dat/l2x_l2y_/l2y.ko5.txt
 LONLAT="124 131 33 44"
 ARG="$L $XY $L2X $L2Y $LONLAT"
 SUF=.ko5
-CANSUF=.binko5
+CANSUF=.binko5      # suffix for canal (.bin+SUF)
 MAP=.SNU
 #
 OPT=within          # within or nolimit

@@ -13,7 +13,7 @@ LONLAT="124 131 33 44"
 ARG="$L $XY $L2X $L2Y $LONLAT"
 MAP=.SNU
 SUF=.ko5
-CANSUF=.binko5
+CANSUF=.binko5      # suffix for canal (.bin+SUF)
 MAX=1
 OPT=within
 ############################################################
