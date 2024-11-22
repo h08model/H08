@@ -40,7 +40,7 @@ PROG=./main
 SUF=.hlf                # Suffix
 MAP=.WFDEI              # Map
 
-#SUF=.hlo                # for parallel computing  
+#SUF=.hlo                # for parallel computing (land only)  
 #MAP=.WFDEI
 
 #SUF=.ko5                # for Korean peninsula (.ko5)

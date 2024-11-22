@@ -76,7 +76,7 @@ LONLAT="-180 180 -90 90"            # geographical range
 SUF=.hlf                            # suffix
 MAP=.WFDEI                          # map
 #
-# for parallel computing
+# for parallel computing (Land only)
 #L="67209"                          # total num of land cells
 #XY="720 360"                        # X and Y
 #L2X=../../map/dat/l2x_l2y_/l2x.hlo.txt 

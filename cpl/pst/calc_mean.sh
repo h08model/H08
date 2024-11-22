@@ -5,14 +5,14 @@
 ############################################################
 # Geographical settings (Edit here if you change spatial domain/resolution)
 ############################################################
-L=259200
+L=259200                   # for Global (2D)
 XY="720 360"
 L2X=../../map/dat/l2x_l2y_/l2x.hlf.txt
 L2Y=../../map/dat/l2x_l2y_/l2y.hlf.txt
 LONLAT="-180 180 -90 90"
 SUF=.hlf
 
-#L=67209                    # for parallel computing
+#L=67209                    # for parallel computing (Land only)
 #XY="720 360"
 #L2X=../../map/dat/l2x_l2y_/l2x.hlo.txt
 #L2Y=../../map/dat/l2x_l2y_/l2y.hlo.txt

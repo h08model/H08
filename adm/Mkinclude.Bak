@@ -50,6 +50,11 @@ RM      = /bin/rm
 #FC  = ifort -assume byterecl -zero -DD -CB -traceback -fpe0 -g -heap-arrays
 #FC  = ifort -assume byterecl -zero -O3 -heap-arrays
 #
+# If you use intel fortran compiler on linux (ifx) (top: debug; bottom: optimized)
+#
+#FC  = ifx -assume byterecl -zero -O0 -DD -traceback -fpe0 -g -heap-arrays
+#FC  = ifx -assume byterecl -zero -O3 -heap-arrays
+#
 # If you use g95, enable below (top: debug; bottom: optimized)
 #
 #FC  = g95 -fno-pic -fzero -fd-comment -fbounds-check -ftrace=full -g

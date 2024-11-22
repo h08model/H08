@@ -48,7 +48,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     parameter (array)
       integer           n0l
 c     parameter (physical)
-      integer           n0numomp !! number of threads (parallel computing)
+      integer           n0numomp !! number of threads for parallel computing
       integer           n0secday !! second of a day
       real              p0icepnt !! ice point [K]
       real              p0cp    !! heat capacity of air [J kg-1]

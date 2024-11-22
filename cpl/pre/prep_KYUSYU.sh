@@ -11,7 +11,7 @@ L2X=../../map/dat/l2x_l2y_/l2x.ks1.txt
 L2Y=../../map/dat/l2x_l2y_/l2y.ks1.txt
 LONLAT="129 132 31 34"
 SUF=.ks1
-CANSUF=.binks1
+CANSUF=.binks1 # suffix for canal
 MAP=.kyusyu
 #
 L10=324000                             # 10 times of L

@@ -13,7 +13,7 @@ LONLAT="129 132 31 34"
 ARG="$L $XY $L2X $L2Y $LONLAT"
 MAP=.kyusyu
 SUF=.ks1
-CANSUF=.binks1
+CANSUF=.binks1      # suffix for canal (.bin+SUF)
 #
 MAX=5
 OPT=conditionally

@@ -9,16 +9,16 @@ YEARMEAN=0000
 YEARMIN=1979; YEARMAX=1979
 MONS="01 02 03 04 05 06 07 08 09 10 11 12"
 #
-LALL=259200                 # L for 2 dimensional data
-LLND=67209                  # L for 1 dimensional data
+LALL=259200                 # L for 2d data
+LLND=67209                  # L for 1d data
 X=720                       
 Y=360                       
 L2XLND=../../map/dat/l2x_l2y_/l2x.hlo.txt
 L2YLND=../../map/dat/l2x_l2y_/l2y.hlo.txt
 LONLAT="-180 180 -90 90"
 #
-SUFIN=.hlf                  # Suffix for 2 dimensional data
-SUFOUT=.hlo                 # Suffix for 1 dimensional data
+SUFIN=.hlf                  # Suffix for 2d data
+SUFOUT=.hlo                 # Suffix for 1d data
 MAP=.WFDEI
 #
 PRJMET=wfde

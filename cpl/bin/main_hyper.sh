@@ -248,11 +248,11 @@ LCAN=../../dam/dat/uniform.0.0${CANSUF} # must be 10 times larger than the binar
 #
 # aqueduct settings shown in Hanasaki et al. 2018 
 #
-#LCAN=../../map/out/can_des_/candes.l.partially.5${MAP}.bin  #5c
-#LCAN=../../map/out/can_des_/candes.l.merged.5${MAP}.bin    #5m
-#LCAN=../../map/out/can_des_/candes.l.within.5${MAP}.bin  #5w
+#LCAN=../../map/out/can_des_/candes.l.partially.5${MAP}${CANSUF} #5c
+#LCAN=../../map/out/can_des_/candes.l.merged.5${MAP}${CANSUF}    #5m
+#LCAN=../../map/out/can_des_/candes.l.within.5${MAP}${CANSUF}  #5w
 #
-#LCAN=../../map/out/can_des_/candes.l.within.1${MAP}.bin  #NECD
+#LCAN=../../map/out/can_des_/candes.l.within.1${MAP}${CANSUF}  #NECD
 LCAN=../../map/out/can_des_/candes.l.merged.5${MAP}${CANSUF}  #N_C_
 ############################################################
 # Input for water efficiency 1 (Edit here if you wish)

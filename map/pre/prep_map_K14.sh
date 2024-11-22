@@ -16,7 +16,7 @@ ARG="$L $XY $L2X $L2Y $LONLAT"
 
 MAX=1
 OPT=within
-CANSUF=.binhlf
+CANSUF=.binhlf   # suffix for canal (.bin+SUF)
 ############################################################
 # in
 ############################################################

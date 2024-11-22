@@ -49,7 +49,7 @@ PROG=./main_ftcs             # program
 SUF=.hlf                # Suffix
 MAP=.WFDEI              # Map
 
-#SUF=.ko5
+#SUF=.ko5                # for Korean Peninsula (.ko5)
 #MAP=.SNU
 ############################################################
 # Mosaic settings (Do not edit here unless you are an expert)

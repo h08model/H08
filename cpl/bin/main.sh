@@ -41,7 +41,7 @@ PROG=./main         # program
 # edit main.f and re-compile it.)
 ############################################################
 SUF=.hlf                # Suffix
-CANSUF=.binhlf          # Suffix for canal (.bin+suffix)
+CANSUF=.binhlf          # Suffix for canal (.bin+Suffix)
 MAP=.WFDEI              # Map
 
 #SUF=.hlo                # for parallel computing

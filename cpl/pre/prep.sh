@@ -11,7 +11,7 @@ L2X=../../map/dat/l2x_l2y_/l2x.hlf.txt
 L2Y=../../map/dat/l2x_l2y_/l2y.hlf.txt
 LONLAT="-180 180 -90 90"
 SUF=.hlf
-CANSUF=.binhlf
+CANSUF=.binhlf      # suffix for canal (.bin+SUF)
 MAP=.WFDEI
 
 #L=11088
