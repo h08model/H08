@@ -31,8 +31,10 @@
 #
 # For WSL (Ubuntu) users
 INC      = -I/usr/include
-LIB      = -L/usr/x86_64-linux-gnu -lnetcdff
-#LIB      = -L/usr/x86_64-linux-gnu -lnetcdff -lgomp  # for parallel computing (openmp)
+LIB      = -L/usr/lib/x86_64-linux-gnu -lnetcdff             # for gfortran
+#LIB      = -L/usr/lib/x86_64-linux-gnu -lnetcdff -lgomp     # for gfortran parallel computing (openmp)
+#LIB      = -L/opt/intel/lib/intel64 -lnetcdff              # for intel fortran compiler
+#LIB      = -L/opt/intel/lib/intel64 -lnetcdff -liomp5      # for intel fortran compiler parallel computing (openmp)
 ############################################################
 # rm path. Leave as is.
 ############################################################
