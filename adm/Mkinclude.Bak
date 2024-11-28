@@ -32,6 +32,7 @@
 # For WSL (Ubuntu) users
 INC      = -I/usr/include
 LIB      = -L/usr/x86_64-linux-gnu -lnetcdff
+#LIB      = -L/usr/x86_64-linux-gnu -lnetcdff -lgomp  # for parallel computing (openmp)
 ############################################################
 # rm path. Leave as is.
 ############################################################
