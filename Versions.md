@@ -1,7 +1,29 @@
 # Update Note: H08 v24
 
-## Versions (2024.07.30)
-Latest GitHub branch (main) is v24.0.1
+## Versions (2024.11.30)
+Latest GitHub branch (main) is v24.1.0
+
+## Updates in v24.1.0 (2024.11.30)
+#### Add Parallel Calculation Option
+- Parallelization is now provided as an option in the land surface process module and in the coupled model calculations. The default setting remains no parallelization.
+- The published parallel computation code is based on the code developed by Takahiro Oda. We thank him for his contribution.
+- To perform parallel calculations, you need to prepare land-only one-dimensional data and enable the parallelization option in the main calculation.
+<br>The relevant codes are as follows;
+    1. adm/Mkinclude.bak
+    2. bin/Makefile, ht2dto1d.f
+    3. lnd/pre/prep_lnd_ht2dto1d.sh
+    4. lnd/bin/Makefile, calc_leakyb.f, main.f, main.sh
+    5. cpl/pre/prep_cpl_2dto1d.sh
+    6. cpl/bin/Makefile, main.f, main.sh
+    7. cpl/pst/calc_mean.sh, list_watbal.sh
+- Please check the Parallel Computing Manual on the H08 website for further information on how to run parallel calculations.
+
+#### Renaming of .bin file used for water transfer scheme
+- .bin → .bin+SUF (Suffix: hlf, ko5, ks1) (corrected)
+- The relevant codes are as follows;
+    1. map/pre/prep_map_K14.sh, prep_map_lcan.sh, prep_map_K14_region.sh, prep_map_lcan_region.sh, prep_map_implicit_KYUSYU.sh, prep_map_merged_KYUSYU.sh
+    2. cpl/pre/prep.sh, prep_KYUSYU.sh
+    3. cpl/bin/main.f, main.sh, main_ftcs.f, main_ftcs.sh, main_hyper.f main_hyper.sh
 
 ## Updates in v24.0.1 (2024.07.30)
 - All of the small bugs below have been fixed.
@@ -38,7 +60,7 @@ Latest GitHub branch (main) is v24.0.1
 
 ## Updates in v24.0.0 (2024.04.16)
 - The explicit method (FTCS) can now be selected for the river model. The traditional semi-implicit method is also available.
-  The explicit code was developed and provided by Naho Yoden. We appriciate her kindness.
+- The explicit code was developed and provided by Naho Yoden. We appriciate her kindness.
   <br> For more details, please see the following paper.
   
   Yoden, N., Yamazaki, D., and Hanasaki, N.: Improving river routing algorithms to efficiently implement canal water diversion schemes in global hydrological models, Hydrological   Research Letters, 18, 7-13, 10.3178/hrl.18.7, 2024. 
