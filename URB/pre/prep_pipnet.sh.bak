@@ -1,0 +1,137 @@
+#!/bin/sh
+############################################################
+#to  prepare demand reflecting water supply and drainage reflecting sewage
+#by  2024/2/29, nhanasaki
+############################################################
+#
+############################################################
+source ~/.bashrc
+L=1728; SUF=.tk5; NUMMAX=4
+L=1728; SUF=.ln5; ID=00000038; NUMMAX=1
+JOB=3
+############################################################
+# Job 1 (toy; one river for one city)
+############################################################
+if [ $JOB = 1 ]; then
+# input
+  MSK=../org/KKT/cty_msk_${SUF}
+  MSK=../../map/dat/cty_msk_/city_${ID}${SUF}  
+  PRF=../dat/cty_prf_.toy${SUF}
+  SWG=../dat/cty_swg_.toy${SUF}
+  DEMINDORG=../../map/dat/dem_ind_/AQUASTAT20000000${SUF}
+  DEMDOMORG=../../map/dat/dem_dom_/AQUASTAT20000000${SUF}
+  RIVOUT=../../riv/out/riv_out_/W5E5LR__20190000${SUF}
+  RIVNUM=../org/KKT/cty_msk_${SUF}
+  RIVNUM=../../map/dat/cty_msk_/city_${ID}${SUF}  
+  RIVARA=../../map/out/riv_ara_/rivara.CAMA${SUF}
+  NUMMAX=1
+  CPTDRN=./CPT/drn.cpt
+  CPTDEMDOM=./CPT/demdom.cpt
+  FRCGWD=../../map/dat/frc_gwd_/D12.CAMA${SUF}
+  FRCGWI=../../map/dat/frc_gwi_/D12.CAMA${SUF}
+  OPT=combine
+# output
+  DEMINDNEW=../../map/dat/dem_ind_/AQUASTAT20000000.toy${SUF}
+  DEMDOMNEW=../../map/dat/dem_dom_/AQUASTAT20000000.toy${SUF}
+  DRN=../../map/dat/cty_drn.toy${SUF}
+  PNGDRN=temp.drn${SUF}.toy.png
+  PNGDEMDOM=temp.demdom${SUF}.toy.png
+  FRCGWDNEW=./frcgwd.CAMA.toy${SUF}
+  FRCGWINEW=./frcgwi.CAMA.toy${SUF}
+fi
+############################################################
+# Case 2 (full; the actual rivers for the city)
+############################################################
+if [ $JOB = 2 ]; then
+# input
+  MSK=../org/KKT/cty_msk_${SUF}
+  PRF=../org/KKT/cty_prf_${SUF}
+  SWG=../org/KKT/cty_swg_${SUF}
+  MSK=../../map/dat/cty_msk_/city_${ID}${SUF}
+  PRF=../../map/dat/cty_prf_/city_${ID}${SUF}
+  SWG=../../map/dat/cty_swg_/city_${ID}${SUF}  
+  DEMINDORG=../../map/dat/dem_ind_/AQUASTAT20000000${SUF}
+  DEMDOMORG=../../map/dat/dem_dom_/AQUASTAT20000000${SUF}
+  RIVOUT=../../riv/out/riv_out_/W5E5LR__20190000${SUF}
+  RIVNUM=../../map/out/riv_num_/rivnum.CAMA${SUF}
+  RIVARA=../../map/out/riv_ara_/rivara.CAMA${SUF}
+  OPT=combine
+  
+  CPTDRN=./CPT/drn.cpt
+  CPTDEMDOM=./CPT/demdom.cpt
+  FRCGWD=../../map/dat/frc_gwd_/D12.CAMA${SUF}
+  FRCGWI=../../map/dat/frc_gwi_/D12.CAMA${SUF}
+# output
+  DEMINDNEW=../../map/dat/dem_ind_/AQUASTAT20000000.full${SUF}
+  DEMDOMNEW=../../map/dat/dem_dom_/AQUASTAT20000000.full${SUF}
+  DRN=../../map/dat/cty_drn.full${SUF}
+  PNGDRN=temp.drn${SUF}.full.png
+  PNGDEMDOM=temp.demdom${SUF}.full.png
+  FRCGWDNEW=./frcgwd.CAMA.full${SUF}
+  FRCGWINEW=./frcgwi.CAMA.full${SUF}
+fi
+############################################################
+# Case 3 (Modified)
+############################################################
+if [ $JOB = 3 ]; then
+# input
+  MSK=../org/KKT/cty_msk_${SUF}
+  PRF=../dat/cty_prf_.full2${SUF}
+  SWG=../org/KKT/cty_swg_${SUF}
+  MSK=../../map/dat/cty_msk_/city_${ID}${SUF}
+  PRF=../../map/dat/cty_prf_/city_${ID}${SUF}
+  SWG=../../map/dat/cty_swg_/city_${ID}${SUF}  
+  DEMINDORG=../../map/dat/dem_ind_/AQUASTAT20000000${SUF}
+  DEMDOMORG=../../map/dat/dem_dom_/AQUASTAT20000000${SUF}
+  RIVOUT=../../riv/out/riv_out_/W5E5LR__20190000${SUF}
+  RIVNUM=../../map/out/riv_num_/rivnum.CAMA${SUF}
+  RIVARA=../../map/out/riv_ara_/rivara.CAMA${SUF}
+  OPT=separate
+
+  CPTDRN=./CPT/drn.cpt
+  CPTDEMDOM=./CPT/demdom.cpt
+  FRCGWD=../../map/dat/frc_gwd_/D12.CAMA${SUF}
+  FRCGWI=../../map/dat/frc_gwi_/D12.CAMA${SUF}
+# output
+  DEMINDNEW=../../map/dat/dem_ind_/AQUASTAT20000000.full2${SUF}
+  DEMDOMNEW=../../map/dat/dem_dom_/AQUASTAT20000000.full2${SUF}
+  DRN=../../map/dat/cty_drn.full2${SUF}
+  PNGDRN=temp.drn${SUF}.full2.png
+  PNGDEMDOM=temp.demdom${SUF}.full2.png
+  FRCGWDNEW=./frcgwd.CAMA.full2${SUF}
+  FRCGWINEW=./frcgwi.CAMA.full2${SUF}
+fi
+############################################################
+# temporary
+############################################################
+EPS=temp.eps
+############################################################
+# calc
+# Usage: n0l         c0ctymsk    c0ctyprf c0ctyswg
+#        c0demdomorg c0demindorg c0rivout c0rivnum
+#        c0rivara    c0frcgwd    c0frcgwi i0nummax
+#        c0demdomnew c0demindnew c0ctydrn
+#        c0frcgwdnew c0frcgwinew
+############################################################
+echo prog_pipnet $L $MSK $PRF $SWG $DEMDOMORG $DEMINDORG $RIVOUT $RIVNUM $RIVARA $FRCGWD $FRCGWI $NUMMAX $DEMDOMNEW $DEMINDNEW $DRN $FRCGWDNEW $FRCGWINEW $OPT
+prog_pipnet $L $MSK $PRF $SWG $DEMDOMORG $DEMINDORG $RIVOUT $RIVNUM $RIVARA $FRCGWD $FRCGWI $NUMMAX $DEMDOMNEW $DEMINDNEW $DRN $FRCGWDNEW $FRCGWINEW $OPT
+############################################################
+# test 
+############################################################
+echo the original domestic and industrial water demand
+htstat $ARG sum $DEMDOMORG
+htstat $ARG sum $DEMINDORG
+
+echo the new domestic and industrial water demand: must be identical
+htstat $ARG sum $DEMDOMNEW
+htstat $ARG sum $DEMINDNEW
+
+echo draw   $DRN $PNGDRN
+htdraw $ARG $DRN $CPTDRN $EPS
+htconv      $EPS $PNGDRN rot
+
+echo draw   $DEMDOMNEW $PNGDEMDOM
+htdraw $ARG $DEMDOMNEW $CPTDEMDOM $EPS
+htconv      $EPS       $PNGDEMDOM rot
+
+
