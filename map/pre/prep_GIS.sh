@@ -30,6 +30,28 @@ L2Y=../dat/l2x_l2y_/l2y${SUF}.txt
 LONLAT="124 131 33 44"
 ARG="$L $XY $L2X $L2Y $LONLAT"
 ###############################################
+# river direction setting
+###############################################
+# for ArcGIS users: 
+#RD1=1
+#RD2=2
+#RD3=4
+#RD4=8
+#RD5=16
+#RD6=32
+#RD7=64
+#RD8=128
+
+# for QGIS users:
+RD1=2
+RD2=3
+RD3=4
+RD4=5
+RD5=6
+RD6=7
+RD7=0
+RD8=1
+###############################################
 # input file
 ###############################################
 DIRORG=../org/GIS
@@ -56,14 +78,14 @@ for JOB in $JOBS; do
     OUT=${DIRFLWDIR}/flwdir${MAP}${SUF}
     sed -e "1, 6d" $FLWDIRORG > temp.txt
     htformat $ARG asciiu binary temp.txt $OUT
-    htmaskrplc $ARG $OUT $OUT eq   1  3 $OUT
-    htmaskrplc $ARG $OUT $OUT eq   4  5 $OUT
-    htmaskrplc $ARG $OUT $OUT eq   8  6 $OUT
-    htmaskrplc $ARG $OUT $OUT eq  16  7 $OUT
-    htmaskrplc $ARG $OUT $OUT eq  32  8 $OUT
-    htmaskrplc $ARG $OUT $OUT eq  64  1 $OUT
-    htmaskrplc $ARG $OUT $OUT eq   2  4 $OUT
-    htmaskrplc $ARG $OUT $OUT eq 128  2 $OUT
+    htmaskrplc $ARG $OUT $OUT eq $RD1 3 $OUT
+    htmaskrplc $ARG $OUT $OUT eq $RD2 4 $OUT
+    htmaskrplc $ARG $OUT $OUT eq $RD3 5 $OUT
+    htmaskrplc $ARG $OUT $OUT eq $RD4 6 $OUT
+    htmaskrplc $ARG $OUT $OUT eq $RD5 7 $OUT
+    htmaskrplc $ARG $OUT $OUT eq $RD6 8 $OUT
+    htmaskrplc $ARG $OUT $OUT eq $RD7 1 $OUT
+    htmaskrplc $ARG $OUT $OUT eq $RD8 2 $OUT
   fi
 done
 OUT=${DIRFLWDIR}/flwdir${MAP}${SUF}
