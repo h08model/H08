@@ -279,7 +279,7 @@ echo $CANDESOUT
 # convert l data file
 #############################################################
 CANORGIN=${DIRMAPOUT}/can_org_/canorg.l.merged.1${MAP}${SUFIN}
-RIVNXLIN=${DIRMAPOUT}/riv_nxl_/rivnxl.WFDEI${SUFIN}
+RIVNXLIN=${DIRMAPOUT}/riv_nxl_/rivnxl${MAP}${SUFIN}
 
 LDATVARS="$CANORGIN $RIVNXLIN" 
 for LDATVAR in $LDATVARS; do
