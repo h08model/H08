@@ -336,6 +336,8 @@ c in (file of riv)
       character*128     c0flwvel        !! flow velocity
       character*128     c0medrat        !! meandering ratio
       character*128     c0qtot          !! not used except for namelist
+      character*128     c0lndara
+      
 c state variables (riv)
       real              r1rivsto(n0l)   !! river storage [kg]
       real              r2rivsto(n0l,0:n0t)!! river storage [kg]
@@ -567,7 +569,6 @@ c in (map, irrigation)
       character*128     c1pltdoy(n0c)
       character*128     c1hvsdoy(n0c)
       character*128     c1crptyp(n0c)
-      character*128     c0lndara
       character*128     c1arafrc(n0m)
 c in (map, withdrawal)
       real              r1msrcap(n0l)
