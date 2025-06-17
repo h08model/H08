@@ -51,35 +51,35 @@ for VAR in $VARS; do
       fi
       if   [ $VAR = "rlds" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/LWdown_
-	VAR2=LWdown
+        DIROUT=../../met/dat/LWdown__
+	VAR2=LWdown_
       elif [ $VAR = "ps" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/PSurf__
+        DIROUT=../../met/dat/PSurf___
 	VAR2=PSurf__
       elif [ $VAR = "huss" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/Qair___
+        DIROUT=../../met/dat/Qair____
 	VAR2=Qair___
       elif [ $VAR = "prrn" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/Rainf__
+        DIROUT=../../met/dat/Rainf___
 	VAR2=Rainf__
       elif [ $VAR = "rsds" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/SWdown_
+        DIROUT=../../met/dat/SWdown__
 	VAR2=SWdown_
       elif [ $VAR = "prsn" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/Snowf__
+        DIROUT=../../met/dat/Snowf___
 	VAR2=Snowf__
       elif [ $VAR = "tas" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/Tair___
+        DIROUT=../../met/dat/Tair____
 	VAR2=Tair___
       elif [ $VAR = "sfcWind" ]; then
         ADD=WFDEI
-        DIROUT=../../met/dat/Wind___
+        DIROUT=../../met/dat/Wind____
 	VAR2=Wind___
       fi
       if [ ! -d $DIROUT ]; then
