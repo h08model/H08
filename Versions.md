@@ -1,7 +1,35 @@
 # Update Note: H08 v24
 
-## Versions (2024.11.30)
-Latest GitHub branch (main) is v24.1.0
+## Versions (2025.07.22)
+Latest GitHub branch (main) is v24.1.1
+
+## Updates in v24.1.1 (2025.07.22)
+#### Update to map/pre/prep_GIS.sh
+- The previous "ArcGIS Manual for H08 Users" was published in two editions: the first edition for ArcMap and the second edition for ArcGIS. In addition, a separate manual for QGIS has now been released. In response to these updates, the script has been modified to allow users to set flow direction according to the GIS tool they are using.
+- Please refer to the respective manuals for detailed instructions.
+
+#### Minor bug fixes
+- All of the minor bugs below have been fixed.
+    1. File: cpl/bin/main_ftcs.f
+         - Line 339(added): character*128 c0lndara
+    2. File: cpl/pre/prep_cpl_2dto1d.sh
+         - Line 282(corrected): RIVNXLIN=${DIRMAPOUT}/riv_nxl_/rivnxl${MAP}${SUFIN}
+    3. File: map/pre/prep_map_despot.sh
+         - Line 58(corrected): gmt makecpt -T-0.5/1.5/1.0 > $CPT
+    4. File: met/pre/prep_WFDEI.sh
+         - Line 54(corrected): DIROUT=../../met/dat/LWdown__
+         - Line 55(corrected): VAR2=LWdown_
+         - Line 58(corrected): DIROUT=../../met/dat/PSurf___
+         - Line 62(corrected): DIROUT=../../met/dat/Qair____
+         - Line 66(corrected): DIROUT=../../met/dat/Rainf___
+         - Line 70(corrected): DIROUT=../../met/dat/SWdown__
+         - Line 74(corrected): DIROUT=../../met/dat/Snowf___
+         - Line 78(corrected): DIROUT=../../met/dat/Tair____
+         - Line 82(corrected): DIROUT=../../met/dat/Wind____
+    5. File: crp/pre.prep.sh
+         - Line 11(corrected): L2Y=../../map/dat/l2x_l2y_/l2y.hlf.txt
+         - Line 22(corrected): #L2Y=../../map/dat/l2x_l2y_/l2y.ko5.txt
+         - Line 30(corrected): #L2Y=../../map/dat/l2x_l2y_/l2y.ks1.txt
 
 ## Updates in v24.1.0 (2024.11.30)
 #### Add Parallel Calculation Option
