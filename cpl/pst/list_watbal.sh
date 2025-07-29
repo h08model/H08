@@ -7,7 +7,7 @@
 ############################################################
 PRJ="WFDE"                         # project
 #PRJ="AK10"
-RUN="LR__"                          # run
+RUN="LECD"                          # run
 #PRJMET=WFDE                        # project for meteorology
 #RUNMET=I___
 PRJMET=wfde
@@ -15,10 +15,10 @@ RUNMET=____                        # run     for meteorology
 #PRJMET=AMeD
 #RUNMET=AS1_
 PRJDEM=WFDE                         # project for water demand
-RUNDEM=N_C_                        # run     for water demand
+RUNDEM=LECD                        # run     for water demand
 #RUNDEM=LECD
 PRJENV=WFDE                         # project for environmental flow
-RUNENV=LR__                         # run     for environmental flow
+RUNENV=LECD                         # run     for environmental flow
 #PRJENV=AK10                        # setting for Kyusyu
 #RUNENV=LR__
 #
@@ -1302,6 +1302,12 @@ echo SUPTOTGW.    $SUPTOTG      [km3/y] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$
 echo SUPTOTALL    $SUPTOTSG     [km3/y] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo AQUASTAT.    $WITTOT       [km3/y] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 
+echo                                    >> $OUT
+echo '+++ Environmental +++'            >> $OUT
+echo                                    >> $OUT
+echo ENVFLW       $ENVFLW       [km3/y] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
+echo                                    >> $OUT
+
 echo                                      >> $OUT
 echo '+++ Water imbalance of land +++'    >> $OUT
 echo                                      >> $OUT
@@ -1315,11 +1321,7 @@ echo 'LAT.....'      $BALLNDMINIBLAT [degE]  | awk '{printf("%12s%12.2f%8s\n",$1
 echo 'NUM[<-1]'      $BALLNDMINIBNUM [cells] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'BALLND..'      $BALLNDIBTOT    [km3/y] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'FILE....'      $FBALLND        [kg/y]  | awk '{printf("%12s%12s%8s\n",$1,$2,$3)}' >> $OUT
-echo                                    >> $OUT
-echo '+++ Environmental +++'            >> $OUT
-echo                                    >> $OUT
-echo ENVFLW       $ENVFLW       [km3/y] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
-echo                                    >> $OUT
+
 ############################################################
 # Job (Calculate surface water imbalance map)
 ############################################################
