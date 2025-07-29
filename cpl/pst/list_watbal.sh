@@ -7,7 +7,7 @@
 ############################################################
 PRJ="WFDE"                         # project
 #PRJ="AK10"
-RUN="LECD"                          # run
+RUN="LR__"                          # run
 #PRJMET=WFDE                        # project for meteorology
 #RUNMET=I___
 PRJMET=wfde
@@ -15,10 +15,10 @@ RUNMET=____                        # run     for meteorology
 #PRJMET=AMeD
 #RUNMET=AS1_
 PRJDEM=WFDE                         # project for water demand
-RUNDEM=LECD                        # run     for water demand
+RUNDEM=N_C_                        # run     for water demand
 #RUNDEM=LECD
 PRJENV=WFDE                         # project for environmental flow
-RUNENV=LECD                         # run     for environmental flow
+RUNENV=LR__                         # run     for environmental flow
 #PRJENV=AK10                        # setting for Kyusyu
 #RUNENV=LR__
 #
