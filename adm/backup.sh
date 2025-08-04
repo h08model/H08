@@ -5,12 +5,12 @@
 ############################################################
 # You must edit here (basic)
 ############################################################
-DIRBUP=/data3/tsukuba/matsuda/BACKUP          # Backu up directory 
-DIRH08=/data3/tsukuba/matsuda/BACKUP/H08_20200201   # H08 root directory
+DIRBUP=/home/hanasaki/BACKUP          # Backu up directory 
+DIRH08=/home/hanasaki/H08/H08_sim     # H08 root directory
 ############################################################
 # You can edit here (directories to back up)
 ############################################################
-DIR1STS='cpl crp dam lnd map met riv'     # Exclude adm,bin,cpt,lib 
+DIR1STS='cpl crp dam lnd map met riv URB'     # Exclude adm,bin,cpt,lib 
 DIR2NDS='bin pre pst'
 ############################################################
 # Macro
