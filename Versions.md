@@ -44,6 +44,21 @@ Latest GitHub branch (main) is v24.1.1
     5. cpl/pre/prep_cpl_2dto1d.sh
     6. cpl/bin/Makefile, main.f, main.sh
     7. cpl/pst/calc_mean.sh, list_watbal.sh
+- The following variables are newly introduced:
+   ##### `n0numomp` (in lnd/bin/calc_leakyb.f)
+   - Type: Integer
+   - Description: Number of OpenMP threads to be used.
+   - Default: '1' (parallelization disabled).
+   - Note: Users can edit this value according to your computing environment.
+
+   ##### `c0optpara` (in lnd/bin/calc_leakyb.f, main.f, cpl/bin/main.f)
+   - Type: Character (string)
+   - Description: Flag to enable or disable parallel computation.
+      - "yes": Enable parallelization
+      - "NO": Disable parallelization
+   - Default: "NO" (set in lnd/bin/main.sh, cpl/bin/main.sh)
+     
+- **Note:** When integrating or merging code from versions before and after this update, please ensure that the new variables (`n0numomp`, `c0optpara`) are properly defined and passed throughout the relevant source files.  
 - Please check the Parallel Computing Manual on the H08 website for further information on how to run parallel calculations.
 
 #### Renaming of .bin file used for water transfer scheme
