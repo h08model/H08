@@ -1311,16 +1311,16 @@ echo                                    >> $OUT
 echo                                      >> $OUT
 echo '+++ Water imbalance of land +++'    >> $OUT
 echo                                      >> $OUT
-echo 'MAXVAL..'      $BALLNDMAXIBVAL [mm]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
+echo 'MAXVAL..'      $BALLNDMAXIBVAL [mm/y]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LON.....'      $BALLNDMAXIBLON [degN]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LAT.....'      $BALLNDMAXIBLAT [degE]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'NUM[>1].'      $BALLNDMAXIBNUM [cells] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
-echo 'MINVAL..'      $BALLNDMINIBVAL [mm]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
+echo 'MINVAL..'      $BALLNDMINIBVAL [mm/y]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LON.....'      $BALLNDMINIBLON [degN]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LAT.....'      $BALLNDMINIBLAT [degE]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'NUM[<-1]'      $BALLNDMINIBNUM [cells] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'BALLND..'      $BALLNDIBTOT    [km3/y] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
-echo 'FILE....'      $FBALLND        [kg/y]  | awk '{printf("%12s%12s%8s\n",$1,$2,$3)}' >> $OUT
+echo 'FILE....'      $FBALLND        [mm/y]  | awk '{printf("%12s%12s%8s\n",$1,$2,$3)}' >> $OUT
 
 ############################################################
 # Job (Calculate surface water imbalance map)
@@ -1374,16 +1374,16 @@ echo 'FILE....'      $FBALLND        [kg/y]  | awk '{printf("%12s%12s%8s\n",$1,$
 echo                                               >> $OUT
 echo '+++ Water imbalance of surface water +++'    >> $OUT
 echo                                               >> $OUT
-echo 'MAXVAL..'      $BALSWMAXIBVAL [mm]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
+echo 'MAXVAL..'      $BALSWMAXIBVAL [mm/y]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LON.....'      $BALSWMAXIBLON [degN]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LAT.....'      $BALSWMAXIBLAT [degE]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'NUM[>1].'      $BALSWMAXIBNUM [cells] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
-echo 'MINVAL..'      $BALSWMINIBVAL [mm]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
+echo 'MINVAL..'      $BALSWMINIBVAL [mm/y]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LON.....'      $BALSWMINIBLON [degN]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LAT.....'      $BALSWMINIBLAT [degE]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'NUM[<-1]'      $BALSWMINIBNUM [cells] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'BALSW..'       $BALSWIBTOT    [km3/y] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
-echo 'FILE....'      $FBALSW        [kg/y]  | awk '{printf("%12s%12s%8s\n",$1,$2,$3)}' >> $OUT
+echo 'FILE....'      $FBALSW        [mm/y]  | awk '{printf("%12s%12s%8s\n",$1,$2,$3)}' >> $OUT
 ############################################################
 # Job (Calculate groundwater imbalance map)
 ############################################################
@@ -1434,14 +1434,14 @@ echo 'FILE....'      $FBALSW        [kg/y]  | awk '{printf("%12s%12s%8s\n",$1,$2
 echo                                               >> $OUT
 echo '+++ Water imbalance of groundwater +++'    >> $OUT
 echo                                               >> $OUT
-echo 'MAXVAL..'      $BALGWMAXIBVAL [mm]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
+echo 'MAXVAL..'      $BALGWMAXIBVAL [mm/y]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LON.....'      $BALGWMAXIBLON [degN]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LAT.....'      $BALGWMAXIBLAT [degE]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'NUM[>1].'      $BALGWMAXIBNUM [cells] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
-echo 'MINVAL..'      $BALGWMINIBVAL [mm]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
+echo 'MINVAL..'      $BALGWMINIBVAL [mm/y]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LON.....'      $BALGWMINIBLON [degN]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LAT.....'      $BALGWMINIBLAT [degE]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'NUM[<-1]'      $BALGWMINIBNUM [cells] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'BALGW..'       $BALGWIBTOT    [km3/y] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
-echo 'FILE....'      $FBALGW        [kg/y]  | awk '{printf("%12s%12s%8s\n",$1,$2,$3)}' >> $OUT
+echo 'FILE....'      $FBALGW        [mm/y]  | awk '{printf("%12s%12s%8s\n",$1,$2,$3)}' >> $OUT
 
