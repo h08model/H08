@@ -126,3 +126,11 @@ riv/pre/prog_clsest
 riv/pst/prog_envout
 riv/pst/prog_flddro
 
+#My rule
+temp*
+*~
+gmt.history
+/Recycle/
+/out/
+/fig/
+/tab/
