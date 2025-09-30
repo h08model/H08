@@ -1,9 +1,9 @@
 # Update Note: H08 v24
 
-## Versions (2025.09.30)
+## Versions (2025.10.07)
 Latest GitHub branch (main) is v24.1.2
 
-## Updates in v24.1.2 (2025.09.30)
+## Updates in v24.1.2 (2025.10.07)
 #### Major bug fix (Groundwater Calculation in cpl/bin/main.f)
 - We identified a moderately severe bug in groundwater calculation, which leads to water imbalance in coupled simulations.
 - The issue was resolved by introducing a dummy array (r2arafrc2) for conditional checks, extending the index range and ensuring that all relevant cells are properly processed.
