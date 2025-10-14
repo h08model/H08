@@ -1,18 +1,31 @@
 # Update Note: H08 v24
 
-## Versions (2025.10.07)
+## Versions (2025.10.14)
 Latest GitHub branch (main) is v24.1.2
 
-## Updates in v24.1.2 (2025.10.07)
+## Updates in v24.1.2 (2025.10.14)
 #### Major bug fix (Groundwater Calculation in cpl/bin/main.f)
 - We identified a moderately severe bug in groundwater calculation, which leads to water imbalance in coupled simulations.
 - The issue was resolved by introducing a dummy array (r2arafrc2) for conditional checks, extending the index range and ensuring that all relevant cells are properly processed.
 
 #### Minor bug fixes
-- Minor bugs below have been fixed.
+- All of the minor bugs below have been fixed.
     1. File: cpl/pst/list_watbal.sh
           - Line 1378, 1379, 1382, 1383, 1438, 1439, 1442, 1443: Corrected water balance list output (degE/degN were reversed).
           - Line 1314, 1318, 1323, 1377, 1381, 1386, 1437, 1441, 1446: Corrected water balance list output (the unit is mm/y).
+          - Line 1095(corrected): BALLNDMAXIBNUM=`htmask $ARG $FBALLND $FBALLND gt 1 $TEMP long | tail -1 | awk '{print $1}'`
+          - Line 1099(corrected): BALLNDMINIBNUM=`htmask $ARG $FBALLND $FBALLND lt -1 $TEMP long | tail -1 | awk '{print $1}'`
+          - Line 1365(corrected): BALSWMAXIBNUM=`htmask $ARG $FBALSW $FBALSW gt 1 $TEMP long | tail -1 | awk '{print $1}'`
+          - Line 1369(corrected): BALSWMINIBNUM=`htmask $ARG $FBALSW $FBALSW lt -1 $TEMP long | tail -1 | awk '{print $1}'`
+          - Line 1426(corrected): BALGWMAXIBNUM=`htmask $ARG $FBALGW $FBALGW gt 1 $TEMP long | tail -1 | awk '{print $1}'`
+          - Line 1430(corrected): BALGWMINIBNUM=`htmask $ARG $FBALGW $FBALGW lt -1 $TEMP long | tail -1 | awk '{print $1}'`
+          - Line 1432(added): htmask $ARG $FBALGW $FBALGW lt -1 $TEMP long
+    2. File: cpl/pst/draw_all.sh
+          - Line 194(corrected): gmt psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
+          - Line 198(corrected): gmt psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
+          - Line 283(corrected): gmt psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
+    3. File: cpl/bin/main.sh
+          - Line 19(corrected): LDBG=209746
 
 ## Updates in v24.1.1 (2025.07.22)
 #### Update to map/pre/prep_GIS.sh
