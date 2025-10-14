@@ -1092,11 +1092,11 @@ fi
   BALLNDMAXIBVAL=`htstat $ARG max $FBALLND | awk '{print $1}'`
   BALLNDMAXIBLAT=`htstat $ARG max $FBALLND | awk '{print $6}'`
   BALLNDMAXIBLON=`htstat $ARG max $FBALLND | awk '{print $5}'`
-  BALLNDMAXIBNUM=`htmask $ARG $FBALLND $FBALLND gt 1 $TEMP | awk '{print $3}'`
+  BALLNDMAXIBNUM=`htmask $ARG $FBALLND $FBALLND gt 1 $TEMP long | tail -1 | awk '{print $1}'`
   BALLNDMINIBVAL=`htstat $ARG min $FBALLND | awk '{print $1}'`
   BALLNDMINIBLAT=`htstat $ARG min $FBALLND | awk '{print $6}'`
   BALLNDMINIBLON=`htstat $ARG min $FBALLND | awk '{print $5}'`
-  BALLNDMINIBNUM=`htmask $ARG $FBALLND $FBALLND lt -1 $TEMP | awk '{print $3}'`
+  BALLNDMINIBNUM=`htmask $ARG $FBALLND $FBALLND lt -1 $TEMP long | tail -1 | awk '{print $1}'`
 #
   htmath $L mul $FBALLND $FLNDARADUM $TEMP  # kg/m2/yr --> kg/yr
   BALLNDIBTOT=`htstat $ARG sum $TEMP | awk '{print $1/1000/1000/1000/1000}'`
@@ -1362,11 +1362,11 @@ echo 'FILE....'      $FBALLND        [mm/y]  | awk '{printf("%12s%12s%8s\n",$1,$
   BALSWMAXIBVAL=`htstat $ARG max $FBALSW | awk '{print $1}'`
   BALSWMAXIBLAT=`htstat $ARG max $FBALSW | awk '{print $6}'`
   BALSWMAXIBLON=`htstat $ARG max $FBALSW | awk '{print $5}'`
-  BALSWMAXIBNUM=`htmask $ARG $FBALSW $FBALSW gt 1 $TEMP | awk '{print $3}'`
+  BALSWMAXIBNUM=`htmask $ARG $FBALSW $FBALSW gt 1 $TEMP long | tail -1 | awk '{print $1}'`
   BALSWMINIBVAL=`htstat $ARG min $FBALSW | awk '{print $1}'`
   BALSWMINIBLAT=`htstat $ARG min $FBALSW | awk '{print $6}'`
   BALSWMINIBLON=`htstat $ARG min $FBALSW | awk '{print $5}'`
-  BALSWMINIBNUM=`htmask $ARG $FBALSW $FBALSW lt -1 $TEMP | awk '{print $3}'`
+  BALSWMINIBNUM=`htmask $ARG $FBALSW $FBALSW lt -1 $TEMP long | tail -1 | awk '{print $1}'`
 #
   htmath $L mul $FBALSW $FLNDARADUM $TEMP  # kg/m2/yr --> kg/yr
   BALSWIBTOT=`htstat $ARG sum $TEMP | awk '{print $1/1000/1000/1000/1000}'`
@@ -1379,6 +1379,7 @@ echo 'LON.....'      $BALSWMAXIBLON [degE]  | awk '{printf("%12s%12.2f%8s\n",$1,
 echo 'LAT.....'      $BALSWMAXIBLAT [degN]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'NUM[>1].'      $BALSWMAXIBNUM [cells] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'MINVAL..'      $BALSWMINIBVAL [mm/y]    | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
+
 echo 'LON.....'      $BALSWMINIBLON [degE]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'LAT.....'      $BALSWMINIBLAT [degN]  | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
 echo 'NUM[<-1]'      $BALSWMINIBNUM [cells] | awk '{printf("%12s%12.2f%8s\n",$1,$2,$3)}' >> $OUT
@@ -1422,12 +1423,13 @@ echo 'FILE....'      $FBALSW        [mm/y]  | awk '{printf("%12s%12s%8s\n",$1,$2
   BALGWMAXIBVAL=`htstat $ARG max $FBALGW | awk '{print $1}'`
   BALGWMAXIBLAT=`htstat $ARG max $FBALGW | awk '{print $6}'`
   BALGWMAXIBLON=`htstat $ARG max $FBALGW | awk '{print $5}'`
-  BALGWMAXIBNUM=`htmask $ARG $FBALGW $FBALGW gt 1 $TEMP | awk '{print $3}'`
+  BALGWMAXIBNUM=`htmask $ARG $FBALGW $FBALGW gt 1 $TEMP long | tail -1 | awk '{print $1}'`
   BALGWMINIBVAL=`htstat $ARG min $FBALGW | awk '{print $1}'`
   BALGWMINIBLAT=`htstat $ARG min $FBALGW | awk '{print $6}'`
   BALGWMINIBLON=`htstat $ARG min $FBALGW | awk '{print $5}'`
-  BALGWMINIBNUM=`htmask $ARG $FBALGW $FBALGW lt -1 $TEMP | awk '{print $3}'`
+  BALGWMINIBNUM=`htmask $ARG $FBALGW $FBALGW lt -1 $TEMP long | tail -1 | awk '{print $1}'`
 #
+  htmask $ARG $FBALGW $FBALGW lt -1 $TEMP long  
   htmath $L mul $FBALGW $FLNDARADUM $TEMP  # kg/m2/yr --> kg/yr
   BALGWIBTOT=`htstat $ARG sum $TEMP | awk '{print $1/1000/1000/1000/1000}'`
 
