@@ -191,11 +191,11 @@ for VAR in $VARS; do
   if [ $VAR = SoilMoist -o $VAR = SWE ]; then
 #   awk '{print NR-0.5,$4*'"$SCALE"'+'"$OFFSET"'}' temp.$VAR.txt
     awk '{print NR-0.5,$4*'"$SCALE"'+'"$OFFSET"'}' temp.$VAR.txt |\
-    psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
+    gmt psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
   else
 #   awk '{print NR,$4*'"$SCALE"'+'"$OFFSET"'}' temp.$VAR.txt
     awk '{print NR,$4*'"$SCALE"'+'"$OFFSET"'}' temp.$VAR.txt |\
-    psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
+    gmt psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
   fi
 
   gmt pstext -O         $RFLAG $BFLAG $JFLAG     -N -K << EOF >> $EPS
@@ -280,7 +280,7 @@ echo --- water balance error ---
 awk '{printf("%2d %12.4f\n",NR,$4*'"$SCALE"'+'"$OFFSET"')}' temp.$VAR.txt
 echo ---------------------------
 awk '{print NR,$4*'"$SCALE"'+'"$OFFSET"'}' temp.$VAR.txt |\
-    psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
+    gmt psxy -O -Y${YOFF} $RFLAG $BFLAG $JFLAG $WFLAG -K  >> $EPS
 gmt pstext -O         $RFLAG $BFLAG $JFLAG     -N -K << EOF >> $EPS
 $XTITLE $YTITLE 16 0 0 6 $VAR
 EOF
