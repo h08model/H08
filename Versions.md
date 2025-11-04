@@ -61,7 +61,7 @@ Latest GitHub branch (main) is v24.1.3
          - Line 74(corrected): DIROUT=../../met/dat/Snowf___
          - Line 78(corrected): DIROUT=../../met/dat/Tair____
          - Line 82(corrected): DIROUT=../../met/dat/Wind____
-    5. File: crp/pre.prep.sh
+    5. File: crp/pre/prep.sh
          - Line 11(corrected): L2Y=../../map/dat/l2x_l2y_/l2y.hlf.txt
          - Line 22(corrected): #L2Y=../../map/dat/l2x_l2y_/l2y.ko5.txt
          - Line 30(corrected): #L2Y=../../map/dat/l2x_l2y_/l2y.ks1.txt
