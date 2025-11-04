@@ -18,6 +18,7 @@ PRJRUN=AK10LECD
 #PRJRUN=AK105wm_
 #PRJRUN=AK105mm_
 #
+L=$LKS1
 SUF=.ks1
 #SUF=.nk1
 #
@@ -36,10 +37,10 @@ for SRC in $SRCS; do
     if [ !  -d ../../lnd/out/SupAID${SRC} ]; then
       mkdir -p ../../lnd/out/SupAID${SRC}
     fi
-    htcreate $LKS1 0 $AID
-    htmath   $LKS1 add $AID $A $AID
-    htmath   $LKS1 add $AID $I $AID
-    htmath   $LKS1 add $AID $D $AID
+    htcreate $L 0 $AID
+    htmath   $L add $AID $A $AID
+    htmath   $L add $AID $I $AID
+    htmath   $L add $AID $D $AID
     YEAR=`expr $YEAR + 1`
   done
 done
@@ -64,19 +65,19 @@ while [ $YEAR -le $YEARMAX ]; do
   ITT=../../lnd/out/SupInd${SUM}/${PRJRUN}${YEAR}0000${SUF}
   DTT=../../lnd/out/SupDom${SUM}/${PRJRUN}${YEAR}0000${SUF}
   TTT=../../lnd/out/SupAID${SUM}/${PRJRUN}${YEAR}0000${SUF}
-  htcreate $LKS1 0 $ATT
-  htcreate $LKS1 0 $ITT
-  htcreate $LKS1 0 $DTT
-  htcreate $LKS1 0 $TTT
+  htcreate $L 0 $ATT
+  htcreate $L 0 $ITT
+  htcreate $L 0 $DTT
+  htcreate $L 0 $TTT
   for SRC in $SRCS; do
     A=../../lnd/out/SupAgr${SRC}/${PRJRUN}${YEAR}0000${SUF}
     I=../../lnd/out/SupInd${SRC}/${PRJRUN}${YEAR}0000${SUF}
     D=../../lnd/out/SupDom${SRC}/${PRJRUN}${YEAR}0000${SUF}
     T=../../lnd/out/SupAID${SRC}/${PRJRUN}${YEAR}0000${SUF}
-    htmath   $LKS1 add $ATT $A $ATT
-    htmath   $LKS1 add $ITT $I $ITT
-    htmath   $LKS1 add $DTT $D $DTT
-    htmath   $LKS1 add $TTT $T $TTT
+    htmath   $L add $ATT $A $ATT
+    htmath   $L add $ITT $I $ITT
+    htmath   $L add $DTT $D $DTT
+    htmath   $L add $TTT $T $TTT
   done
   YEAR=`expr $YEAR + 1`
 done

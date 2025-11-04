@@ -184,6 +184,8 @@ c state variables (lnd)
       real              r1swe_pr(n0l)
       real              r1rgw(n0l)         !! ave layer groundwater [kg m-2]
       real              r3rgw(n0l,0:n0t,0:n0m)
+      real              r3rgw_pr(n0l,0:n0t,0:n0m)!!previous
+      real              r3rgw_md(n0l,0:n0t,0:n0m)!!modified
       real              r1rgw_pr(n0l)
       character*128     c1soilmoist(0:n0m)
       character*128     c1soilmoistini(0:n0m)
@@ -565,7 +567,8 @@ c in (map, irrigation)
       integer           i2hvsdoy(n0l,n0c)
       integer           i2crptyp(n0l,n0c)
       real              r1lndara(n0l)
-      real              r2arafrc(n0l,n0m)!! areal fraction
+      real              r2arafrc(n0l,n0m) !! areal fraction
+      real              r2arafrc2(n0l,-1*n0m:2*n0m)!! areal fraction
       character*128     c1pltdoy(n0c)
       character*128     c1hvsdoy(n0c)
       character*128     c1crptyp(n0c)
@@ -1390,6 +1393,13 @@ cvar start
             r2arafrc(i0l,i0m)=r1tmp(i0l)
           end do
         end do
+c
+        r2arafrc2=0.0
+        do i0l=1,n0l
+          do i0m=1,n0m
+             r2arafrc2(i0l,i0m)=r2arafrc(i0l,i0m)
+          end do
+       end do
 c
         if(c0demind.ne.'NO')then
           call read_result(
@@ -2361,77 +2371,91 @@ c
                   do i0m=1,n0m
                     if(r3rgw(i0l,0,i0m).ne.p0mis)then
                       if(r2arafrc(i0l,i0m).ne.p0mis)then
+            if(n0m.gt.6)then
+              write(*,*) 'need more lines in cpl/bin/main.f'
+              stop
+            end if
             if(i0m.eq.n0m)then
                continue
-            else if(i0m+1.le.n0m.and.r2arafrc(i0l,i0m+1).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m+1).gt.0.0)then
                       r3rgw(i0l,0,i0m+1)=r3rgw(i0l,0,i0m+1)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m+1)
-            else if(i0m+2.le.n0m.and.r2arafrc(i0l,i0m+2).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m+2).gt.0.0)then
                       r3rgw(i0l,0,i0m+2)=r3rgw(i0l,0,i0m+2)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m+2)
-            else if(i0m+3.le.n0m.and.r2arafrc(i0l,i0m+3).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m+3).gt.0.0)then
                       r3rgw(i0l,0,i0m+3)=r3rgw(i0l,0,i0m+3)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m+3)
-            else if(i0m+4.le.n0m.and.r2arafrc(i0l,i0m+4).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m+4).gt.0.0)then
                       r3rgw(i0l,0,i0m+4)=r3rgw(i0l,0,i0m+4)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m+4)
-            else if(i0m+5.le.n0m.and.r2arafrc(i0l,i0m+5).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m+5).gt.0.0)then
                       r3rgw(i0l,0,i0m+5)=r3rgw(i0l,0,i0m+5)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m+5)
-            else if(i0m+1.le.n0m.and.r2arafrc(i0l,i0m+1).eq.0.0)then
-                      r3rgw(i0l,0,i0m+1)=r3rgw(i0l,0,i0m+1)
-     $               +min(0.0,r3rgw(i0l,0,i0m))
-     $               *r2arafrc(i0l,i0m)/1e-10
 
-            else
-                      write(*,*) 'need more lines in cpl/bin/main.f1'
-                      write(*,*) i0m,n0m,r2arafrc(i0l,1)
-                      write(*,*) i0m,n0m,r2arafrc(i0l,2)
-                      write(*,*) i0m,n0m,r2arafrc(i0l,3)
-                      write(*,*) i0m,n0m,r2arafrc(i0l,4)
-                      stop
+            r3rgw_md(i0l,0,i0m)
+     $           =r3rgw(i0l,0,i0m)-r3rgw_pr(i0l,0,i0m)
+            if(i0l.eq.i0ldbg.and.r3rgw_md(i0l,0,i0m).gt.0)then
+              write(*,*) 'main: gw adjustment 1 i0m:',i0m
+              write(*,*) 'main: r3rgw_before',r3rgw_pr(i0l,0,i0m)
+              write(*,*) 'main: r3rgw_after',r3rgw(i0l,0,i0m)
+              write(*,*) 'main: r3rgw(1)',r3rgw(i0l,0,1)
+              write(*,*) 'main: r3rgw(2)',r3rgw(i0l,0,2)
+              write(*,*) 'main: r3rgw(3)',r3rgw(i0l,0,3)
+              write(*,*) 'main: r3rgw(4)',r3rgw(i0l,0,4)
             end if
                       end if
-                      r3rgw(i0l,0,i0m)=max(0.0,r3rgw(i0l,0,i0m))
-                    end if
-                  end do 
+                     end do 
                 else
                   do i0m=n0m,1,-1
                     if(r3rgw(i0l,0,i0m).ne.p0mis)then
-                      if(r2arafrc(i0l,i0m).ne.p0mis.and.
-     $                   r2arafrc(i0l,n0m).le.0.99)then
+c                      if(r2arafrc(i0l,i0m).ne.p0mis.and.
+c     $                    r2arafrc(i0l,n0m).le.0.99)then
+                       if(r2arafrc(i0l,i0m).ne.p0mis)then
             if(i0m.eq.1)then
                continue
-            else if(i0m-1.ge.1.and.r2arafrc(i0l,i0m-1).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m-1).gt.0.0)then
                       r3rgw(i0l,0,i0m-1)=r3rgw(i0l,0,i0m-1)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-1)
-            else if(i0m-2.ge.1.and.r2arafrc(i0l,i0m-2).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m-2).gt.0.0)then
                       r3rgw(i0l,0,i0m-2)=r3rgw(i0l,0,i0m-2)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-2)
-            else if(i0m-3.ge.1.and.r2arafrc(i0l,i0m-3).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m-3).gt.0.0)then
                       r3rgw(i0l,0,i0m-3)=r3rgw(i0l,0,i0m-3)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-3)
-            else if(i0m-4.ge.1.and.r2arafrc(i0l,i0m-4).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m-4).gt.0.0)then
                       r3rgw(i0l,0,i0m-4)=r3rgw(i0l,0,i0m-4)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-4)
-            else if(i0m-5.ge.1.and.r2arafrc(i0l,i0m-5).gt.0.0)then
+            else if(r2arafrc2(i0l,i0m-5).gt.0.0)then
                       r3rgw(i0l,0,i0m-5)=r3rgw(i0l,0,i0m-5)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m-5)
             end if
                       end if
-                      r3rgw(i0l,0,i0m)=max(0.0,r3rgw(i0l,0,i0m))
-                    end if
+               r3rgw_pr(i0l,0,i0m)=r3rgw(i0l,0,i0m)
+               r3rgw(i0l,0,i0m)=max(0.0,r3rgw(i0l,0,i0m))
+               r3rgw_md(i0l,0,i0m)
+     $              =r3rgw(i0l,0,i0m)-r3rgw_pr(i0l,0,i0m)
 
+            if(i0l.eq.i0ldbg.and.r3rgw_md(i0l,0,i0m).gt.0)then
+              write(*,*) 'main: gw adjustment 2 i0m:',i0m
+              write(*,*) 'main: r3rgw before: ',r3rgw_pr(i0l,0,i0m)
+              write(*,*) 'main: r3rgw after:  ',r3rgw(i0l,0,i0m)
+              write(*,*) 'main: r3rgw(1)',r3rgw(i0l,0,1)
+              write(*,*) 'main: r3rgw(2)',r3rgw(i0l,0,2)
+              write(*,*) 'main: r3rgw(3)',r3rgw(i0l,0,3)
+              write(*,*) 'main: r3rgw(4)',r3rgw(i0l,0,4)
+            end if
+                    end if
                   end do
                 end if
               end do
