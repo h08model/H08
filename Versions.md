@@ -1,7 +1,19 @@
 # Update Note: H08 v24
 
-## Versions (2025.11.04)
-Latest GitHub branch (main) is v24.1.3
+## Versions (2025.11.11)
+Latest GitHub branch (main) is v24.1.4
+
+## Updates in v24.1.4 (2025.11.11)
+#### Minor bug fix
+- The minor bugs below have been fixed.
+  1. File: adm/Mkinclude.Bak
+        - Line 34(corrected): LIB      = -L/usr/lib/x86_64-linux-gnu -lnetcdf -lnetcdff             # for gfortran
+        - Line 35(corrected): #LIB      = -L/usr/lib/x86_64-linux-gnu -lnetcdf -lnetcdff -lgomp     # for gfortran parallel computing (openmp)
+        - Line 36(corrected): #LIB      = -L/opt/intel/lib/intel64 -lnetcdf -lnetcdff           # for intel fortran compiler
+        - Line 37(corrected): #LIB      = -L/opt/intel/lib/intel64 -lnetcdf -lnetcdff -liomp5   # for intel fortran compiler parallel computing (openmp)
+  2. File: cpl/bin/main_ftcs.f
+        - Line 2400(added): end if
+        - Line 2401(added): end if
 
 ## Updates in v24.1.3 (2025.11.04)
 #### Major bug fix (Groundwater Calculation in cpl/bin/main_ftcs.f)
