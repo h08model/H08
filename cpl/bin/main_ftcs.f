@@ -2397,6 +2397,8 @@ c
                       r3rgw(i0l,0,i0m+5)=r3rgw(i0l,0,i0m+5)
      $               +min(0.0,r3rgw(i0l,0,i0m))
      $               *r2arafrc(i0l,i0m)/r2arafrc(i0l,i0m+5)
+            end if
+                      end if
 
             r3rgw_md(i0l,0,i0m)
      $           =r3rgw(i0l,0,i0m)-r3rgw_pr(i0l,0,i0m)
@@ -2409,8 +2411,8 @@ c
               write(*,*) 'main: r3rgw(3)',r3rgw(i0l,0,3)
               write(*,*) 'main: r3rgw(4)',r3rgw(i0l,0,4)
             end if
-                      end if
-                     end do 
+                   end if           
+                  end do 
                 else
                   do i0m=n0m,1,-1
                     if(r3rgw(i0l,0,i0m).ne.p0mis)then
