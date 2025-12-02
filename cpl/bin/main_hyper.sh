@@ -7,8 +7,8 @@
 ############################################################
 PRJ=AK10		# Project name
 #RUN=NEmD                # Run name 
-RUN=N_C_
-#RUN=LECD
+#RUN=N_C_
+RUN=LECD
 YEARMIN=2014            # 
 YEARMAX=2014            # 
 SECINT=86400            # interval
@@ -32,7 +32,7 @@ SPNRAT=0.95             # spinup threshold
 ENGBALC=1.0             # energy inbalance tolerance
 WATBALC=0.1             # water inbalance tolerance
 CNTC=1000               # maximum iteration
-PROG=./main_hyper       # program
+PROG=./main_F18             # program
 ############################################################
 # Geographical settings (edit here if you change spatial domain/resolution.
 # Note that L (n0l) is prescribed in main.f. You also need to
@@ -223,16 +223,16 @@ DAMDEMAGRFIX=../../lnd/out/DemAgr__/${PRJN_C_}${RUNN_C_}00000000${SUF}FX
 #
 # disable reservoir operation
 #
-      DAMID_=NO              # Large reservoir ID
-      DAMPRP=NO              # Large reservoir primary purpose
-      DAMCAP=NO              # Large reservoir capacity
-      DAMSRF=NO              # Reservoir surface area
-   DAMMON1ST=NO              # 1st month of operating year
-      DAMALC=NO              # Reservoir demand allocation (kalc)
-DAMRIVOUTFIX=NO              # Mean ann riv dis
-DAMDEMAGRFIX=NO              # Mean ann agr wat dem
-      MSRCAP=NO              # Medium size reservoir capacity
-      MSRAFC=NO              # Areal fraction of Medium size res.
+#      DAMID_=NO              # Large reservoir ID
+#      DAMPRP=NO              # Large reservoir primary purpose
+#      DAMCAP=NO              # Large reservoir capacity
+#      DAMSRF=NO              # Reservoir surface area
+#   DAMMON1ST=NO              # 1st month of operating year
+#      DAMALC=NO              # Reservoir demand allocation (kalc)
+#DAMRIVOUTFIX=NO              # Mean ann riv dis
+#DAMDEMAGRFIX=NO              # Mean ann agr wat dem
+#      MSRCAP=NO              # Medium size reservoir capacity
+#      MSRAFC=NO              # Areal fraction of Medium size res.
 ############################################################
 # Input for hum-new (Edit here if you wish)
 ############################################################
@@ -376,7 +376,7 @@ RLSDOY='../../map/org/KYUSYU/dam/damrls-x.txt'
 # Parameter for NNBW (Edit here if you wish)
 ############################################################
 #
-#OPTNNB=NO        # non-local & non-renwable water source (J. Hydrol., 2010)
+#OPTNNB=no        # non-local & non-renwable water source (J. Hydrol., 2010)
 #
 OPTNNB=yes       # non-local & non-renwable water source (J. Hydrol., 2010)
 ############################################################

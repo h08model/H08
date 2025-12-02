@@ -14,7 +14,7 @@ c either express or implied.
 c See the License for the specific language governing permissions and
 c limitations under the License.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-      program main_hyper
+      program main_human
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cto   run coupled model
 cby   2010/03/31, hanasaki, NIES: H08ver1.0
@@ -1020,7 +1020,6 @@ c
           r2arafrc(i0l,i0m)=r1tmp(i0l)
         end do
       end do
-      
 d     write(*,*) 'main: --- Read fixed fields -----------------------'
 d     write(*,*) 'main: ilndmsk:     ',i1lndmsk(i0ldbg)
 d     write(*,*) 'main: r1soildepth: ',r1soildepth(i0ldbg)
@@ -1689,7 +1688,7 @@ c
                   end do
 c
 
-                  call calc_irgapp_hyper(
+                  call calc_irgapp_F18(
      $                 n0l,n0c,
      $                 i0ldbg,n0secday,    r0fctpad,    r0fctnonpad, 
      $                 c1optlnduse(i0m),
@@ -1846,7 +1845,7 @@ d                     write(*,*) 'main: |-r0damsto   ',r0damsto
 c 
                     i0doy=igetdoy(i0year,i0mon,i0day)
 
-                    call calc_resope_hyper(
+                    call calc_resope_F18(
      $                 i0secint,i0damid_,
      $                 i0flgkrls,r0knorm,
      $                 c0optkrls,c0optdamrls,c0optdamwbc,
@@ -2212,7 +2211,7 @@ d     write(*,*) 'main r1deminds ',r1deminds(i0ldbg)
 d     write(*,*) 'main r1demdoms ',r1demdoms(i0ldbg)
 c
 
-              call calc_humact_hyper(
+              call calc_humact_F18(
      $             n0l,         i0ldbg,
      $             i0secint,    r1rivseq,    r0rivseqmax,
      $             r1rivnxl,    r1lndara,    r1paramc,

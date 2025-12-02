@@ -14,7 +14,7 @@ c either express or implied.
 c See the License for the specific language governing permissions and
 c limitations under the License.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-      subroutine calc_resope_hyper(
+      subroutine calc_resope_F18(
      $     i0secint, i0damid_,
      $     i0flgkrls,r0knorm, 
      $     c0optkrls,c0optdamrls,c0optdamwbc,
@@ -206,7 +206,7 @@ ccc
 c
         r0damrls=r0krls*r0damrls*1000.0*r1factor(i0damid_)
         if(i0damid_.eq.2)then
-          write(*,*) 'calc_resope_hyper ',
+          write(*,*) 'calc_resope_F18 ',
      $     i0doy,r0damrls,r0targetmax,r0targetmin,
      $     r2maxsto(i0damid_,1),r2maxsto(i0damid_,2),
      $     r2maxsto(i0damid_,3),r2maxsto(i0damid_,4)

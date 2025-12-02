@@ -14,7 +14,7 @@ c either express or implied.
 c See the License for the specific language governing permissions and
 c limitations under the License.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-      subroutine calc_irgapp_hyper(
+      subroutine calc_irgapp_F18(
      $     n0l,n0c,
      $     i0ldbg,      i0secint,    
      $     r0fctpad,    r0fctnonpad, c0optlnduse,
