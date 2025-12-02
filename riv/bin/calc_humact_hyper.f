@@ -14,7 +14,7 @@ c either express or implied.
 c See the License for the specific language governing permissions and
 c limitations under the License.
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-      subroutine calc_humact_hyper(
+      subroutine calc_humact_F18(
      $     n0l,         i0ldbg,
      $     i0secint,    r1rivseq,    r0rivseqmax, 
      $     r1nxtgrd,    r1lndara,    r1paramc,
