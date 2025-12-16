@@ -1,7 +1,39 @@
 # Update Note: H08 v24
 
-## Versions (2025.11.11)
-Latest GitHub branch (main) is v24.1.4
+## Versions (2025.12.16)
+Latest GitHub branch (main) is v24.1.5
+
+## Updates in v24.1.5 (2025.12.16)
+#### Bug fixes (Blocking)
+- Incorrect program and subroutine reference names that prevented execution were fixed in the following files.
+  1. File: cpl/bin/calc_irgapp_hyper.f
+        - Line 17(corrected): subroutine calc_irgapp_hyper(
+  2. File: cpl/bin/main_hyper.f
+        - Line 17(corrected): program main_hyper
+        - Line 1692(corrected): call calc_irgapp_hyper(
+        - Line 1849(corrected): call calc_resope_hyper(
+        - Line 2215(corrected):  call calc_humact_hyper(
+  3. File: cpl/bin/main_hyper.sh
+        - Line 35(corrected): PROG=./main_hyper
+        - Line 379(corrected): #OPTNNB=NO
+  4. File: dam/bin/calc_resope_hyper.f
+        - Line 17(corrected): subroutine calc_resope_hyper(
+        - Line 209(corrected):  write(*,*) 'calc_resope_hyper ',
+  5. File: riv/bin/calc_humact_hyper.f
+        - Line 17(corrected): subroutine calc_humact_hyper(
+
+#### Minor bug fixes
+- A minor bug in map/pre/prep_GIS.sh was fixed by correcting the processing order.
+  1. File: map/pre/prep_GIS.sh
+        - Line 81(corrected): htmaskrplc $ARG $OUT $OUT eq $RD3 5 $OUT
+        - Line 82(corrected): htmaskrplc $ARG $OUT $OUT eq $RD3 6 $OUT
+        - Line 83(corrected): htmaskrplc $ARG $OUT $OUT eq $RD3 3 $OUT
+        - Line 84(corrected): htmaskrplc $ARG $OUT $OUT eq $RD3 4 $OUT
+        - Line 85(corrected): htmaskrplc $ARG $OUT $OUT eq $RD3 7 $OUT
+        - Line 86(corrected): htmaskrplc $ARG $OUT $OUT eq $RD3 8 $OUT
+        - Line 87(corrected): htmaskrplc $ARG $OUT $OUT eq $RD3 1 $OUT
+        - Line 88(corrected): htmaskrplc $ARG $OUT $OUT eq $RD3 2 $OUT
+- **[Advanced]** In prep_lnd_2dto1d.sh and prep_cpl_2dto1d.sh, bugs were fixed and additional handling was added for cases where required files were not generated.
 
 ## Updates in v24.1.4 (2025.11.11)
 #### Minor bug fix
