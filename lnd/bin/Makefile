@@ -9,7 +9,7 @@ DIRLND  = ../../lnd/bin/
 DIRRIV  = ../../riv/bin/
 DIRDAM  = ../../dam/bin/
 DIRCPL  = ../../cpl/bin/
-OBJS    = main main_new
+OBJS    = main main_fix
 ##############################################################
 #	Macro (Settings)
 ##############################################################
@@ -31,7 +31,7 @@ COMPONENT1 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}wrte_bints2.o \
              ${DIRLIB}igetday.o     ${DIRRIV}calc_spinup.o \
              ${DIRLIB}conv_rhtoqa.o ${DIRLIB}conv_rstors.o
-TARGET2    = main_new
+TARGET2    = main_fix
 COMPONENT2 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
              ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
              ${DIRLIB}read_result.o \
@@ -43,7 +43,7 @@ COMPONENT2 = ${DIRLND}calc_leakyb.o ${DIRLND}calc_ts_nxt.o \
 ##############################################################
 $(TARGET1) : $(TARGET1).o $(COMPONENT1)
 	$(FC) -o $@ $@.o $(COMPONENT1)
-#	$(FC) -o $@ $@.o $(COMPONENT1)  # for parallel computing
+#	$(FC) -fopenmp -o $@ $@.o $(COMPONENT1)  # for parallel computing
 $(TARGET2) : $(TARGET2).o $(COMPONENT2)
 	$(FC) -o $@ $@.o $(COMPONENT2)
 
