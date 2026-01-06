@@ -1,7 +1,17 @@
 # Update Note: H08 v24
 
-## Versions (2025.12.16)
-Latest GitHub branch (main) is v24.1.5
+## Versions (2026.01.06)
+Latest GitHub branch (main) is v24.1.6
+
+## Updates in v24.1.6 (2026.01.06)
+#### Major bug fix
+- A moderately severe bug in the reservoir operation code in cpl/bin/main.f has been fixed.
+  1. File: cpl/bin/main.f
+        - Line 1811(corrected): r0daminf=r2daminf(i0l,1)
+        - Line 2504(added):               call wrte_bints2(n0l,n0t,
+        - Line 2505(added):      $             r1daminf,       r2daminf,     c0daminf,
+        - Line 2506(added):      $             i0year,i0mon,i0day,i0sec,i0secint,
+        - Line 2507(added):      $             s0ave)
 
 ## Updates in v24.1.5 (2025.12.16)
 #### Bug fixes (Blocking)
