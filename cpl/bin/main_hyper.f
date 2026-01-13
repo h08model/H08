@@ -1814,7 +1814,7 @@ c
                     r0rivout=r1rivoutfix(i0l)
                     r0damcap=r1damcap(i0l)
                     r0damsrf=r1damsrf(i0l)
-                    r0daminf=r2rivout(i0l,1)
+                    r0daminf=r2daminf(i0l,1)
                     if(i0damprp.eq.4)then
                       r0damdem=r1damdem(i0l)
                     else
@@ -2380,6 +2380,10 @@ c riv
 c dam
               call wrte_bints2(n0l,n0t,
      $             r1damout,       r2damout,     c0damout,
+     $             i0year,i0mon,i0day,i0sec,i0secint,
+     $             s0ave)
+              call wrte_bints2(n0l,n0t,
+     $             r1daminf,       r2daminf,     c0daminf,
      $             i0year,i0mon,i0day,i0sec,i0secint,
      $             s0ave)
               call wrte_bints2(n0l,n0t,
