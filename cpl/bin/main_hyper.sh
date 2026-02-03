@@ -1131,6 +1131,7 @@ DIRSUPAGR=../../lnd/out/SupAgr__
 DIRDAMSTO=../../dam/out/dam_sto_       # large reservoir storage
 DIRMSRSTO=../../dam/out/msr_sto_       # medium-sized reservoir storage
 DIRDAMOUT=../../dam/out/dam_out_       # large reservoir release
+DIRDAMINF=../../dam/out/dam_inf_       # large reservoir inflow
 DIRDAMDEM=../../dam/out/dam_dem_       # large reservoir release
 DIRMSROUT=../../dam/out/msr_out_       # medium-sezed reservoir storage
 # 20200710
@@ -1229,6 +1230,7 @@ DIRRTFDOM=../../lnd/out/RtFDom__       # returnflow domestic
     SUPAGR=${DIRSUPAGR}/${PRJ}${RUN}${SUF}MO
     DAMSTO=${DIRDAMSTO}/${PRJ}${RUN}${SUF}DY
     DAMOUT=${DIRDAMOUT}/${PRJ}${RUN}${SUF}DY
+    DAMINF=${DIRDAMINF}/${PRJ}${RUN}${SUF}DY
     DAMDEM=${DIRDAMDEM}/${PRJ}${RUN}${SUF}DY
       KRLS=${DIRKRLS}/${PRJ}${RUN}${SUF}YR # 20200710
     MSRSTO=${DIRMSRSTO}/${PRJ}${RUN}${SUF}MO
@@ -1635,6 +1637,7 @@ if [ ! -d $DIRDEMAGR5    ]; then mkdir -p $DIRDEMAGR5;     fi
 if [ ! -d $DIRSUPAGR     ]; then mkdir -p $DIRSUPAGR;      fi
 if [ ! -d $DIRDAMSTO     ]; then mkdir -p $DIRDAMSTO;        fi
 if [ ! -d $DIRDAMOUT     ]; then mkdir -p $DIRDAMOUT;        fi
+if [ ! -d $DIRDAMINF     ]; then mkdir -p $DIRDAMINF;        fi
 if [ ! -d $DIRDAMDEM     ]; then mkdir -p $DIRDAMDEM;        fi
 if [ ! -d $DIRKRLS       ]; then mkdir -p $DIRKRLS;        fi #20200710
 if [ ! -d $DIRMSRSTO     ]; then mkdir -p $DIRMSRSTO;        fi

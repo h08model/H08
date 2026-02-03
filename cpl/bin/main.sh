@@ -17,6 +17,7 @@ YEARMAX=1979
 SECINT=86400            # interval
 #LDBG=80076              # debugging point (high plains)
 LDBG=209746                  # any integer number not larger than n0l
+#LDBG=1
 PRJMET=wfde             # Project name of meteorological data
 RUNMET=____             # Run     name of meteorological data
 PRJLR__=WFDE            # Project name of LR__ simulation (Manual Ch.8,9)
@@ -931,6 +932,7 @@ DIRSUPAGR=../../lnd/out/SupAgr__
 DIRDAMSTO=../../dam/out/dam_sto_       # large reservoir storage
 DIRMSRSTO=../../dam/out/msr_sto_       # medium-sized reservoir storage
 DIRDAMOUT=../../dam/out/dam_out_       # large reservoir release
+DIRDAMINF=../../dam/out/dam_inf_       # large reservoir inflow
 DIRDAMDEM=../../dam/out/dam_dem_       # large reservoir release
 DIRMSROUT=../../dam/out/msr_out_       # medium-sezed reservoir storage
 DIRSUPIND=../../lnd/out/SupInd__       # industrial water supply
@@ -1024,6 +1026,7 @@ DIRRTFDOM=../../lnd/out/RtFDom__       # returnflow domestic
     SUPAGR=${DIRSUPAGR}/${PRJ}${RUN}${SUF}MO
     DAMSTO=${DIRDAMSTO}/${PRJ}${RUN}${SUF}MO
     DAMOUT=${DIRDAMOUT}/${PRJ}${RUN}${SUF}MO
+    DAMINF=${DIRDAMINF}/${PRJ}${RUN}${SUF}MO
     DAMDEM=${DIRDAMDEM}/${PRJ}${RUN}${SUF}MO
     MSRSTO=${DIRMSRSTO}/${PRJ}${RUN}${SUF}MO
     MSROUT=${DIRMSROUT}/${PRJ}${RUN}${SUF}MO
@@ -1365,6 +1368,7 @@ if [ ! -d $DIRDEMAGR4    ]; then mkdir -p $DIRDEMAGR4;     fi
 if [ ! -d $DIRSUPAGR     ]; then mkdir -p $DIRSUPAGR;      fi
 if [ ! -d $DIRDAMSTO     ]; then mkdir -p $DIRDAMSTO;        fi
 if [ ! -d $DIRDAMOUT     ]; then mkdir -p $DIRDAMOUT;        fi
+if [ ! -d $DIRDAMINF     ]; then mkdir -p $DIRDAMINF;        fi
 if [ ! -d $DIRDAMDEM     ]; then mkdir -p $DIRDAMDEM;        fi
 if [ ! -d $DIRMSRSTO     ]; then mkdir -p $DIRMSRSTO;        fi
 if [ ! -d $DIRMSROUT     ]; then mkdir -p $DIRMSROUT;        fi
