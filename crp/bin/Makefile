@@ -3,7 +3,7 @@
 ############################################################
 include   ../../adm/Mkinclude
 DIRLIB  = ../../lib/
-OBJS    = main calc_crpyld.o
+OBJS    = main calc_crpyld.o main_ai calc_crpyld_ai.o
 ############################################################
 # Suffix rules
 ############################################################
@@ -14,6 +14,12 @@ OBJS    = main calc_crpyld.o
 ############################################################
 TARGET1    = main
 COMPONENT1 = calc_crpyld.o \
+             $(DIRLIB)read_binary.o   $(DIRLIB)wrte_binary.o \
+             $(DIRLIB)read_result.o   $(DIRLIB)wrte_bints2.o \
+             $(DIRLIB)cgetfnt.o       $(DIRLIB)igetday.o \
+             $(DIRLIB)igetdoy.o       $(DIRLIB)igetymd.o
+TARGET2    = main_ai
+COMPONENT2 = calc_crpyld_ai.o \
              $(DIRLIB)read_binary.o   $(DIRLIB)wrte_binary.o \
              $(DIRLIB)read_result.o   $(DIRLIB)wrte_bints2.o \
              $(DIRLIB)cgetfnt.o       $(DIRLIB)igetday.o \

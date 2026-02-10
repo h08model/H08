@@ -21,7 +21,8 @@ OBJS =  cgetfnl.o     cgetfnt.o     \
         sort_decord.o sort_incord.o \
         wrte_ascii2.o wrte_ascii3.o wrte_ascii4.o wrte_asciiu.o \
         wrte_binary.o wrte_bints2.o wrte_bints3.o \
-        wrte_bytswp.o calc_uscale.o read_ascii5.o wrte_ascii5.o
+        wrte_bytswp.o calc_uscale.o read_ascii5.o wrte_ascii5.o \
+	conv_tarhtovpd.o
 ######################################################################
 #
 ######################################################################
@@ -60,6 +61,9 @@ TARGET9.SUB =  ${DIRLIB}/read_asciiu.o ${DIRLIB}/read_i1l2xy.o
 TARGET10 = test_bints2
 TARGET10.SUB =  ${DIRLIB}/wrte_bints2.o ${DIRLIB}/igetday.o \
                 ${DIRLIB}/wrte_binary.o
+TARGET11 = test_tarhtovpd
+TARGET11.SUB =  ${DIRLIB}/conv_tarhtovpd.o
+
 ${TARGET1} : ${TARGET1}.o ${TARGET1.SUB}
 	${FC} $@.o ${TARGET1.SUB} ${FLFLAGS} -o $@
 ${TARGET2} : ${TARGET2}.o ${TARGET2.SUB}
@@ -80,6 +84,8 @@ ${TARGET9} : ${TARGET9}.o ${TARGET9.SUB}
 	${FC} $@.o ${TARGET9.SUB} ${FLFLAGS} -o $@
 ${TARGET10} : ${TARGET10}.o ${TARGET10.SUB}
 	${FC} $@.o ${TARGET10.SUB} ${FLFLAGS} -o $@
+${TARGET11} : ${TARGET11}.o ${TARGET11.SUB}
+	${FC} $@.o ${TARGET11.SUB} ${FLFLAGS} -o $@
 ######################################################################
 #
 ######################################################################
