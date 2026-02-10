@@ -3,7 +3,7 @@
 ############################################################
 include   ../../adm/Mkinclude
 DIRLIB  = ../../lib/
-OBJS    =  prog_RH prog_WFD prog_WFDEI ptwR2bin_f ptwRpR2bin_f
+OBJS    =  prog_RH prog_WFD prog_WFDEI ptwR2bin_f ptwRpR2bin_f prog_VPD
 ############################################################
 #       Macro (Settings)
 ############################################################
@@ -57,14 +57,18 @@ COMPONENT11 =  ${DIRLIB}wrte_bints2.o ${DIRLIB}wrte_binary.o \
 TARGET12    =  prog_LUH
 COMPONENT12 =  ${DIRLIB}wrte_bints2.o ${DIRLIB}wrte_binary.o \
                ${DIRLIB}igetday.o     ${DIRLIB}cgetfnt.o
-TARGET13    =   prog_GSWP3
+TARGET13    =  prog_GSWP3
 COMPONENT13 =  ${DIRLIB}read_i1l2xy.o ${DIRLIB}read_asciiu.o \
                ${DIRLIB}cgetfnt.o     ${DIRLIB}wrte_binary.o \
                ${DIRLIB}igetymd.o     ${DIRLIB}igetday.o
-TARGET14    =   ptwR2bin_f
+TARGET14    =  ptwR2bin_f
 COMPONENT14 =
-TARGET15    =   ptwRpR2bin_f
+TARGET15    =  ptwRpR2bin_f
 COMPONENT15 =
+TARGET16    =  prog_VPD
+COMPONENT16 =  ${DIRLIB}read_result.o ${DIRLIB}wrte_bints2.o \
+               ${DIRLIB}read_binary.o ${DIRLIB}wrte_binary.o \
+               ${DIRLIB}igetday.o     ${DIRLIB}conv_tarhtovpd.o
 ############################################################
 # Compilation
 ############################################################
@@ -98,6 +102,8 @@ $(TARGET14) : $(TARGET14).o $(COMPONENT14)
 	$(FC) -o $@ $@.o $(COMPONENT14)
 $(TARGET15) : $(TARGET15).o $(COMPONENT15)
 	$(FC) -o $@ $@.o $(COMPONENT15)
+$(TARGET16) : $(TARGET16).o $(COMPONENT16)
+	$(FC) -o $@ $@.o $(COMPONENT16)
 ############################################################
 # Commands
 ############################################################
