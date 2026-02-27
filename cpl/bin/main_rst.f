@@ -112,18 +112,15 @@ c in (set of restart)
       integer           i0monrstend                   !! month of temporal termination for restart
       integer           i0dayrstend                   !! day of temporal termination for restart
 c variables
-      character*128     c1soilmoistrrst(0:n0m)        !! Average layer soil moisture (Read)
-      character*128     c1soilmoistwrst(0:n0m)        !! Average layer soil moisture (Write)
+      character*128     c1soilmoistrst(0:n0m)         !! Average layer soil moisture
       character*128     c1soiltemprst(0:n0m)          !! Average layer soil temperature
       character*128     c1avgsurftrst(0:n0m)          !! Snow water equivalent
       character*128     c1swerst(0:n0m)               !! Average surface temperature
       character*128     c1rgwrst(0:n0m)               !! Average layer groundwater
       character*128     c0rivinfrst                   !! River inflow
       character*128     c0rivoutrst                   !! River outflow 
-      character*128     c0rivstorrst                  !! River storage (Read)
-      character*128     c0rivstowrst                  !! River storage (Write)
-      character*128     c0rivsto_prrrst               !! River storage in the previous time step (Read)
-      character*128     c0rivsto_prwrst               !! River storage in the previous time step (Write)
+      character*128     c0rivstorst                   !! River storage
+      character*128     c0rivsto_prrst                !! River storage in the previous time step
       character*128     c1crpdayrst(0:n0m)            !! Cropping day
       character*128     c1hunarst(0:n0m)              !! Heat unit
       character*128     c1swurst(0:n0m)               !! Plant transpiration in latter half
@@ -198,14 +195,14 @@ c namelist
      $     i0yearrstbgn,      i0monrstbgn,       i0dayrstbgn,
      $     i0yearrstend,      i0monrstend,       i0dayrstend,
      $     c0rivinfrst,       c0rivoutrst,
-     $     c0rivstorrst,      c0rivstowrst,
-     $     c0rivsto_prrrst,   c0rivsto_prwrst,
+     $     c0rivstorst,      
+     $     c0rivsto_prrst,   
      $     c0msrstorst,       c0damoutrst,       c0damstorst,
      $     c0krlsrst,         c0supagrrst,
      $     c0frcsupagrrivrst, c0frcsupagrrgwrst,
      $     c0frcsupagrmsrrst, c0frcsupagrnnbrst,
      $     c1flgculrst,       c1flgirgrst,       c1targetrst,
-     $     c1soilmoistrrst,   c1soilmoistwrst,
+     $     c1soilmoistrst,
      $     c1soiltemprst,     c1avgsurftrst,     
      $     c1swerst,          c1rgwrst,          c1crpdayrst,       
      $     c1hunarst,         c1swurst,          c1swprst,          
@@ -1429,7 +1426,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       if(i0rstbgnflg.eq.1)then     !! Read state variables from rst files
         do i0m=1,n0m
           call read_result(
-     $         n0l,c1soilmoistrrst(i0m),i0yearrstbgn,i0monrstbgn,
+     $         n0l,c1soilmoistrst(i0m),i0yearrstbgn,i0monrstbgn,
      $         i0dayrstbgn,0,i0secint,r1tmp)
           do i0l=1,n0l
             r3soilmoist(i0l,0,i0m)=r1tmp(i0l)
@@ -1523,10 +1520,10 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
         end do
 d       write(*,*) 'main: r2rivout      :',r2rivout(i0ldbg,1)
         call read_result(
-     $         n0l,c0rivstorrst,i0yearrstbgn,i0monrstbgn,
+     $         n0l,c0rivstorst,i0yearrstbgn,i0monrstbgn,
      $         i0dayrstbgn,0,i0secint,r1rivsto)
         call read_result(
-     $         n0l,c0rivsto_prrrst,i0yearrstbgn,i0monrstbgn,
+     $         n0l,c0rivsto_prrst,i0yearrstbgn,i0monrstbgn,
      $         i0dayrstbgn,0,i0secint,r1rivsto_pr)
         call read_result(
      $         n0l,c0supagrrst,i0yearrstbgn,i0monrstbgn,
@@ -2926,7 +2923,7 @@ c out (restart - lnd)
                       r1tmp(i0l)=r3soilmoist(i0l,0,i0m)
                     end do
                     call wrte_bints3(n0l,n0t,
-     $                   r1tmp,   r3soilmoist, c1soilmoistwrst,
+     $                   r1tmp,   r3soilmoist, c1soilmoistrst,
      $                   i0year,i0mon,i0day,i0sec,i0secint,
      $                   s0sta,n0m,i0m,r2arafrc,s0ave)
                     do i0l=1,n0l
@@ -3600,11 +3597,11 @@ c out (restart - riv,dam)
      $                 i0year,i0mon,i0day,i0sec,i0secint,
      $                 s0sta)
                   call wrte_bints2(n0l,n0t,
-     $                 r1rivsto,       r2rivsto,     c0rivstowrst,
+     $                 r1rivsto,       r2rivsto,     c0rivstorst,
      $                 i0year,i0mon,i0day,i0sec,i0secint,
      $                 s0sta)
                   call wrte_bints2(n0l,n0t,
-     $                 r1rivsto_pr,    r2tmp,  c0rivsto_prwrst,
+     $                 r1rivsto_pr,    r2tmp,  c0rivsto_prrst,
      $                 i0year,i0mon,i0day,i0sec,i0secint,
      $                 s0sta)
                   call wrte_bints2(n0l,n0t,
