@@ -1,3 +1,5 @@
+**NOTE: The latest manuals and data are available at the manual and the data folders.**
+
 # About H08 v24 development
 This GitHub repository is mainly used for those who want to join and contribute to the development of H08. 
 
@@ -39,3 +41,4 @@ A preliminary proposal on how to merge contributions from multiple external cont
 
 [^1]: (1). On the H08 repository page, select the dev24XX_PROJ branch using the switch selection button under the repository name to display the dev24XX_PROJ branch.<br>(2). Click the "Fork" button in the upper right corner to fork the dev24XX_PROJ branch to your GitHub page.
 <br>(3). "Git pull" the forked dev24XX_PROJ branch to your local repository. At this time, there may be conflicts between locally modified files and files in the pulled branch, so modify the local files to resolve the conflicts before successfully pulling the dev24XX_PROJ branch.<br>(4). Checkout to the dev24XX_PROJ branch that you pulled locally, and then register the modified and added files ("git add" and "git commit"). This registration of changes to the local repository in the dev24XX_PROJ branch is called **reflection**.
+
