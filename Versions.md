@@ -1,7 +1,16 @@
 # Update Note: H08 v24
 
-## Versions (2026.01.13)
-Latest GitHub branch (main) is v24.1.7
+## Versions (2026.03.05)
+Latest GitHub branch (main) is v24.2.0
+
+## Updates in v24.2.0 (2026.03.05)
+#### Update in crop growth module
+- The calculation results do not account for regional differences in crop varieties, fertilization, or agricultural techniques. Ai et al. 2023 addressed this issue by incorporating maps of factors such as fertilizer application rates, improving the model so that country-specific yields align with FAO statistical values.
+- When using this new model, prepare additional input files using met/pre/prep_ai.sh and perform calculations using crp/bin/main_ai.sh.
+- The relevant codes are as follows;
+  1. lib/Makefile, conv_tarhtovpd.f
+  2. met/pre/Makefile, prep_ai.sh, prog_VPD.f
+  3. crp/bin/Makefile, main_ai.sh, calc_crpyld_ai.f, main_ai.f
 
 ## Updates in v24.1.7 (2026.01.13)
 #### Major bug fix
