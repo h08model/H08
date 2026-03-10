@@ -1,4 +1,5 @@
 # Update Note: H08 v24
+**NOTE: The latest manuals and data are available at the manual and the data folders.**
 
 ## Versions (2026.03.05)
 Latest GitHub branch (main) is v24.2.0
@@ -6,7 +7,7 @@ Latest GitHub branch (main) is v24.2.0
 ## Updates in v24.2.0 (2026.03.05)
 #### Update in crop growth module
 - The calculation results do not account for regional differences in crop varieties, fertilization, or agricultural techniques. Ai et al. 2023 addressed this issue by incorporating maps of factors such as fertilizer application rates, improving the model so that country-specific yields align with FAO statistical values.
-- When using this new model, prepare additional input files using met/pre/prep_ai.sh and perform calculations using crp/bin/main_ai.sh.
+- When using this model, first prepare the meteorological relative humidity (RH) data for the target year(s). Next, extract the Ai2023/ directory from data/Data_Ai_2023.20260301.tar.gz and place it under map/org/ (final path: map/org/Ai2023/). Then, prepare the additional input files by running met/pre/prep_ai.sh, and perform the calculations by running crp/bin/main_ai.sh.
 - The relevant codes are as follows;
   1. lib/Makefile, conv_tarhtovpd.f
   2. met/pre/Makefile, prep_ai.sh, prog_VPD.f
