@@ -233,7 +233,8 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     Calculate snow albedo
 c     - See Hanasaki et al., HESS, 12, 1007-1025, 2008a, Eq.B1
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-c kametani
+c     shogo
+c     kametani
  10   continue
 !$omp parallel num_threads(n0numomp)
 !$omp do private(i0l)
