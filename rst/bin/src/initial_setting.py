@@ -33,7 +33,7 @@ def initial_setting():
     # -----------------------------------------------------------------------
     config = configparser.ConfigParser()
     config.optionxform = str
-    config.read("../cfg/restart_settings.conf", encoding="utf-8")
+    config.read("rst/cfg/restart_settings.conf", encoding="utf-8")
 
     ## H08 run directory
     h08_run_dir = config['GeneralSettings']['h08_run_dir']

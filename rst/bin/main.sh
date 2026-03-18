@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # ===========================================================================
 # Created By  : Yuki Ishikawa
 # Created Date: 2023-10-10
@@ -13,15 +13,22 @@
 #PBS -M yishikawa@rainbow.iis.u-tokyo.ac.jp
 #PBS -m ea
 #PBS -V
-cd $PBS_O_WORKDIR
+# for PBS users
+#cd $PBS_O_WORKDIR
 
+# others
+cd "/home/tamaoki/H08"
 # ===========================================================================
 # Jobs
 # ===========================================================================
-## Activate the python virtual environment
-source activate pyh08
+## Activate the python virtual environment (conda)
+#source activate pyh08
+
+## Activate the python virtual environment (venv)
+source rst/pyh08/bin/activate
+
 ## Run the simulation
-python run_h08.py
+python rst/bin/run_h08.py
 
 wait
 

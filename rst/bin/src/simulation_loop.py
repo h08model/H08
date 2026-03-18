@@ -37,6 +37,9 @@ class H08Run:
 
         ## Run a single H08 simulation
         run_input = self.sm.subprocess_input(bgn_time, end_time)
+# tamaoki start 20260318
+        print("RUN INPUT:", run_input)
+# tamaoki end
         subprocess.run(run_input)
         
         return None
