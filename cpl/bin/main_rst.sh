@@ -32,7 +32,7 @@ SPNRAT=0.95             # spinup threshold
 ENGBALC=1.0             # energy inbalance tolerance
 WATBALC=0.1             # water inbalance tolerance
 CNTC=1000               # maximum iteration
-PROG=./main             # program
+PROG=./main_rst             # program
 ############################################################
 # Restart settings (Edit here if you wish)
 ############################################################
@@ -692,42 +692,37 @@ DIRFRCSOILMOISTNNBRST4=../../rst/out/tmp/FrcSmNN4
 # Output for Restart (Do not edit here unless you are an expert)
 ############################################################
 # Variables required to keep consistency
-     SOILMOISTRRST0=${DIRSOILMOISTRRST0}/${PRJ}${RUN}${SUF}DY      # Average layer soil moisture (read assimilated data)
-     SOILMOISTWRST0=${DIRSOILMOISTWRST0}/${PRJ}${RUN}${SUF}DY      # Average layer soil moisture (write simulated data)
+     SOILMOISTRST0=${DIRSOILMOISTRST0}/${PRJ}${RUN}${SUF}DY      # Average layer soil moisture (read assimilated data)
        SOILTEMPRST0=${DIRSOILTEMPRST0}/${PRJ}${RUN}${SUF}DY        # Average layer soil temperature
             SWERST0=${DIRSWERST0}/${PRJ}${RUN}${SUF}DY             # Snow water equivalent
        AVGSURFTRST0=${DIRAVGSURFTRST0}/${PRJ}${RUN}${SUF}DY        # Average surface temperature
              GWRST0=${DIRGWRST0}/${PRJ}${RUN}${SUF}DY              # Average layer groundwater
-     SOILMOISTRRST1=${DIRSOILMOISTRRST1}/${PRJ}${RUN}${SUF}DY
+      SOILMOISTRST1=${DIRSOILMOISTRST1}/${PRJ}${RUN}${SUF}DY
      SOILMOISTWRST1=${DIRSOILMOISTWRST1}/${PRJ}${RUN}${SUF}DY
        SOILTEMPRST1=${DIRSOILTEMPRST1}/${PRJ}${RUN}${SUF}DY
             SWERST1=${DIRSWERST1}/${PRJ}${RUN}${SUF}DY
        AVGSURFTRST1=${DIRAVGSURFTRST1}/${PRJ}${RUN}${SUF}DY
              GWRST1=${DIRGWRST1}/${PRJ}${RUN}${SUF}DY
-     SOILMOISTRRST2=${DIRSOILMOISTRRST2}/${PRJ}${RUN}${SUF}DY
-     SOILMOISTWRST2=${DIRSOILMOISTWRST2}/${PRJ}${RUN}${SUF}DY
+      SOILMOISTRST2=${DIRSOILMOISTRST2}/${PRJ}${RUN}${SUF}DY
        SOILTEMPRST2=${DIRSOILTEMPRST2}/${PRJ}${RUN}${SUF}DY
             SWERST2=${DIRSWERST2}/${PRJ}${RUN}${SUF}DY
        AVGSURFTRST2=${DIRAVGSURFTRST2}/${PRJ}${RUN}${SUF}DY
              GWRST2=${DIRGWRST2}/${PRJ}${RUN}${SUF}DY
-     SOILMOISTRRST3=${DIRSOILMOISTRRST3}/${PRJ}${RUN}${SUF}DY
+      SOILMOISTRST3=${DIRSOILMOISTRST3}/${PRJ}${RUN}${SUF}DY
      SOILMOISTWRST3=${DIRSOILMOISTWRST3}/${PRJ}${RUN}${SUF}DY
        SOILTEMPRST3=${DIRSOILTEMPRST3}/${PRJ}${RUN}${SUF}DY
             SWERST3=${DIRSWERST3}/${PRJ}${RUN}${SUF}DY
        AVGSURFTRST3=${DIRAVGSURFTRST3}/${PRJ}${RUN}${SUF}DY
              GWRST3=${DIRGWRST3}/${PRJ}${RUN}${SUF}DY
-     SOILMOISTRRST4=${DIRSOILMOISTRRST4}/${PRJ}${RUN}${SUF}DY
-     SOILMOISTWRST4=${DIRSOILMOISTWRST4}/${PRJ}${RUN}${SUF}DY
+      SOILMOISTRST4=${DIRSOILMOISTRST4}/${PRJ}${RUN}${SUF}DY
        SOILTEMPRST4=${DIRSOILTEMPRST4}/${PRJ}${RUN}${SUF}DY
             SWERST4=${DIRSWERST4}/${PRJ}${RUN}${SUF}DY
        AVGSURFTRST4=${DIRAVGSURFTRST4}/${PRJ}${RUN}${SUF}DY
              GWRST4=${DIRGWRST4}/${PRJ}${RUN}${SUF}DY
           RIVINFRST=${DIRRIVINFRST}/${PRJ}${RUN}${SUF}DY           # River inflow
           RIVOUTRST=${DIRRIVOUTRST}/${PRJ}${RUN}${SUF}DY           # River outflow
-         RIVSTORRST=${DIRRIVSTORRST}/${PRJ}${RUN}${SUF}DY          # River storage (read assimilated data)
-         RIVSTOWRST=${DIRRIVSTOWRST}/${PRJ}${RUN}${SUF}DY          # River storage (write simulated data)
-       RIVSTOPRRRST=${DIRRIVSTOPRRRST}/${PRJ}${RUN}${SUF}DY        # River storage (Read assimilated data)
-       RIVSTOPRWRST=${DIRRIVSTOPRWRST}/${PRJ}${RUN}${SUF}DY        # River storage (write simulated data)
+          RIVSTORST=${DIRRIVSTORST}/${PRJ}${RUN}${SUF}DY          # River storage (read assimilated data)
+	RIVSTOPRRST=${DIRRIVSTOPRRST}/${PRJ}${RUN}${SUF}DY        # River storage (Read assimilated data)
          CRPDAYRST0=${DIRCRPDAYRST0}/${PRJ}${RUN}${SUF}DY          # Cropping day
          CRPDAYRST1=${DIRCRPDAYRST1}/${PRJ}${RUN}${SUF}DY
          CRPDAYRST2=${DIRCRPDAYRST2}/${PRJ}${RUN}${SUF}DY
@@ -966,91 +961,91 @@ FRCSOILMOISTNNBRST4=${DIRFRCSOILMOISTNNBRST4}/${PRJ}${RUN}${SUF}DY
 ############################################################
 # Output directory Land (Do not edit here unless you are an expert)
 ############################################################
-    DIRSWNET0=../../lnd/out/SWnet___
-    DIRLWNET0=../../lnd/out/LWnet___
-      DIRQLE0=../../lnd/out/Qle_____
-       DIRQH0=../../lnd/out/Qh______
-       DIRQG0=../../lnd/out/Qg______
-     DIREVAP0=../../lnd/out/Evap____
-  DIRPOTEVAP0=../../lnd/out/PotEvap_
-       DIRQS0=../../lnd/out/Qs______
-      DIRQSB0=../../lnd/out/Qsb_____
-     DIRQTOT0=../../lnd/out/Qtot____
-DIRSOILMOIST0=../../lnd/out/SoilMois
- DIRSOILTEMP0=../../lnd/out/SoilTemp
-      DIRSWE0=../../lnd/out/SWE_____
- DIRAVGSURFT0=../../lnd/out/AvgSurfT
-       DIRGW0=../../lnd/out/GW______
-      DIRQBF0=../../lnd/out/Qbf_____
-      DIRQRC0=../../lnd/out/Qrc_____
+    DIRSWNET0=../../lnd/out_rst/SWnet___
+    DIRLWNET0=../../lnd/out_rst/LWnet___
+      DIRQLE0=../../lnd/out_rst/Qle_____
+       DIRQH0=../../lnd/out_rst/Qh______
+       DIRQG0=../../lnd/out_rst/Qg______
+     DIREVAP0=../../lnd/out_rst/Evap____
+  DIRPOTEVAP0=../../lnd/out_rst/PotEvap_
+       DIRQS0=../../lnd/out_rst/Qs______
+      DIRQSB0=../../lnd/out_rst/Qsb_____
+     DIRQTOT0=../../lnd/out_rst/Qtot____
+DIRSOILMOIST0=../../lnd/out_rst/SoilMois
+ DIRSOILTEMP0=../../lnd/out_rst/SoilTemp
+      DIRSWE0=../../lnd/out_rst/SWE_____
+ DIRAVGSURFT0=../../lnd/out_rst/AvgSurfT
+       DIRGW0=../../lnd/out_rst/GW______
+      DIRQBF0=../../lnd/out_rst/Qbf_____
+      DIRQRC0=../../lnd/out_rst/Qrc_____
 
-    DIRSWNET1=../../lnd/out/SWnet__1
-    DIRLWNET1=../../lnd/out/LWnet__1
-      DIRQLE1=../../lnd/out/Qle____1
-       DIRQH1=../../lnd/out/Qh_____1
-     DIREVAP1=../../lnd/out/Evap___1
-  DIRPOTEVAP1=../../lnd/out/PotEvap1
-       DIRQS1=../../lnd/out/Qs_____1
-      DIRQSB1=../../lnd/out/Qsb____1
-     DIRQTOT1=../../lnd/out/Qtot___1
-DIRSOILMOIST1=../../lnd/out/SoilMoi1
- DIRSOILTEMP1=../../lnd/out/SoilTem1
-      DIRSWE1=../../lnd/out/SWE____1
- DIRAVGSURFT1=../../lnd/out/AvgSurf1
-       DIRGW1=../../lnd/out/GW_____1
-      DIRQBF1=../../lnd/out/Qbf____1
-      DIRQRC1=../../lnd/out/Qrc____1
+    DIRSWNET1=../../lnd/out_rst/SWnet__1
+    DIRLWNET1=../../lnd/out_rst/LWnet__1
+      DIRQLE1=../../lnd/out_rst/Qle____1
+       DIRQH1=../../lnd/out_rst/Qh_____1
+     DIREVAP1=../../lnd/out_rst/Evap___1
+  DIRPOTEVAP1=../../lnd/out_rst/PotEvap1
+       DIRQS1=../../lnd/out_rst/Qs_____1
+      DIRQSB1=../../lnd/out_rst/Qsb____1
+     DIRQTOT1=../../lnd/out_rst/Qtot___1
+DIRSOILMOIST1=../../lnd/out_rst/SoilMoi1
+ DIRSOILTEMP1=../../lnd/out_rst/SoilTem1
+      DIRSWE1=../../lnd/out_rst/SWE____1
+ DIRAVGSURFT1=../../lnd/out_rst/AvgSurf1
+       DIRGW1=../../lnd/out_rst/GW_____1
+      DIRQBF1=../../lnd/out_rst/Qbf____1
+      DIRQRC1=../../lnd/out_rst/Qrc____1
 
-    DIRSWNET2=../../lnd/out/SWnet__2
-    DIRLWNET2=../../lnd/out/LWnet__2
-      DIRQLE2=../../lnd/out/Qle____2
-       DIRQH2=../../lnd/out/Qh_____2
-     DIREVAP2=../../lnd/out/Evap___2
-  DIRPOTEVAP2=../../lnd/out/PotEvap2
-       DIRQS2=../../lnd/out/Qs_____2
-      DIRQSB2=../../lnd/out/Qsb____2
-     DIRQTOT2=../../lnd/out/Qtot___2
-DIRSOILMOIST2=../../lnd/out/SoilMoi2
- DIRSOILTEMP2=../../lnd/out/SoilTem2
-      DIRSWE2=../../lnd/out/SWE____2
- DIRAVGSURFT2=../../lnd/out/AvgSurf2
-       DIRGW2=../../lnd/out/GW_____2
-      DIRQBF2=../../lnd/out/Qbf____2
-      DIRQRC2=../../lnd/out/Qrc____2
+    DIRSWNET2=../../lnd/out_rst/SWnet__2
+    DIRLWNET2=../../lnd/out_rst/LWnet__2
+      DIRQLE2=../../lnd/out_rst/Qle____2
+       DIRQH2=../../lnd/out_rst/Qh_____2
+     DIREVAP2=../../lnd/out_rst/Evap___2
+  DIRPOTEVAP2=../../lnd/out_rst/PotEvap2
+       DIRQS2=../../lnd/out_rst/Qs_____2
+      DIRQSB2=../../lnd/out_rst/Qsb____2
+     DIRQTOT2=../../lnd/out_rst/Qtot___2
+DIRSOILMOIST2=../../lnd/out_rst/SoilMoi2
+ DIRSOILTEMP2=../../lnd/out_rst/SoilTem2
+      DIRSWE2=../../lnd/out_rst/SWE____2
+ DIRAVGSURFT2=../../lnd/out_rst/AvgSurf2
+       DIRGW2=../../lnd/out_rst/GW_____2
+      DIRQBF2=../../lnd/out_rst/Qbf____2
+      DIRQRC2=../../lnd/out_rst/Qrc____2
 
-    DIRSWNET3=../../lnd/out/SWnet__3
-    DIRLWNET3=../../lnd/out/LWnet__3
-      DIRQLE3=../../lnd/out/Qle____3
-       DIRQH3=../../lnd/out/Qh_____3
-     DIREVAP3=../../lnd/out/Evap___3
-  DIRPOTEVAP3=../../lnd/out/PotEvap3
-       DIRQS3=../../lnd/out/Qs_____3
-      DIRQSB3=../../lnd/out/Qsb____3
-     DIRQTOT3=../../lnd/out/Qtot___3
-DIRSOILMOIST3=../../lnd/out/SoilMoi3
- DIRSOILTEMP3=../../lnd/out/SoilTem3
-      DIRSWE3=../../lnd/out/SWE____3
- DIRAVGSURFT3=../../lnd/out/AvgSurf3
-       DIRGW3=../../lnd/out/GW_____3
-      DIRQBF3=../../lnd/out/Qbf____3
-      DIRQRC3=../../lnd/out/Qrc____3
+    DIRSWNET3=../../lnd/out_rst/SWnet__3
+    DIRLWNET3=../../lnd/out_rst/LWnet__3
+      DIRQLE3=../../lnd/out_rst/Qle____3
+       DIRQH3=../../lnd/out_rst/Qh_____3
+     DIREVAP3=../../lnd/out_rst/Evap___3
+  DIRPOTEVAP3=../../lnd/out_rst/PotEvap3
+       DIRQS3=../../lnd/out_rst/Qs_____3
+      DIRQSB3=../../lnd/out_rst/Qsb____3
+     DIRQTOT3=../../lnd/out_rst/Qtot___3
+DIRSOILMOIST3=../../lnd/out_rst/SoilMoi3
+ DIRSOILTEMP3=../../lnd/out_rst/SoilTem3
+      DIRSWE3=../../lnd/out_rst/SWE____3
+ DIRAVGSURFT3=../../lnd/out_rst/AvgSurf3
+       DIRGW3=../../lnd/out_rst/GW_____3
+      DIRQBF3=../../lnd/out_rst/Qbf____3
+      DIRQRC3=../../lnd/out_rst/Qrc____3
 
-    DIRSWNET4=../../lnd/out/SWnet__4
-    DIRLWNET4=../../lnd/out/LWnet__4
-      DIRQLE4=../../lnd/out/Qle____4
-       DIRQH4=../../lnd/out/Qh_____4
-     DIREVAP4=../../lnd/out/Evap___4
-  DIRPOTEVAP4=../../lnd/out/PotEvap4
-       DIRQS4=../../lnd/out/Qs_____4
-      DIRQSB4=../../lnd/out/Qsb____4
-     DIRQTOT4=../../lnd/out/Qtot___4
-DIRSOILMOIST4=../../lnd/out/SoilMoi4
- DIRSOILTEMP4=../../lnd/out/SoilTem4
-      DIRSWE4=../../lnd/out/SWE____4
- DIRAVGSURFT4=../../lnd/out/AvgSurf4
-       DIRGW4=../../lnd/out/GW_____4
-      DIRQBF4=../../lnd/out/Qbf____4
-      DIRQRC4=../../lnd/out/Qrc____4
+    DIRSWNET4=../../lnd/out_rst/SWnet__4
+    DIRLWNET4=../../lnd/out_rst/LWnet__4
+      DIRQLE4=../../lnd/out_rst/Qle____4
+       DIRQH4=../../lnd/out_rst/Qh_____4
+     DIREVAP4=../../lnd/out_rst/Evap___4
+  DIRPOTEVAP4=../../lnd/out_rst/PotEvap4
+       DIRQS4=../../lnd/out_rst/Qs_____4
+      DIRQSB4=../../lnd/out_rst/Qsb____4
+     DIRQTOT4=../../lnd/out_rst/Qtot___4
+DIRSOILMOIST4=../../lnd/out_rst/SoilMoi4
+ DIRSOILTEMP4=../../lnd/out_rst/SoilTem4
+      DIRSWE4=../../lnd/out_rst/SWE____4
+ DIRAVGSURFT4=../../lnd/out_rst/AvgSurf4
+       DIRGW4=../../lnd/out_rst/GW_____4
+      DIRQBF4=../../lnd/out_rst/Qbf____4
+      DIRQRC4=../../lnd/out_rst/Qrc____4
 ############################################################
 # Output for lnd (Do not edit here unless you are an expert)
 ############################################################
@@ -1277,8 +1272,8 @@ SOILMOIST0=${DIRSOILMOIST0}/${PRJ}${RUN}${SUF}MO
 ############################################################
 # Output directory for riv (Do not edit here unless you are an expert)
 ############################################################
-DIRRIVSTO=../../riv/out/riv_sto_
-DIRRIVOUT=../../riv/out/riv_out_
+DIRRIVSTO=../../riv/out_rst/riv_sto_
+DIRRIVOUT=../../riv/out_rst/riv_out_
 ############################################################
 # Output for riv(Do not edit here unless you are an expert)
 ############################################################
@@ -1463,51 +1458,51 @@ CWSOUT2NDBLU4=${DIRCWSOUT2NDBLU4}/${PRJ}${RUN}${SUF}YR
 ############################################################
 # Output directory for hum (Do not edit here unless you are an expert)
 ############################################################
-DIRDEMAGR0=../../lnd/out/DemAgr__
-DIRDEMAGR1=../../lnd/out/DemAgr_1
-DIRDEMAGR2=../../lnd/out/DemAgr_2
-DIRDEMAGR3=../../lnd/out/DemAgr_3
-DIRDEMAGR4=../../lnd/out/DemAgr_4
+DIRDEMAGR0=../../lnd/out_rst/DemAgr__
+DIRDEMAGR1=../../lnd/out_rst/DemAgr_1
+DIRDEMAGR2=../../lnd/out_rst/DemAgr_2
+DIRDEMAGR3=../../lnd/out_rst/DemAgr_3
+DIRDEMAGR4=../../lnd/out_rst/DemAgr_4
 #
-DIRSUPAGR=../../lnd/out/SupAgr__
+DIRSUPAGR=../../lnd/out_rst/SupAgr__
 DIRDAMSTO=../../dam/out/dam_sto_       # large reservoir storage
 DIRMSRSTO=../../dam/out/msr_sto_       # medium-sized reservoir storage
 DIRDAMOUT=../../dam/out/dam_out_       # large reservoir release
 DIRDAMDEM=../../dam/out/dam_dem_       # large reservoir release
 DIRMSROUT=../../dam/out/msr_out_       # medium-sezed reservoir storage
-DIRSUPIND=../../lnd/out/SupInd__       # industrial water supply
-DIRSUPDOM=../../lnd/out/SupDom__       # domestic water supply
-DIRSUPAGRRIV=../../lnd/out/SupAgrR_    # agricultral water supply from river
-DIRSUPINDRIV=../../lnd/out/SupIndR_    # industrial water supply from river
-DIRSUPDOMRIV=../../lnd/out/SupDomR_    # domestic water supply from river
-DIRSUPAGRCAN=../../lnd/out/SupAgrC_    # agricultral water supply from canal
-DIRSUPINDCAN=../../lnd/out/SupIndC_    # industrial water supply from canal
-DIRSUPDOMCAN=../../lnd/out/SupDomC_    # domestic water supply from canal
-DIRSUPAGRRGW=../../lnd/out/SupAgrGR    # agricultral water supply from RGW
-DIRSUPINDRGW=../../lnd/out/SupIndGR    # industrial water supply from RGW
-DIRSUPDOMRGW=../../lnd/out/SupDomGR    # domestic water supply from RGW
-DIRSUPAGRMSR=../../lnd/out/SupAgrM_    # agricultural water supply from m-s r
-DIRSUPINDMSR=../../lnd/out/SupIndM_    # industrial water supply from m-s r
-DIRSUPDOMMSR=../../lnd/out/SupDomM_    # domestic water supply from m-s r
-DIRSUPAGRNNBS=../../lnd/out/SupAgrSN    # agricultural water supply from NNBW
-DIRSUPINDNNBS=../../lnd/out/SupIndSN    # industrial water supply from NNBW
-DIRSUPDOMNNBS=../../lnd/out/SupDomSN    # domestic water supply from NNBW
-DIRSUPAGRNNBG=../../lnd/out/SupAgrGN    # agricultural water supply from NNBW
-DIRSUPINDNNBG=../../lnd/out/SupIndGN    # industrial water supply from NNBW
-DIRSUPDOMNNBG=../../lnd/out/SupDomGN    # domestic water supply from NNBW
-DIRSUPAGRDES=../../lnd/out/SupAgrD_    # agricultural water supply from des 
-DIRSUPINDDES=../../lnd/out/SupIndD_    # industrial water supply from desal
-DIRSUPDOMDES=../../lnd/out/SupDomD_    # domestic water supply from desal
-DIRSUPAGRRCL=../../lnd/out/SupAgrL_    # agricultural water supply from rec
-DIRSUPINDRCL=../../lnd/out/SupIndL_    # industrial water supply from recycl
-DIRSUPDOMRCL=../../lnd/out/SupDomL_    # domestic water supply from recycl
-DIRSUPAGRDEF=../../lnd/out/SupAgrF_    # agricultural water deficit
-DIRSUPINDDEF=../../lnd/out/SupIndF_    # industrial water deficit
-DIRSUPDOMDEF=../../lnd/out/SupDomF_    # domestic water deficit
-DIRLOSAGR=../../lnd/out/LosAgr__       # irrigation loss
-DIRRTFAGR=../../lnd/out/RtFAgr__       # returnflow agricultural
-DIRRTFIND=../../lnd/out/RtFInd__       # returnflow industrial
-DIRRTFDOM=../../lnd/out/RtFDom__       # returnflow domestic
+DIRSUPIND=../../lnd/out_rst/SupInd__       # industrial water supply
+DIRSUPDOM=../../lnd/out_rst/SupDom__       # domestic water supply
+DIRSUPAGRRIV=../../lnd/out_rst/SupAgrR_    # agricultral water supply from river
+DIRSUPINDRIV=../../lnd/out_rst/SupIndR_    # industrial water supply from river
+DIRSUPDOMRIV=../../lnd/out_rst/SupDomR_    # domestic water supply from river
+DIRSUPAGRCAN=../../lnd/out_rst/SupAgrC_    # agricultral water supply from canal
+DIRSUPINDCAN=../../lnd/out_rst/SupIndC_    # industrial water supply from canal
+DIRSUPDOMCAN=../../lnd/out_rst/SupDomC_    # domestic water supply from canal
+DIRSUPAGRRGW=../../lnd/out_rst/SupAgrGR    # agricultral water supply from RGW
+DIRSUPINDRGW=../../lnd/out_rst/SupIndGR    # industrial water supply from RGW
+DIRSUPDOMRGW=../../lnd/out_rst/SupDomGR    # domestic water supply from RGW
+DIRSUPAGRMSR=../../lnd/out_rst/SupAgrM_    # agricultural water supply from m-s r
+DIRSUPINDMSR=../../lnd/out_rst/SupIndM_    # industrial water supply from m-s r
+DIRSUPDOMMSR=../../lnd/out_rst/SupDomM_    # domestic water supply from m-s r
+DIRSUPAGRNNBS=../../lnd/out_rst/SupAgrSN    # agricultural water supply from NNBW
+DIRSUPINDNNBS=../../lnd/out_rst/SupIndSN    # industrial water supply from NNBW
+DIRSUPDOMNNBS=../../lnd/out_rst/SupDomSN    # domestic water supply from NNBW
+DIRSUPAGRNNBG=../../lnd/out_rst/SupAgrGN    # agricultural water supply from NNBW
+DIRSUPINDNNBG=../../lnd/out_rst/SupIndGN    # industrial water supply from NNBW
+DIRSUPDOMNNBG=../../lnd/out_rst/SupDomGN    # domestic water supply from NNBW
+DIRSUPAGRDES=../../lnd/out_rst/SupAgrD_    # agricultural water supply from des 
+DIRSUPINDDES=../../lnd/out_rst/SupIndD_    # industrial water supply from desal
+DIRSUPDOMDES=../../lnd/out_rst/SupDomD_    # domestic water supply from desal
+DIRSUPAGRRCL=../../lnd/out_rst/SupAgrL_    # agricultural water supply from rec
+DIRSUPINDRCL=../../lnd/out_rst/SupIndL_    # industrial water supply from recycl
+DIRSUPDOMRCL=../../lnd/out_rst/SupDomL_    # domestic water supply from recycl
+DIRSUPAGRDEF=../../lnd/out_rst/SupAgrF_    # agricultural water deficit
+DIRSUPINDDEF=../../lnd/out_rst/SupIndF_    # industrial water deficit
+DIRSUPDOMDEF=../../lnd/out_rst/SupDomF_    # domestic water deficit
+DIRLOSAGR=../../lnd/out_rst/LosAgr__       # irrigation loss
+DIRRTFAGR=../../lnd/out_rst/RtFAgr__       # returnflow agricultural
+DIRRTFIND=../../lnd/out_rst/RtFInd__       # returnflow industrial
+DIRRTFDOM=../../lnd/out_rst/RtFDom__       # returnflow domestic
 ############################################################
 # Output for hum (Do not edit here unless you are an expert)
 ############################################################
@@ -1605,36 +1600,36 @@ DIRRTFDOM=../../lnd/out/RtFDom__       # returnflow domestic
 ############################################################
 # Edit here if you wish (new, out directory)
 ############################################################
-DIRFRCSOILMOISTGRN0=../../lnd/out/SoilmGF_
-DIRFRCSOILMOISTRIV0=../../lnd/out/SoilmRF_
-DIRFRCSOILMOISTMSR0=../../lnd/out/SoilmMF_
-DIRFRCSOILMOISTNNB0=../../lnd/out/SoilmNF_
-DIRFRCSOILMOISTGRN1=../../lnd/out/SoilmGF1
-DIRFRCSOILMOISTRIV1=../../lnd/out/SoilmRF1
-DIRFRCSOILMOISTMSR1=../../lnd/out/SoilmMF1
-DIRFRCSOILMOISTNNB1=../../lnd/out/SoilmNF1
-DIRFRCSOILMOISTGRN2=../../lnd/out/SoilmGF2
-DIRFRCSOILMOISTRIV2=../../lnd/out/SoilmRF2
-DIRFRCSOILMOISTMSR2=../../lnd/out/SoilmMF2
-DIRFRCSOILMOISTNNB2=../../lnd/out/SoilmNF2
-DIRFRCSOILMOISTGRN3=../../lnd/out/SoilmGF3
-DIRFRCSOILMOISTRIV3=../../lnd/out/SoilmRF3
-DIRFRCSOILMOISTMSR3=../../lnd/out/SoilmMF3
-DIRFRCSOILMOISTNNB3=../../lnd/out/SoilmNF3
-DIRFRCSOILMOISTGRN4=../../lnd/out/SoilmGF4
-DIRFRCSOILMOISTRIV4=../../lnd/out/SoilmRF4
-DIRFRCSOILMOISTMSR4=../../lnd/out/SoilmMF4
-DIRFRCSOILMOISTNNB4=../../lnd/out/SoilmNF4
-DIREVAPGRN0=../../lnd/out/Evap__G_
-DIREVAPBLU0=../../lnd/out/Evap__B_
-DIREVAPGRN1=../../lnd/out/Evap__G1
-DIREVAPBLU1=../../lnd/out/Evap__B1
-DIREVAPGRN2=../../lnd/out/Evap__G2
-DIREVAPBLU2=../../lnd/out/Evap__B2
-DIREVAPGRN3=../../lnd/out/Evap__G3
-DIREVAPBLU3=../../lnd/out/Evap__B3
-DIREVAPGRN4=../../lnd/out/Evap__G4
-DIREVAPBLU4=../../lnd/out/Evap__B4
+DIRFRCSOILMOISTGRN0=../../lnd/out_rst/SoilmGF_
+DIRFRCSOILMOISTRIV0=../../lnd/out_rst/SoilmRF_
+DIRFRCSOILMOISTMSR0=../../lnd/out_rst/SoilmMF_
+DIRFRCSOILMOISTNNB0=../../lnd/out_rst/SoilmNF_
+DIRFRCSOILMOISTGRN1=../../lnd/out_rst/SoilmGF1
+DIRFRCSOILMOISTRIV1=../../lnd/out_rst/SoilmRF1
+DIRFRCSOILMOISTMSR1=../../lnd/out_rst/SoilmMF1
+DIRFRCSOILMOISTNNB1=../../lnd/out_rst/SoilmNF1
+DIRFRCSOILMOISTGRN2=../../lnd/out_rst/SoilmGF2
+DIRFRCSOILMOISTRIV2=../../lnd/out_rst/SoilmRF2
+DIRFRCSOILMOISTMSR2=../../lnd/out_rst/SoilmMF2
+DIRFRCSOILMOISTNNB2=../../lnd/out_rst/SoilmNF2
+DIRFRCSOILMOISTGRN3=../../lnd/out_rst/SoilmGF3
+DIRFRCSOILMOISTRIV3=../../lnd/out_rst/SoilmRF3
+DIRFRCSOILMOISTMSR3=../../lnd/out_rst/SoilmMF3
+DIRFRCSOILMOISTNNB3=../../lnd/out_rst/SoilmNF3
+DIRFRCSOILMOISTGRN4=../../lnd/out_rst/SoilmGF4
+DIRFRCSOILMOISTRIV4=../../lnd/out_rst/SoilmRF4
+DIRFRCSOILMOISTMSR4=../../lnd/out_rst/SoilmMF4
+DIRFRCSOILMOISTNNB4=../../lnd/out_rst/SoilmNF4
+DIREVAPGRN0=../../lnd/out_rst/Evap__G_
+DIREVAPBLU0=../../lnd/out_rst/Evap__B_
+DIREVAPGRN1=../../lnd/out_rst/Evap__G1
+DIREVAPBLU1=../../lnd/out_rst/Evap__B1
+DIREVAPGRN2=../../lnd/out_rst/Evap__G2
+DIREVAPBLU2=../../lnd/out_rst/Evap__B2
+DIREVAPGRN3=../../lnd/out_rst/Evap__G3
+DIREVAPBLU3=../../lnd/out_rst/Evap__B3
+DIREVAPGRN4=../../lnd/out_rst/Evap__G4
+DIREVAPBLU4=../../lnd/out_rst/Evap__B4
 ############################################################
 # Edit here if you wish (new, out)
 ############################################################
@@ -1716,42 +1711,36 @@ if [ ! -d $DIRRTFDOM ]; then mkdir -p $DIRRTFDOM; fi
 ############################################################
 # Job (Prepare directory Restart)
 ############################################################
-if [ ! -d $DIRSOILMOISTRRST0      ]; then mkdir -p $DIRSOILMOISTRRST0;      fi
-if [ ! -d $DIRSOILMOISTWRST0      ]; then mkdir -p $DIRSOILMOISTWRST0;      fi
+if [ ! -d $DIRSOILMOISTRST0       ]; then mkdir -p $DIRSOILMOISTRST0;       fi
 if [ ! -d $DIRSOILTEMPRST0        ]; then mkdir -p $DIRSOILTEMPRST0;        fi
 if [ ! -d $DIRSWERST0             ]; then mkdir -p $DIRSWERST0;             fi
 if [ ! -d $DIRAVGSURFTRST0        ]; then mkdir -p $DIRAVGSURFTRST0;        fi
 if [ ! -d $DIRGWRST0              ]; then mkdir -p $DIRGWRST0;              fi
-if [ ! -d $DIRSOILMOISTRRST1      ]; then mkdir -p $DIRSOILMOISTRRST1;      fi
+if [ ! -d $DIRSOILMOISTRST1       ]; then mkdir -p $DIRSOILMOISTRST1;       fi
 if [ ! -d $DIRSOILMOISTWRST1      ]; then mkdir -p $DIRSOILMOISTWRST1;      fi
 if [ ! -d $DIRSOILTEMPRST1        ]; then mkdir -p $DIRSOILTEMPRST1;        fi
 if [ ! -d $DIRSWERST1             ]; then mkdir -p $DIRSWERST1;             fi
 if [ ! -d $DIRAVGSURFTRST1        ]; then mkdir -p $DIRAVGSURFTRST1;        fi
 if [ ! -d $DIRGWRST1              ]; then mkdir -p $DIRGWRST1;              fi
-if [ ! -d $DIRSOILMOISTRRST2      ]; then mkdir -p $DIRSOILMOISTRRST2;      fi
-if [ ! -d $DIRSOILMOISTWRST2      ]; then mkdir -p $DIRSOILMOISTWRST2;      fi
+if [ ! -d $DIRSOILMOISTRST2       ]; then mkdir -p $DIRSOILMOISTRST2;       fi
 if [ ! -d $DIRSOILTEMPRST2        ]; then mkdir -p $DIRSOILTEMPRST2;        fi
 if [ ! -d $DIRSWERST2             ]; then mkdir -p $DIRSWERST2;             fi
 if [ ! -d $DIRAVGSURFTRST2        ]; then mkdir -p $DIRAVGSURFTRST2;        fi
 if [ ! -d $DIRGWRST2              ]; then mkdir -p $DIRGWRST2;              fi
-if [ ! -d $DIRSOILMOISTRRST3      ]; then mkdir -p $DIRSOILMOISTRRST3;      fi
-if [ ! -d $DIRSOILMOISTWRST3      ]; then mkdir -p $DIRSOILMOISTWRST3;      fi
+if [ ! -d $DIRSOILMOISTRST3       ]; then mkdir -p $DIRSOILMOISTRST3;       fi
 if [ ! -d $DIRSOILTEMPRST3        ]; then mkdir -p $DIRSOILTEMPRST3;        fi
 if [ ! -d $DIRSWERST3             ]; then mkdir -p $DIRSWERST3;             fi
 if [ ! -d $DIRAVGSURFTRST3        ]; then mkdir -p $DIRAVGSURFTRST3;        fi
 if [ ! -d $DIRGWRST3              ]; then mkdir -p $DIRGWRST3;              fi
-if [ ! -d $DIRSOILMOISTRRST4      ]; then mkdir -p $DIRSOILMOISTRRST4;      fi
-if [ ! -d $DIRSOILMOISTWRST4      ]; then mkdir -p $DIRSOILMOISTWRST4;      fi
+if [ ! -d $DIRSOILMOISTRST4       ]; then mkdir -p $DIRSOILMOISTRST4;       fi
 if [ ! -d $DIRSOILTEMPRST4        ]; then mkdir -p $DIRSOILTEMPRST4;        fi
 if [ ! -d $DIRSWERST4             ]; then mkdir -p $DIRSWERST4;             fi
 if [ ! -d $DIRAVGSURFTRST4        ]; then mkdir -p $DIRAVGSURFTRST4;        fi
 if [ ! -d $DIRGWRST4              ]; then mkdir -p $DIRGWRST4;              fi
 if [ ! -d $DIRRIVINFRST           ]; then mkdir -p $DIRRIVINFRST;           fi
 if [ ! -d $DIRRIVOUTRST           ]; then mkdir -p $DIRRIVOUTRST;           fi
-if [ ! -d $DIRRIVSTORRST          ]; then mkdir -p $DIRRIVSTORRST;          fi
-if [ ! -d $DIRRIVSTOWRST          ]; then mkdir -p $DIRRIVSTOWRST;          fi
-if [ ! -d $DIRRIVSTOPRRRST        ]; then mkdir -p $DIRRIVSTOPRRRST;        fi
-if [ ! -d $DIRRIVSTOPRWRST        ]; then mkdir -p $DIRRIVSTOPRWRST;        fi
+if [ ! -d $DIRRIVSTORST           ]; then mkdir -p $DIRRIVSTORST;           fi
+if [ ! -d $DIRRIVSTOPRRST        ]; then mkdir -p $DIRRIVSTOPRRST;        fi
 if [ ! -d $DIRCRPDAYRST0          ]; then mkdir -p $DIRCRPDAYRST0;          fi
 if [ ! -d $DIRCRPDAYRST1          ]; then mkdir -p $DIRCRPDAYRST1;          fi
 if [ ! -d $DIRCRPDAYRST2          ]; then mkdir -p $DIRCRPDAYRST2;          fi
@@ -2063,7 +2052,7 @@ if [ ! -d $DIRQRC4       ]; then mkdir -p $DIRQRC4;       fi
 ############################################################
 # Job (Prepare directory for riv)
 ############################################################
-if [ ! -d ../../riv/out ]; then mkdir -p ../../riv/out; fi
+if [ ! -d ../../riv/out_rst ]; then mkdir -p ../../riv/out_rst; fi
 if [ ! -d $DIRRIVSTO    ]; then mkdir -p $DIRRIVSTO;    fi
 if [ ! -d $DIRRIVOUT    ]; then mkdir -p $DIRRIVOUT;    fi
 ############################################################
@@ -2265,10 +2254,8 @@ i0dayrstend=$DAYRSTEND
 
 c0rivinfrst='$RIVINFRST'
 c0rivoutrst='$RIVOUTRST'
-c0rivstorrst='$RIVSTORRST'
-c0rivstowrst='$RIVSTOWRST'
-c0rivsto_prrrst='$RIVSTOPRRRST'
-c0rivsto_prwrst='$RIVSTOPRWRST'
+c0rivstorst='$RIVSTORST'
+c0rivsto_prrst='$RIVSTOPRRST'
 c0msrstorst='$MSRSTORST'
 c0damoutrst='$DAMOUTRST'
 c0damstorst='$DAMSTORST'
@@ -2286,8 +2273,7 @@ c1flgirgrst(2)='$FLGIRGRST2'
 c1targetrst(1)='$TARGETRST1'
 c1targetrst(2)='$TARGETRST2'
 
-c1soilmoistrrst(0)='$SOILMOISTRRST0'
-c1soilmoistwrst(0)='$SOILMOISTWRST0'
+c1soilmoistrst(0)='$SOILMOISTRST0'
 c1soiltemprst(0)='$SOILTEMPRST0'
 c1avgsurftrst(0)='$SWERST0'
 c1swerst(0)='$AVGSURFTRST0'
@@ -2312,8 +2298,7 @@ c1frcsoilmoistgrnrst(0)='$FRCSOILMOISTGRNRST0'
 c1frcsoilmoistrivrst(0)='$FRCSOILMOISTRIVRST0'
 c1frcsoilmoistmsrrst(0)='$FRCSOILMOISTMSRRST0'
 c1frcsoilmoistnnbrst(0)='$FRCSOILMOISTNNBRST0'
-c1soilmoistrrst(1)='$SOILMOISTRRST1'
-c1soilmoistwrst(1)='$SOILMOISTWRST1'
+c1soilmoistrst(1)='$SOILMOISTRST1'
 c1soiltemprst(1)='$SOILTEMPRST1'
 c1avgsurftrst(1)='$SWERST1'
 c1swerst(1)='$AVGSURFTRST1'
@@ -2397,8 +2382,7 @@ EOF
 
 if [ $NOFMOS -ge 2 ]; then
   cat <<EOF>> $SETRST
-c1soilmoistrrst(2)='$SOILMOISTRRST2'
-c1soilmoistwrst(2)='$SOILMOISTWRST2'
+c1soilmoistrst(2)='$SOILMOISTRST2'
 c1soiltemprst(2)='$SOILTEMPRST2'
 c1avgsurftrst(2)='$SWERST2'
 c1swerst(2)='$AVGSURFTRST2'
@@ -2452,8 +2436,7 @@ fi
 
 if [ $NOFMOS -ge 3 ]; then
   cat <<EOF>> $SETRST
-c1soilmoistrrst(3)='$SOILMOISTRRST3'
-c1soilmoistwrst(3)='$SOILMOISTWRST3'
+c1soilmoistrst(3)='$SOILMOISTRST3'
 c1soiltemprst(3)='$SOILTEMPRST3'
 c1avgsurftrst(3)='$SWERST3'
 c1swerst(3)='$AVGSURFTRST3'
@@ -2507,8 +2490,7 @@ fi
 
 if [ $NOFMOS -ge 4 ]; then
   cat <<EOF>> $SETRST
-c1soilmoistrrst(4)='$SOILMOISTRRST4'
-c1soilmoistwrst(4)='$SOILMOISTWRST4'
+c1soilmoistrst(4)='$SOILMOISTRST4'
 c1soiltemprst(4)='$SOILTEMPRST4'
 c1avgsurftrst(4)='$SWERST4'
 c1swerst(4)='$AVGSURFTRST4'
