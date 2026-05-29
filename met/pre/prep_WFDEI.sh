@@ -92,7 +92,7 @@ for VAR in $VARS; do
    NC=../../met/org/WFDEI/3hourly/${VAR2}_${ADD}_${YEAR}${MON}.nc
       elif [ $TRESO = DY ]; then
 #  NC=../../met/org/WFDEI/daily/${VAR}_daily_${ADD}_${YEAR}${MON}.nc(outdated)
-   NC=../../met/org/WFDEI/daily/${VAR2}_wfde_____${YEAR}${MON}_DY.nc
+   NC=../../met/org/WFDEI/daily/${VAR}_wfde_____${YEAR}${MON}_DY.nc
       fi
       echo $NC
 #
