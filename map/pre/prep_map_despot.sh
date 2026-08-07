@@ -33,6 +33,16 @@ L2Y=${DIRH08}/map/dat/l2x_l2y_/l2y.hlf.txt
 LONLAT="-180 180 -90 90"
 SUF=.hlf
 ARG="$L $XY $L2X $L2Y $LONLAT"
+
+### for KOREA
+# L=11088
+# XY="84 132"
+# L2X=${DIRH08}/map/dat/l2x_l2y_/l2x.ko5.txt
+# L2Y=${DIRH08}/map/dat/l2x_l2y_/l2y.ko5.txt
+# LONLAT="124 131 33 44"
+# SUF=.ko5
+# ARG="$L $XY $L2X $L2Y $LONLAT"
+# MAP=.SNU
 ############################################################
 # in
 ############################################################

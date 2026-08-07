@@ -89,15 +89,15 @@ c          end do
           write(*,*) i0day,i0sec
 c          
           r1out=p0mis
-          do i0y=1,n0y
-            do i0x=1,n0x
-              r1out(i0x+n0x*(i0y-1))=r1dat(i0x+n0x*(n0y-i0y))
-            end do
-          end do
+c          do i0y=1,n0y
+c            do i0x=1,n0x
+c              r1out(i0x+n0x*(i0y-1))=r1dat(i0x+n0x*(n0y-i0y))
+c            end do
+c          end do
 c
             call wrte_bints2(
      $           n0l,n0t,
-     $           r1out,r2out,
+     $           r1dat,r2out,
      $           c0out,i0year,i0mon,i0day,i0sec,i0secint,
      $           s0ave)
 c          

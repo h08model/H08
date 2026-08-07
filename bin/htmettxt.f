@@ -137,6 +137,11 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc 
 c Calculation
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+      if(c0idx.eq.'MY'.or.c0idx.eq.'MM'.or.c0idx.eq.'MD')then
+         i0yearminout=n0yearmin-1
+         i0yearmaxout=n0yearmin-1
+      end if
+      
       do i0year=i0yearminout,i0yearmaxout
         r0maxsim=p0maxini
         r0maxobs=p0maxini
