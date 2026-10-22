@@ -8,8 +8,7 @@ HS="A B C"
 TES="A B C"
 OS="A B C"
 
-#PRJ=WFDE        # for H08 ver2018
-PRJ=GSW2        # for Korean peninsula (.ko5)
+PRJ=WFDE        # for H08 ver2018
 #PRJ=NK03        # for Naka and Kuji river
 #PRJ=AK10        # for Kyusyu (.ks1)
 #########################################

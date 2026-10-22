@@ -9,7 +9,7 @@
 ############################################################
 # settings (esit below)
 ############################################################
-S_PRJ=GSW2
+S_PRJ=WFDE           # Project name (must be 4 char.)
 I_IDS="7 4 2 9 10 3 1 8 6 5"  # sort by catchment area order
 #
 R_DEFSD=1.0     # default parameter for SD

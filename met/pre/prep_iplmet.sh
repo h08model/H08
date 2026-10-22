@@ -7,8 +7,10 @@
 PRJ=wfde
 RUN=____
 DIRS="../dat/PSurf___/ ../dat/Rainf___/ ../dat/Snowf___/ ../dat/Wind____/ ../dat/LWdown__/ ../dat/Qair____/ ../dat/SWdown__/ ../dat/Tair____/"
-YEARMIN=1986
-YEARMAX=1986
+#YEARMIN=1986
+#YEARMAX=1986
+YEARMIN=1979
+YEARMAX=1979
 MONTH="01 02 03 04 05 06 07 08 09 10 11 12"
 ############################################################
 # Geographical Setting (Input)
@@ -24,18 +26,34 @@ MAPIN=.WFDEI
 ############################################################
 # Geographical Setting (Output)
 ############################################################
-LOUT=36000
-XYOUT="300 120"
-L2XOUT=../../map/dat/l2x_l2y_/l2x.g5m.txt
-L2YOUT=../../map/dat/l2x_l2y_/l2y.g5m.txt
-LONMIN=73
-LONMAX=98
-LATMIN=22
-LATMAX=32
+#Ganges-Brhmaputra-Megna (Masood et al. 2015)
+#LOUT=36000
+#XYOUT="300 120"
+#L2XOUT=../../map/dat/l2x_l2y_/l2x.g5m.txt
+#L2YOUT=../../map/dat/l2x_l2y_/l2y.g5m.txt
+#LONMIN=73
+#LONMAX=98
+#LATMIN=22
+#LATMAX=32
+#SUFOUT=.g5m
+#MAPOUT=.GBM
+
+# for KOREA
+LOUT=11088
+XYOUT="84 132"
+L2XOUT=../../map/dat/l2x_l2y_/l2x.ko5.txt
+L2YOUT=../../map/dat/l2x_l2y_/l2y.ko5.txt
+LONMIN=124
+LONMAX=131
+LATMIN=33
+LATMAX=44
+SUFOUT=.ko5
+MAPOUT=.SNU
+
+#
 ARGOUT="$LOUT $XYOUT $L2XOUT $L2YOUT $LONMIN $LONMAX $LATMIN $LATMAX"
-GRD=0.08333
-SUFOUT=.g5m
-MAPOUT=.GBM
+#GRD=0.08333
+GRD=$(echo "scale=10; 1/12" | bc)
 ############################################################
 # Input Map
 ############################################################
@@ -44,7 +62,8 @@ LNDMSKOUT=../../map/dat/lnd_msk_/lndmsk${MAPOUT}${SUFOUT}
 ############################################################
 # Job
 ############################################################
-GRDHLF=`echo "scale=5; $GRD/2" | bc`
+#GRDHLF=`echo "scale=5; $GRD/2" | bc`
+GRDHLF=`echo "scale=10; $GRD/2" | bc`
 RFLAGLONMIN=`echo "scale=5; $LONMIN + $GRDHLF" | bc`
 RFLAGLONMAX=`echo "scale=5; $LONMAX - $GRDHLF" | bc`
 RFLAGLATMIN=`echo "scale=5; $LATMIN + $GRDHLF" | bc`
@@ -69,10 +88,10 @@ for DIR in $DIRS; do
 	htlinear $ARGIN $ARGOUT ${DIR}temp${SUFIN} ${DIR}temp${SUFOUT}
 	htformat $ARGOUT binary ascii3 ${DIR}temp${SUFOUT} ${DIR}temp.xyz
 		
-	xyz2grd ${DIR}temp.xyz -R$RFLAG -I$IFLAG -G./grd -F
-	surface ${DIR}temp.xyz -R$RFLAG -I$IFLAG -G./grd -T0 -Ll0
+	gmt xyz2grd ${DIR}temp.xyz -R$RFLAG -I$IFLAG -G./grd -F
+	gmt surface ${DIR}temp.xyz -R$RFLAG -I$IFLAG -G./grd -T0 -Ll0
 
-	grd2xyz grd > ${VARMET}.xyz
+	gmt grd2xyz grd > ${VARMET}.xyz
         SANCHK=`wc ${VARMET}.xyz | awk '{print $1}'`
         if [ $SANCHK != $LOUT ]; then
           echo setting error. array size inconsistent.

@@ -1,7 +1,7 @@
 ########################
 # create set file
 ########################
-PRJ=GSW2
+PRJ=WFDE
 SUF=.ko5
 MAP=.SNU
 

@@ -15,6 +15,9 @@ YEARMAX=1979           # end year
 #YEARMIN=2014
 #YEARMAX=2014
 
+# PRJ=GF__
+# RUN=LR__
+
 SECINT=86400            # interval
 LDBG=43420             # debugging point
 PRJMET=wfde
@@ -107,7 +110,9 @@ SOILDEPTH=../../lnd/dat/uniform.1.00${SUF}
        CG=../../lnd/dat/uniform.13000.00${SUF}
        CD=../../lnd/dat/uniform.0.003${SUF}
     GAMMA=../../lnd/dat/gamma___/${PRJMET}${RUNMET}00000000${SUF}
+    # GAMMA=../../lnd/dat/gamma___/wfde____00000000${SUF}
       TAU=../../lnd/dat/tau_____/${PRJMET}${RUNMET}00000000${SUF}
+      # TAU=../../lnd/dat/tau_____/wfde____00000000${SUF}
   GWDEPTH=../../lnd/dat/uniform.1.00${SUF}
   GWYIELD=../../lnd/dat/uniform.0.30${SUF}
   GWGAMMA=../../lnd/dat/uniform.2.00${SUF}

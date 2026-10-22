@@ -9,11 +9,11 @@ TES="A B C"
 OS="A B C"
 
 DATA=`date +"%Y%m%d"`
-PRJ=GSW2     # project name
+PRJ=WFDE     # project name
 ########################################
 # sample of fundamental technique
 ########################################
-#cat GSW2AAAA20151002.set | sed -e 's/AAAA/AAAB/g' | sed -e 's/uniform.1.00/uniform.1.00/g' | sed -e 's/uniform.0.003/uniform.0.003/g' | sed -e 's/uniform.2.00/uniform.2.00/g' | sed -e 's/uniform.100.00/uniform.50.00/g'
+#cat WFDEAAAA20151002.set | sed -e 's/AAAA/AAAB/g' | sed -e 's/uniform.1.00/uniform.1.00/g' | sed -e 's/uniform.0.003/uniform.0.003/g' | sed -e 's/uniform.2.00/uniform.2.00/g' | sed -e 's/uniform.100.00/uniform.50.00/g'
 ########################################
 #
 ########################################

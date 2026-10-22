@@ -13,8 +13,7 @@ TAUS="A B C"
 PROG=./main          # program to execute
 NOFCPU=4             # no of CPUs, or how many runs to execute at once
 DATE=`date +"%Y%m%d"`        # date in the setting file
-PRJ=GSW2             # project name
-#PRJ=WFDE             # for H08 ver2018
+PRJ=WFDE             # for H08 ver2018
 ############################################################
 #
 ############################################################
