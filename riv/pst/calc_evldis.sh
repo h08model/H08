@@ -15,7 +15,7 @@ CDS="A B C"        # options for CD (ibid)
 GAMMAS="A B C"     # options for Gamma (ibid)
 TAUS="A B C"       # options for Tau (ibid)
 #
-PRJ=GSW2           # Project name (must be 4 char.)
+PRJ=WFDE           # Project name (must be 4 char.)
 YEARMIN=1986       # year to start calibration
 YEARMAX=1986       # year to end validation
 TRESO=MO           # MO for monthly, DY for daily

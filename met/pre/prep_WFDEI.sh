@@ -28,11 +28,22 @@
 ############################################################
 YEARMIN=1979
 YEARMAX=1979
+
+# PRJMET=wfde
+# RUNMET=____
+# SUF=.hlf
+
+PRJMET=GF__                     #for KOREA
+RUNMET=hs__                    
+# RUNMET=85__                    
+SUF=.ko5
+
 ############################################################
 # Macro (Do not change here unless you are an expert)
 ############################################################
 DIRPWD=`pwd`
 L=259200
+# L=11088
 MONS="01 02 03 04 05 06 07 08 09 10 11 12"
 #VARS="LWdown PSurf Qair Rainf SWdown Snowf Tair Wind"
 VARS="rlds ps huss prrn rsds prsn tas sfcWind"
@@ -85,14 +96,17 @@ for VAR in $VARS; do
       if [ ! -d $DIROUT ]; then
         mkdir -p $DIROUT
       fi
-      OUT=${DIROUT}/wfde____.hlf
+      OUT=${DIROUT}/${PRJMET}${RUNMET}${SUF}
+
 #
       if   [ $TRESO = 3H ]; then
 #  NC=../../met/org/WFDEI/3hourly/${VAR}_${ADD}_${YEAR}${MON}.nc(outdated)
    NC=../../met/org/WFDEI/3hourly/${VAR2}_${ADD}_${YEAR}${MON}.nc
       elif [ $TRESO = DY ]; then
 #  NC=../../met/org/WFDEI/daily/${VAR}_daily_${ADD}_${YEAR}${MON}.nc(outdated)
-   NC=../../met/org/WFDEI/daily/${VAR}_wfde_____${YEAR}${MON}_DY.nc
+  #  NC=../../met/org/WFDEI/daily/${VAR}_wfde_____${YEAR}${MON}_DY.nc
+   NC=../../met/org/WFDEI/daily/${VAR}_${PRJMET}${RUNMET}_${YEAR}${MON}_DY.nc
+
       fi
       echo $NC
 #

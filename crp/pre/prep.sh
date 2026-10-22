@@ -42,6 +42,11 @@ RUNMET=____             # Run     name of meteorological input
 #RUNSIM=LR__
 #PRJMET=AMeD
 #RUNMET=AS1_
+#PRJSIM=GF__
+#RUNSIM=LR__
+#PRJMET=GF__
+#RUNMET=hs__
+
 #
 YEARMIN=1979
 YEARMAX=1979
